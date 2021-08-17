@@ -1,0 +1,37 @@
+.navbarBorder {
+    border-bottom: 1px solid #A9C6FE;
+    padding: 16px !important;
+}
+
+.basicNav a {
+    font-size: 15px;
+    line-height: 126%;
+    letter-spacing: 0.03em;
+    color: #040D27;
+    opacity: 0.9;
+    display: inline-block;
+    padding: 0.50rem 0.75rem;
+    margin-right: 0.5rem;
+    border-radius: 10px;
+    transition: 300ms ease-in-out color, background-color;
+}
+
+.basicNav a:hover {
+    color: #2853EB;
+    text-decoration: none;
+}
+
+.tabNav a {
+    background-color: #ECEDF3;
+}
+
+.tabNav a:hover, .linkTab a:hover {
+    background-color: #fff;
+}
+
+@media (max-width: 576px) {
+    .basicNav {
+        margin-top: 12px;
+    }
+}
+

@@ -1,0 +1,33 @@
+.switchModeBtn {
+    margin: 0 27px;
+    flex: 0 0 56px;
+    max-width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15);
+}
+
+@media (max-width: 576px) {
+    .switchModeBtn {
+        margin: 1.25rem 0;
+    }
+
+    .switcherWrap {
+        flex-wrap: wrap !important;
+    }
+}
+@media only screen and (max-width: 767px) and (min-width: 418px) {
+    button.TransferNFTSwitcher_switchModeBtn__4R4kN.d-flex.flex-column {
+        width: 56px !important;
+    }
+
+    .TransferNFTSwitcher_switcherWrap__3xI7Q.d-flex.align-items-center.justify-content-center {
+        flex-direction: column !important;
+    }
+}
