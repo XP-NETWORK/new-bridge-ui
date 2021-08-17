@@ -6,6 +6,7 @@ import {
 import './Global.css';
 import NavBar from "./layout/NavBar";
 import TransferNFT from "./pages/TransferNFT/TransferNFT";
+import TransferLiquidity from "./pages/TransferLiquidity/TransferLiquidity";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
                 <NavBar/>
             </header>
             <Switch>
-                <Route exact path={"/xp-network"} component={TransferNFT}/>
+                <Route exact path={"/"} component={TransferNFT}/>
+                <Route exact path={"/transfer-liquidity"} component={TransferLiquidity}/>
             </Switch>
         </Router>
     </div>

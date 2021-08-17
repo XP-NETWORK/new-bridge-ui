@@ -16,7 +16,15 @@ html, body {
     }
 }
 
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 736px!important;
+    }
+}
 
+
+
+/*Main Style*/
 .App {
     background: url('./assets/images/mainBg.svg') center center/cover no-repeat;
     min-height: 100vh;
@@ -35,7 +43,6 @@ html, body {
     letter-spacing: 0.03em;
     margin: 31px 10px 27px;
 }
-
 
 /*Buttons*/
 .btnBrand {
@@ -64,15 +71,3 @@ html, body {
     color: #040D27;
 }
 
-/** mahbob **/
-@media only screen and (max-width: 767px) and (min-width: 418px) {
-    button.TransferNFTSwitcher_switchModeBtn__4R4kN.d-flex.flex-column {
-        width: 56px !important;
-		margin-top: 15px;
-		margin-bottom: 15px;
-    }
-
-    .TransferNFTSwitcher_switcherWrap__3xI7Q.d-flex.align-items-center.justify-content-center {
-        flex-direction: column !important;
-    }
-}

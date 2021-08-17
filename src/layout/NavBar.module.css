@@ -3,7 +3,7 @@
     padding: 16px !important;
 }
 
-.basicNav a {
+.basicNav a, .tabNavResponsive a {
     font-size: 15px;
     line-height: 126%;
     letter-spacing: 0.03em;
@@ -16,17 +16,22 @@
     transition: 300ms ease-in-out color, background-color;
 }
 
-.basicNav a:hover {
+.basicNav a:hover, .tabNavResponsive a:hover {
     color: #2853EB;
     text-decoration: none;
 }
 
-.tabNav a {
+.tabNav a, .tabNavResponsive a {
     background-color: #ECEDF3;
 }
 
 .tabNav a:hover, .linkTab a:hover {
     background-color: #fff;
+}
+
+.selected {
+    background-color: #fff !important;
+    color: #2853EB !important;
 }
 
 @media (max-width: 576px) {

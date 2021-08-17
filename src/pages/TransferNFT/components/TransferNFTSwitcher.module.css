@@ -22,12 +22,3 @@
         flex-wrap: wrap !important;
     }
 }
-@media only screen and (max-width: 767px) and (min-width: 418px) {
-    button.TransferNFTSwitcher_switchModeBtn__4R4kN.d-flex.flex-column {
-        width: 56px !important;
-    }
-
-    .TransferNFTSwitcher_switcherWrap__3xI7Q.d-flex.align-items-center.justify-content-center {
-        flex-direction: column !important;
-    }
-}
