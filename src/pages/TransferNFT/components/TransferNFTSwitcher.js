@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Image} from "react-bootstrap";
 import xpNetIco from '../../../assets/images/XpNet.svg';
 import enrollIco from '../../../assets/images/enroll.svg';
@@ -9,11 +10,14 @@ import rightArrow from '../../../assets/images/rightArrow.svg';
 import CardWrap from "../../../UIElemnts/CardWrap";
 import SelectItem from "../../../UIElemnts/SelectItem";
 import Classes from './TransferNFTSwitcher.module.css';
+import {swapChains} from '../../../actions'
 
-const TransferNFTSwitcher = () => {
+
+const TransferNFTSwitcher = ({fromChain, toChain, fromAccount, toAccount, onSwapChainsPressed}) => {
+
     const switchHandler = (e) => {
         e.preventDefault();
-        console.log("Switch chains cliecked");
+        onSwapChainsPressed();
     }
 
     return (
@@ -22,13 +26,13 @@ const TransferNFTSwitcher = () => {
                 <SelectItem
                     label={"From"}
                     iconImage={xpNetIco}
-                    optionName={"XP.network"}
+                    optionName={fromChain}
                     downArrow={downArrow}
                 />
                 <SelectItem
                     label={"Source Account"}
                     iconImage={userAvatar}
-                    optionName={"Alice_Stash"}
+                    optionName={fromAccount}
                     downArrow={downArrow}
                 />
             </CardWrap>
@@ -45,13 +49,13 @@ const TransferNFTSwitcher = () => {
                 <SelectItem
                     label={"To"}
                     iconImage={enrollIco}
-                    optionName={"Elrond"}
+                    optionName={toChain}
                     downArrow={downArrow}
                 />
                 <SelectItem
                     label={"Target Account"}
                     iconImage={userAvatar}
-                    optionName={"Alice"}
+                    optionName={toAccount}
                     downArrow={downArrow}
                 />
             </CardWrap>
@@ -59,4 +63,15 @@ const TransferNFTSwitcher = () => {
     );
 };
 
-export default TransferNFTSwitcher;
+const mapStateToProps = state => ({
+        fromChain: state.selectReducer.fromChain,
+        toChain: state.selectReducer.toChain,
+        fromAccount: state.selectReducer.fromAccount,
+        toAccount: state.selectReducer.toAccount
+});
+
+const mapDispatchToProps = dispatch => ({
+    onSwapChainsPressed: () => dispatch(swapChains())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransferNFTSwitcher);

@@ -1,14 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {Container, Row, Col} from "react-bootstrap";
 import TransferNFTSwitcher from "./components/TransferNFTSwitcher";
 import NFTSourceAccount from "./components/NFTSourceAccount";
 
-const TransferNFT = () => {
+import {transferNFT} from '../../actions';
 
-
-    const handleClick = () => {
-        console.log('Transfer NFT clicked');
-    }
+const TransferNFT = ({transferNFT}) => {
 
     return (
         <Container>
@@ -27,7 +25,7 @@ const TransferNFT = () => {
                     <div className="text-center mt-3 mt-md-4 mb-5">
                         <button 
                             className="btnBrand btnBrand--primary"
-                            onClick={handleClick}
+                            onClick={() => transferNFT()}
                             >
                             Transfer NFT
                         </button>
@@ -38,4 +36,12 @@ const TransferNFT = () => {
     );
 };
 
-export default TransferNFT;
+const mapStateToProps = state => ({
+    //...
+  });
+  
+  const mapDispatchToProps = dispatch => ({
+    transferNFT: () => dispatch(transferNFT())
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransferNFT);
