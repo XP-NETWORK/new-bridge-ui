@@ -1,5 +1,6 @@
 // External Imports
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 // Internal imports
 import {selectReducer} from './reducers';
 
@@ -12,5 +13,5 @@ const rootReducer = combineReducers(reducers);
 
 export const configureStore = () => createStore(
     rootReducer,
-
+    applyMiddleware(thunk)
 );

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { elrondHelperFactory, polkadotPalletHelperFactory, web3HelperFactory, txnSocketHelper } from 'testsuite-ts';
 import { ChainConfig } from './config';
 import { CHAIN_INFO } from './consts';

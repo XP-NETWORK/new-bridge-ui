@@ -12,6 +12,10 @@ const actionTypes = {
     
     TRANSFER_COINS         : "TRANSFER_COINS",
     TRANSFER_NFT           : "TRANSFER_NFT",
+
+    CHANGE_AMMOUNT         : "CHANGE_AMMOUNT",
+    GET_BALANCE            : "GETBALANCE",
+    
 }
 
 export default actionTypes;

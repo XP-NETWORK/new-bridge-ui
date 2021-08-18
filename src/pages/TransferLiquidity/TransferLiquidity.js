@@ -1,4 +1,5 @@
-import React, {Fragment} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import Styles from './TransferLiquidity.module.css';
 import {Col, Container, Image, Row} from "react-bootstrap";
 import CardWrap from "../../UIElemnts/CardWrap";
@@ -9,8 +10,42 @@ import userAvatar from "../../assets/images/userAvatar.svg";
 import rightArrow from "../../assets/images/rightArrow.svg";
 import leftArrow from "../../assets/images/leftArrow.svg";
 import enrollIco from "../../assets/images/enroll.svg";
+import {swapChains, changeAmount, transferCoins} from '../../actions';
+import { exchangeRates } from '../../config';
+import {getBalanceThunk} from '../../thunks';
 
-const TransferLiquidity = () => {
+const TransferLiquidity = ({
+
+    // States
+    fromChain, 
+    toChain, 
+    fromAccount, 
+    toAccount, 
+    amount,
+    balance,
+    coin,
+    exchangeRate,
+
+    // Dispatch emitters:
+    getbalance,
+    onSwapChainsPressed, 
+    onChaneAmount, 
+    send}) => {
+
+        getbalance(fromChain, fromAccount);
+        // getbalance("Ropsten", 'ACC1')
+
+
+    const switchHandler = (e) => {
+        e.preventDefault();
+        onSwapChainsPressed();
+    }
+
+    const handleChangeAmount = (e) => {
+        e.preventDefault();
+        onChaneAmount(e.target.value);
+    }
+
     return (
         <Container>
             <div className="title title--primary">
@@ -23,13 +58,13 @@ const TransferLiquidity = () => {
                             <SelectItem
                                 label={"From"}
                                 iconImage={xpNetIco}
-                                optionName={"XP.network"}
+                                optionName={fromChain}
                                 downArrow={downArrow}
                             />
                             <SelectItem
                                 label={"Source Account"}
                                 iconImage={userAvatar}
-                                optionName={"Elrond"}
+                                optionName={fromAccount}
                                 downArrow={downArrow}
                             />
                             <SelectItem
@@ -38,11 +73,11 @@ const TransferLiquidity = () => {
                                 optionName={
                                     (<div className={Styles.amountOption}>
                                         <div className="d-flex align-items-center">
-                                            <strong>XPNET</strong>
-                                            <span className={`${Styles.darkAmount} ml-auto`}>$1,322,840,000.00</span>
+                                            <strong>{coin}</strong>
+                                            <span className={`${Styles.darkAmount} ml-auto`}>${balance * exchangeRate}</span>
                                         </div>
-                                        <span>30,909,768,192.56087 XPNET</span>
-                                        <span> @0.1333 </span>
+                                        <span>{balance} {coin}</span>
+                                        <span> @{exchangeRate} </span>
                                     </div>)
                                 }
                                 downArrow={downArrow}
@@ -53,17 +88,19 @@ const TransferLiquidity = () => {
                                 style={{marginTop: "0.6875rem"}}
                             >
                                 <input
-                                    type="text"
+                                    type="number"
                                     className={Styles.inputStyle}
-                                    value={"0.0"}
-                                    disabled={true}
+                                    value={amount}
+                                    disabled={false}
+                                    placeholder={'0.0'}
+                                    onChange={handleChangeAmount}
                                 />
                             </div>
                         </CardWrap>
 
                         <button
                             className={`${Styles.switchModeBtn} d-flex flex-column`}
-                            // onClick={switchHandler}
+                            onClick={switchHandler}
                         >
                             <Image src={rightArrow}/>
                             <Image src={leftArrow} className={"mt-1"}/>
@@ -73,13 +110,13 @@ const TransferLiquidity = () => {
                             <SelectItem
                                 label={"To"}
                                 iconImage={enrollIco}
-                                optionName={"Alice_Stash"}
+                                optionName={toChain}
                                 downArrow={downArrow}
                             />
                             <SelectItem
                                 label={"Target Account"}
                                 iconImage={userAvatar}
-                                optionName={"Alice"}
+                                optionName={toAccount}
                                 downArrow={downArrow}
                             />
 
@@ -89,9 +126,10 @@ const TransferLiquidity = () => {
                                 </div>
                                 <div className={`${Styles.amounInput} d-flex align-items-center`}>
                                     <input
-                                        type="text"
+                                        type="number"
                                         className={Styles.inputStyle}
-                                        value={"0.0"}
+                                        value={amount}
+                                        placeholder={'0.0'}
                                         disabled={true}
                                     />
                                 </div>
@@ -106,7 +144,10 @@ const TransferLiquidity = () => {
 
 
                     <div className="text-center mt-3 mt-md-4 mb-5">
-                        <button className="btnBrand btnBrand--primary">
+                        <button 
+                        className="btnBrand btnBrand--primary"
+                        onClick={send}
+                        >
                             Send
                         </button>
                     </div>
@@ -116,4 +157,24 @@ const TransferLiquidity = () => {
     );
 };
 
-export default TransferLiquidity;
+const mapStateToProps = state => ({
+    fromChain: state.selectReducer.fromChain,
+    toChain: state.selectReducer.toChain,
+    fromAccount: state.selectReducer.fromAccount,
+    toAccount: state.selectReducer.toAccount,
+    amount: state.selectReducer.amount,
+    balance: state.selectReducer.acctBalanceCoins,
+    coin: state.selectReducer.coin,
+    exchangeRate: state.selectReducer.exchangeRate,
+
+});
+
+const mapDispatchToProps = dispatch => ({
+    onSwapChainsPressed: () => dispatch(swapChains()),
+    onChaneAmount: value => dispatch(changeAmount(value)),
+    send: () => dispatch(transferCoins()),
+    getbalance: (chain, account) => dispatch(getBalanceThunk(chain, account)),
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (TransferLiquidity);

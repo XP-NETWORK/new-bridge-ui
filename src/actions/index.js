@@ -44,3 +44,13 @@ export const transferCoins = () => ({
 export const transferNFT = () => ({
     type: actionTypes.TRANSFER_NFT
 });
+
+export const changeAmount = (value) => ({
+    type: actionTypes.CHANGE_AMMOUNT,
+    payload: value
+});
+
+export const getBalance = (value) => ({
+    type: actionTypes.GET_BALANCE,
+    payload: value
+})

@@ -13,3 +13,12 @@ export const coins = [
     'HT',           // 3
     'ETH',          // 4
 ];
+
+export const exchangeRates = {
+    'XPNET':    0.75,
+    'BNB':      402.90,
+    'eGLD':     146.55,
+    'HT':       14.10,
+    'ETH':      3033.80,
+
+}
