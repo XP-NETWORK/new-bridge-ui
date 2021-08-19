@@ -120,20 +120,20 @@ export function ElrondHelper() {
 /**
  * Wrapper over Web3Helper from testsuite-ts
  * 
- * @param {number} chain_nonce nonce of the web3 chain
+ * @param {string} chain identifier of the web3 chain
  */
-export function Web3Helper(chain_nonce) {
+export function Web3Helper(chain) {
     let web3 = undefined;
     let web3Provider = undefined;
 
     async function requireWeb3() {
         if (!web3) {
-            web3Provider = ethers.providers.getDefaultProvider(CHAIN_INFO[chain_nonce].rpcUrl);
+            web3Provider = ethers.providers.getDefaultProvider(CHAIN_INFO[chain].rpcUrl);
             await web3Provider.ready;
         }
         web3 = await web3HelperFactory(
             web3Provider,
-            ChainConfig.web3_minters[chain_nonce],
+            ChainConfig.web3_minters[chain],
             abi
         );
     }
@@ -167,7 +167,7 @@ export function Web3Helper(chain_nonce) {
 export const ChainFactory = {
     "XP.network": PolkadotHelper(),
     "Elrond": ElrondHelper(),
-    "HECO": Web3Helper(CHAIN_INFO["HECO"].nonce),
-    "BSC": Web3Helper(CHAIN_INFO["BSC"].nonce),
-    "ROPSTEN": Web3Helper(CHAIN_INFO["ROPSTEN"].nonce)
+    "HECO": Web3Helper("HECO"),
+    "BSC": Web3Helper("BSC"),
+    "ROPSTEN": Web3Helper("ROPSTEN")
 }
