@@ -1,6 +1,7 @@
 import actionTypes from '../actions/actionTypes';
 import {chains, coins, exchangeRates} from '../config';
 import {PredefinedAccounts} from '../cross_chain/accounts';
+import 'semantic-ui-css/semantic.min.css';
 
 let fromChain = chains[0];
 let toChain = chains[1];
@@ -41,7 +42,10 @@ export const selectReducer = (state = initialState, action) => {
     switch(type){
         case actionTypes.SELECT_FROM_CHAIN:{
 
+            console.log("Clicked fromChain", payload)
+
             fromChain = payload;
+
             const fromAccount = Object.keys(PredefinedAccounts[fromChain])[0];
             coin = coins[chains.indexOf(fromChain)];
 
@@ -56,14 +60,16 @@ export const selectReducer = (state = initialState, action) => {
         }
         case actionTypes.SELECT_TO_CHAIN:{
             toChain = payload;
+            console.log("Clicked to chain", payload)
             return {
                 ...state, 
                 toChain,
-                toAccount: Object.keys(PredefinedAccounts[toChain])[0],
-                toAccountS:Object.keys(PredefinedAccounts[toChain])
+                // toAccount: Object.keys(PredefinedAccounts[toChain])[0],
+                // toAccountS:Object.keys(PredefinedAccounts[toChain])
             }
         }
         case actionTypes.SELECT_FROM_ACCOUNT:{
+            console.log("Clicked from Acct", payload)
             return{
                 ...state, fromAccount: payload
             }

@@ -16,7 +16,18 @@ import rightArrow from "../../assets/images/rightArrow.svg";
 import leftArrow from "../../assets/images/leftArrow.svg";
 import enrollIco from "../../assets/images/enroll.svg";
 // Blockchain Related
-import { swapChains, changeAmount, transferCoins } from '../../actions';
+import { 
+
+    selectFromChain,
+    selectToChain,
+    selectFromAccount,
+    selectToAccount,
+
+    swapChains, 
+    changeAmount, 
+    transferCoins 
+
+} from '../../actions';
 import { chains, coins, exchangeRates } from '../../config';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
 import {
@@ -43,6 +54,11 @@ const TransferLiquidity = ({
     toAccountS,
 
     // Dispatch emitters:
+    selectFromChain,
+    selectToChain,
+    selectFromAccount,
+    selectToAccount,
+
     getbalance,
     onSwapChainsPressed,
     onChaneAmount,
@@ -79,7 +95,7 @@ const TransferLiquidity = ({
         }
     })
 
-    getbalance(fromChain, fromAccount);
+    // getbalance(fromChain, fromAccount);
     // getbalance("Ropsten", 'ACC1')
 
 
@@ -114,6 +130,26 @@ const TransferLiquidity = ({
         )
     }
 
+    const handleChangeFrom = (e) => {
+        e.preventDefault();
+        selectFromChain(e.target.innerText)
+    }
+
+    const handleChangeTo = (e) => {
+        e.preventDefault();
+        selectToChain(e.target.innerText)
+    }
+
+    const handleChangeFromAcct = (e) => {
+        e.preventDefault();
+        selectFromAccount(e.target.innerText)
+    }
+
+    const handleChangeToAcct = (e) => {
+        e.preventDefault();
+        selectToAccount(e.target.innerText)
+    }
+
     return (
         <Container>
             <div className="title title--primary">
@@ -123,13 +159,17 @@ const TransferLiquidity = ({
                 <Col md={{ span: 10, offset: 1 }}>
                     <div className={`${Styles.switcherWrap} d-flex align-items-center justify-content-center`}>
                         <CardWrap>
-                            <SelectItem label={"From"}>
+                            <SelectItem 
+                            label={"From"}
+                            // onChange={e => handleChangeFrom(e)}
+
+                            >
                             <Dropdown
                                     placeholder={'Select option'}
                                     fluid
                                     selection
                                     options={fromTranBridge}
-
+                                    onChange={e => handleChangeFrom(e)}
                                 />
                             </SelectItem>
                             <SelectItem label={"Source Account"}>
@@ -138,6 +178,7 @@ const TransferLiquidity = ({
                                     fluid
                                     selection
                                     options={sourceAccounts}
+                                    onChange={e => handleChangeFromAcct(e)}
                                 />
                             </SelectItem>
                             <SelectItem
@@ -186,6 +227,7 @@ const TransferLiquidity = ({
                                     fluid
                                     selection
                                     options={toTranBridge}
+                                    onChange={e => handleChangeTo(e)}
                                 />
                             </SelectItem>
                             <SelectItem label={"Target Account"}>
@@ -194,6 +236,7 @@ const TransferLiquidity = ({
                                     fluid
                                     selection
                                     options={targetAccounts}
+                                    onChange={e => handleChangeToAcct(e)}
                                 />
                             </SelectItem>
                             <div style={{ marginTop: "0.6875rem" }}>
@@ -252,6 +295,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+
+    selectFromChain: value => dispatch(selectFromChain(value)),
+    selectToChain: value => dispatch(selectToChain(value)),
+    selectFromAccount: value => dispatch(selectFromAccount(value)),
+    selectToAccount: value => dispatch(selectToAccount(value)),
+
     onSwapChainsPressed: () => dispatch(swapChains()),
     onChaneAmount: value => dispatch(changeAmount(value)),
     send: (chain, signer, nonce, to, value) => dispatch(sendTokens(chain, signer, nonce, to, value)),

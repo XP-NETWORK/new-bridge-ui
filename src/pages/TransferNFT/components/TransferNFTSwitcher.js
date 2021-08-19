@@ -13,12 +13,33 @@ import SelectItem from "../../../UIElemnts/SelectItem";
 import Classes from './TransferNFTSwitcher.module.css';
 
 // Blockchain Related
-import { swapChains } from '../../../actions'
+import { 
+    selectFromChain,
+    selectToChain,
+    selectFromAccount,
+    selectToAccount,
+    swapChains,
+
+} from '../../../actions'
 import { mapChainToAvatar} from '../../../mappers';
 import { chains } from '../../../config';
 
 
-const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromAccountS, toAccountS, onSwapChainsPressed }) => {
+const TransferNFTSwitcher = ({ 
+    fromChain, 
+    toChain, 
+    fromAccount, 
+    toAccount, 
+    fromAccountS, 
+    toAccountS, 
+    onSwapChainsPressed,
+
+    selectFromChain,
+    selectToChain,
+    selectFromAccount,
+    selectToAccount,
+
+}) => {
 
     const fromTranBridge = chains.map(item => {
         return {
@@ -54,6 +75,26 @@ const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromA
         onSwapChainsPressed();
     }
 
+    const handleChangeFrom = (e) => {
+        e.preventDefault();
+        selectFromChain(e.target.innerText)
+    }
+
+    const handleChangeTo = (e) => {
+        e.preventDefault();
+        selectToChain(e.target.innerText)
+    }
+
+    const handleChangeFromAcct = (e) => {
+        e.preventDefault();
+        selectFromAccount(e.target.innerText)
+    }
+
+    const handleChangeToAcct = (e) => {
+        e.preventDefault();
+        selectToAccount(e.target.innerText)
+    }
+
     return (
         <Fragment>
             <div className={`${Classes.switcherWrap} d-flex align-items-center justify-content-center`}>
@@ -64,6 +105,7 @@ const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromA
                             fluid
                             selection
                             options={fromTranBridge}
+                            onChange={e => handleChangeFrom(e)}
                         />
                     </SelectItem>
 
@@ -73,6 +115,7 @@ const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromA
                             fluid
                             selection
                             options={sourceAccounts}
+                            onChange={e=>handleChangeFromAcct(e)}
                         />
                     </SelectItem>
                 </CardWrap>
@@ -92,6 +135,7 @@ const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromA
                             fluid
                             selection
                             options={toTranBridge}
+                            onChange={e=>handleChangeTo(e)}
                         />
                     </SelectItem>
                     <SelectItem label={"Target Account"}>
@@ -100,6 +144,7 @@ const TransferNFTSwitcher = ({ fromChain, toChain, fromAccount, toAccount, fromA
                             fluid
                             selection
                             options={targetAccounts}
+                            onChange={e=>handleChangeToAcct(e)}
                         />
                     </SelectItem>
                 </CardWrap>
@@ -123,7 +168,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onSwapChainsPressed: () => dispatch(swapChains())
+    onSwapChainsPressed: () => dispatch(swapChains()),
+
+    selectFromChain: value => dispatch(selectFromChain(value)),
+    selectToChain: value => dispatch(selectToChain(value)),
+    selectFromAccount: value => dispatch(selectFromAccount(value)),
+    selectToAccount: value => dispatch(selectToAccount(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFTSwitcher);
