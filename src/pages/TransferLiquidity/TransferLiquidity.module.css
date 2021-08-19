@@ -1,3 +1,7 @@
+.amountOption {
+    max-width: 200px;
+}
+
 .amountOption strong {
     font-size: 14px;
 }
@@ -59,6 +63,29 @@
 .alignSelf {
     align-self: start !important;
 }
+
+.amountInput {
+    position: relative;
+}
+
+.amountInputImg {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 
 @media (min-width: 320px) and (max-width: 991.98px) {
     .switchModeBtn {

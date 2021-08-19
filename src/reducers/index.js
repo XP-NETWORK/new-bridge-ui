@@ -22,6 +22,7 @@ const initialState = {
     // NFT related
     selNFTHash:'',
     selNFTNonce:'',
+    nftList:[],
 
     // Liquidity related
     coin,
@@ -113,6 +114,24 @@ export const selectReducer = (state = initialState, action) => {
             return {
                 ...state,
                 acctBalanceCoins:payload
+            }
+        }
+        case actionTypes.LIST_NFTS:{
+
+            let nftList = []
+
+            payload.forEach(nft => {
+                if(nft && nft['data']){
+                    const [_chain, _account] = nft['data'].split(',');
+                    if(fromChain === _chain && state.fromAccount === _account){
+                        nftList.push(nft)
+                    }
+                }
+            })
+
+            return{
+                ...state,
+                nftList
             }
         }
         case actionTypes.TRANSFER_COINS:{

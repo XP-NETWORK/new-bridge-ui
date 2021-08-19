@@ -1,3 +1,4 @@
+import { listNFTs } from '../thunks';
 import actionTypes from './actionTypes';
 
 export const selectFromChain = (value) => ({
@@ -52,5 +53,10 @@ export const changeAmount = (value) => ({
 
 export const getBalance = (value) => ({
     type: actionTypes.GET_BALANCE,
+    payload: value
+});
+
+export const listNfts = (value) => ({
+    type: actionTypes.LIST_NFTS,
     payload: value
 })

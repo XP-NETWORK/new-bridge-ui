@@ -13,12 +13,14 @@
     box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15);
 }
 
-@media (max-width: 576px) {
+@media (min-width: 320px) and (max-width: 991.98px) {
     .switchModeBtn {
         margin: 1.25rem 0;
+        width: 56px;
     }
 
     .switcherWrap {
         flex-wrap: wrap !important;
+        flex-direction: column;
     }
 }

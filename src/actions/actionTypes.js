@@ -15,6 +15,9 @@ const actionTypes = {
 
     CHANGE_AMMOUNT         : "CHANGE_AMMOUNT",
     GET_BALANCE            : "GETBALANCE",
+
+    LIST_NFTS              : "LIST_NFTS",
+
     
 }
 

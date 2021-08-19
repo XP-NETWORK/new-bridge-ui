@@ -1,15 +1,21 @@
+// External Imports
 import React from 'react';
 import { connect } from 'react-redux';
-import Styles from './TransferLiquidity.module.css';
+import {Dropdown} from "semantic-ui-react";
 import { Col, Container, Image, Row } from "react-bootstrap";
+// CSS
+import Styles from './TransferLiquidity.module.css';
+// Local Imports
 import CardWrap from "../../UIElemnts/CardWrap";
 import SelectItem from "../../UIElemnts/SelectItem";
+// SVGs
 import xpNetIco from "../../assets/images/XpNet.svg";
 import downArrow from "../../assets/images/downArrow.svg";
 import userAvatar from "../../assets/images/userAvatar.svg";
 import rightArrow from "../../assets/images/rightArrow.svg";
 import leftArrow from "../../assets/images/leftArrow.svg";
 import enrollIco from "../../assets/images/enroll.svg";
+// Blockchain Related
 import { swapChains, changeAmount, transferCoins } from '../../actions';
 import { chains, coins, exchangeRates } from '../../config';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
@@ -20,8 +26,9 @@ import {
 
 } from '../../thunks';
 import {CHAIN_INFO} from '../../cross_chain/consts';
+import { mapChainToAvatar, mapCoinToAvatar } from '../../mappers';
 
-const TransferLiquidity = ({
+const TransferLiquidity = ({ 
 
     // States
     fromChain,
@@ -32,6 +39,8 @@ const TransferLiquidity = ({
     balance,
     coin,
     exchangeRate,
+    fromAccountS, 
+    toAccountS,
 
     // Dispatch emitters:
     getbalance,
@@ -40,6 +49,35 @@ const TransferLiquidity = ({
     send,
     sendWrapped
 }) => {
+
+    const fromTranBridge = chains.map(item => {
+        return {
+            key: item,
+            text: item,
+            value: item,
+            image: { avatar: true, src: mapChainToAvatar(item) }
+        }
+    });
+
+    const toTranBridge = fromTranBridge;
+
+    const sourceAccounts = fromAccountS.map(item => {
+        return {
+            key: item,
+            text: item,
+            value: item,
+            image: { avatar: true, src: userAvatar }
+        }
+    });
+
+    const targetAccounts = toAccountS.map(item => {
+        return {
+            key: item,
+            text: item,
+            value: item,
+            image: { avatar: true, src: userAvatar }
+        }
+    })
 
     getbalance(fromChain, fromAccount);
     // getbalance("Ropsten", 'ACC1')
@@ -85,18 +123,23 @@ const TransferLiquidity = ({
                 <Col md={{ span: 10, offset: 1 }}>
                     <div className={`${Styles.switcherWrap} d-flex align-items-center justify-content-center`}>
                         <CardWrap>
-                            <SelectItem
-                                label={"From"}
-                                iconImage={xpNetIco}
-                                optionName={fromChain}
-                                downArrow={downArrow}
-                            />
-                            <SelectItem
-                                label={"Source Account"}
-                                iconImage={userAvatar}
-                                optionName={fromAccount}
-                                downArrow={downArrow}
-                            />
+                            <SelectItem label={"From"}>
+                            <Dropdown
+                                    placeholder={'Select option'}
+                                    fluid
+                                    selection
+                                    options={fromTranBridge}
+
+                                />
+                            </SelectItem>
+                            <SelectItem label={"Source Account"}>
+                            <Dropdown
+                                    placeholder='Select option'
+                                    fluid
+                                    selection
+                                    options={sourceAccounts}
+                                />
+                            </SelectItem>
                             <SelectItem
                                 label={"Amount"}
                                 iconImage={xpNetIco}
@@ -137,19 +180,22 @@ const TransferLiquidity = ({
                         </button>
 
                         <CardWrap className={"align-self-start"}>
-                            <SelectItem
-                                label={"To"}
-                                iconImage={enrollIco}
-                                optionName={toChain}
-                                downArrow={downArrow}
-                            />
-                            <SelectItem
-                                label={"Target Account"}
-                                iconImage={userAvatar}
-                                optionName={toAccount}
-                                downArrow={downArrow}
-                            />
-
+                            <SelectItem label={"To"}>
+                            <Dropdown
+                                    placeholder='Select option'
+                                    fluid
+                                    selection
+                                    options={toTranBridge}
+                                />
+                            </SelectItem>
+                            <SelectItem label={"Target Account"}>
+                            <Dropdown
+                                    placeholder='Select option'
+                                    fluid
+                                    selection
+                                    options={targetAccounts}
+                                />
+                            </SelectItem>
                             <div style={{ marginTop: "0.6875rem" }}>
                                 <div className={Styles.title}>
                                     Amount
@@ -188,14 +234,20 @@ const TransferLiquidity = ({
 };
 
 const mapStateToProps = state => ({
+
     fromChain: state.selectReducer.fromChain,
     toChain: state.selectReducer.toChain,
+
     fromAccount: state.selectReducer.fromAccount,
     toAccount: state.selectReducer.toAccount,
+
     amount: state.selectReducer.amount,
     balance: state.selectReducer.acctBalanceCoins,
     coin: state.selectReducer.coin,
     exchangeRate: state.selectReducer.exchangeRate,
+
+    fromAccountS: state.selectReducer.fromAccountS,
+    toAccountS: state.selectReducer.toAccountS,
 
 });
 

@@ -34,9 +34,45 @@
     color: #2853EB !important;
 }
 
+.resTabNav {
+    background: #ECEDF3;
+    border: 1px solid #D2D4E8;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.25rem;
+}
+
+.resTabNav a {
+    flex: 0 0 calc(1/2 * 100%);
+    max-width: 50%;
+    font-size: 15px;
+    line-height: 126%;
+    letter-spacing: 0.03em;
+    color: #040D27;
+    opacity: 0.9;
+    padding: 0.40rem;
+    text-align: center;
+    border-radius: 8px;
+}
+
 @media (max-width: 576px) {
     .basicNav {
         margin-top: 12px;
+    }
+
+    .navbarBorder {
+        border: none!important;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbarBorder {
+        border: none!important;
     }
 }
 

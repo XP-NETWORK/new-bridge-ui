@@ -9,20 +9,6 @@ html, body {
 }
 
 
-/*Modify Bootstrap*/
-@media (min-width: 1400px) {
-    .container, .container-lg, .container-md, .container-sm, .container-xl {
-        max-width: 1280px !important;
-    }
-}
-
-@media (min-width: 576px) {
-    .modal-dialog {
-        max-width: 736px!important;
-    }
-}
-
-
 
 /*Main Style*/
 .App {
@@ -70,4 +56,79 @@ html, body {
     border: 2px solid #040D27;
     color: #040D27;
 }
+
+/*Drop Down*/
+.ui.fluid.dropdown {
+    margin-top: 0.6875rem;
+    box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15) !important;
+    background: #FFFFFF!important;
+    border-radius: 10px!important;
+    padding: 1rem!important;
+    min-width: 284px!important;
+    width: 100%;
+    cursor: pointer!important;
+    border: none!important;
+    height: 64px;
+    display: flex!important;
+    align-items: center;
+    font-weight: 500!important;
+    font-size: 1.125rem!important;
+    line-height: 126% !important;
+    letter-spacing: 0.03em!important;
+    color: #040D27!important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.amountSelectItem .ui.fluid.dropdown {
+    height: 87px!important;
+}
+
+.amountSelectItem .ui.fluid.dropdown:after {
+    top: 32px;
+}
+
+.dropdown.icon {
+    display: none;
+}
+
+.ui.fluid.dropdown:after {
+    position: absolute;
+    content: url("./assets/images/downArrow.svg");
+    top: 20px;
+    right: 8px;
+}
+
+.visible.menu {
+    border: none!important;
+    margin-top: 0.25rem!important;
+    box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15) !important;
+    background: #FFFFFF!important;
+    border-radius: 10px!important;
+}
+
+.ui.dropdown>.text, .visible.menu .item {
+    display: flex!important;
+    align-items: center!important;
+}
+
+/*Modify Bootstrap*/
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1280px !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 736px!important;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .btnBrand {
+        width: 100% !important;
+    }
+}
+
 
