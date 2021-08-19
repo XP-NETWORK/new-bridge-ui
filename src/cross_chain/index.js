@@ -123,8 +123,8 @@ export function ElrondHelper() {
  * @param {number} chain_nonce nonce of the web3 chain
  */
 export function Web3Helper(chain_nonce) {
-    web3 = undefined;
-    web3Provider = undefined;
+    let web3 = undefined;
+    let web3Provider = undefined;
 
     async function requireWeb3() {
         if (!web3) {
