@@ -165,9 +165,9 @@ export function Web3Helper(chain_nonce) {
  * Factories for Chains by Chain Name
  */
 export const ChainFactory = {
-    "XP.network": PolkadotHelper,
-    "Elrond": ElrondHelper,
-    "HECO": () => Web3Helper(CHAIN_INFO["HECO"].nonce),
-    "BSC": () => Web3Helper(CHAIN_INFO["BSC"].nonce),
-    "ROPSTEN": () => Web3Helper(CHAIN_INFO["ROPSTEN"],nonce)
+    "XP.network": PolkadotHelper(),
+    "Elrond": ElrondHelper(),
+    "HECO": Web3Helper(CHAIN_INFO["HECO"].nonce),
+    "BSC": Web3Helper(CHAIN_INFO["BSC"].nonce),
+    "ROPSTEN": Web3Helper(CHAIN_INFO["ROPSTEN"].nonce)
 }

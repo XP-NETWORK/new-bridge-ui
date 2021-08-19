@@ -7,7 +7,7 @@ import { ChainFactory } from './cross_chain';
 export const getBalanceThunk = (chain, address) => async dispatch => {
 
     try {
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
         console.log(chain, address, helper, inner)
         const balance = await inner.balance(PredefinedAccounts[chain][address].account);
@@ -29,7 +29,7 @@ export const getBalanceThunk = (chain, address) => async dispatch => {
  */
 export const sendTokens = (chain, signer, nonce, to, value) => async dispatch => {
     try {
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
         const result = inner.transferNativeToForeign(
@@ -55,7 +55,7 @@ export const sendTokens = (chain, signer, nonce, to, value) => async dispatch =>
  */
 export const returnWrappedTokens = (chain, signer, nonce, to, value) => async dispatch => {
     try {
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
         const result = inner.transferNativeToForeign(
@@ -82,7 +82,7 @@ export const returnWrappedTokens = (chain, signer, nonce, to, value) => async di
 export const sendNFTNative = (chain,sender, chain_nonce, to, id) => async dispatch => {
     try {
 
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
         const result = inner.transferNftToForeign(
@@ -108,7 +108,7 @@ export const sendNFTNative = (chain,sender, chain_nonce, to, id) => async dispat
 export const sendNFTForeign = (chain,sender, to, id) => async dispatch => {
     try {
 
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
         const result = inner.unfreezeWrappedNft(
@@ -131,7 +131,7 @@ export const sendNFTForeign = (chain,sender, to, id) => async dispatch => {
  */
 export const listNFTs = (chain,owner) => async dispatch => {
     try {
-        const helper = ChainFactory[chain]();
+        const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
         const result = inner.listNFTs(owner);
