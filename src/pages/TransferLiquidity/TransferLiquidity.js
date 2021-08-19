@@ -161,8 +161,6 @@ const TransferLiquidity = ({
                         <CardWrap>
                             <SelectItem 
                             label={"From"}
-                            // onChange={e => handleChangeFrom(e)}
-
                             >
                             <Dropdown
                                     placeholder={'Select option'}
@@ -170,6 +168,7 @@ const TransferLiquidity = ({
                                     selection
                                     options={fromTranBridge}
                                     onChange={e => handleChangeFrom(e)}
+                                    value={fromChain}
                                 />
                             </SelectItem>
                             <SelectItem label={"Source Account"}>
@@ -179,6 +178,7 @@ const TransferLiquidity = ({
                                     selection
                                     options={sourceAccounts}
                                     onChange={e => handleChangeFromAcct(e)}
+                                    value={fromAccount}
                                 />
                             </SelectItem>
                             <SelectItem
@@ -195,6 +195,7 @@ const TransferLiquidity = ({
                                     </div>)
                                 }
                                 downArrow={downArrow}
+                                
                             />
 
                             <div
@@ -209,6 +210,7 @@ const TransferLiquidity = ({
                                     placeholder={'0.0'}
                                     onChange={handleChangeAmount}
                                 />
+                                
                             </div>
                         </CardWrap>
 
@@ -228,6 +230,7 @@ const TransferLiquidity = ({
                                     selection
                                     options={toTranBridge}
                                     onChange={e => handleChangeTo(e)}
+                                    value={toChain}
                                 />
                             </SelectItem>
                             <SelectItem label={"Target Account"}>
@@ -237,6 +240,7 @@ const TransferLiquidity = ({
                                     selection
                                     options={targetAccounts}
                                     onChange={e => handleChangeToAcct(e)}
+                                    value={toAccount}
                                 />
                             </SelectItem>
                             <div style={{ marginTop: "0.6875rem" }}>

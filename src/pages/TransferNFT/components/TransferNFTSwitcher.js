@@ -106,6 +106,7 @@ const TransferNFTSwitcher = ({
                             selection
                             options={fromTranBridge}
                             onChange={e => handleChangeFrom(e)}
+                            value={fromChain}
                         />
                     </SelectItem>
 
@@ -116,6 +117,7 @@ const TransferNFTSwitcher = ({
                             selection
                             options={sourceAccounts}
                             onChange={e=>handleChangeFromAcct(e)}
+                            value={fromAccount}
                         />
                     </SelectItem>
                 </CardWrap>
@@ -136,6 +138,7 @@ const TransferNFTSwitcher = ({
                             selection
                             options={toTranBridge}
                             onChange={e=>handleChangeTo(e)}
+                            value={toChain}
                         />
                     </SelectItem>
                     <SelectItem label={"Target Account"}>
@@ -145,6 +148,7 @@ const TransferNFTSwitcher = ({
                             selection
                             options={targetAccounts}
                             onChange={e=>handleChangeToAcct(e)}
+                            value={toAccount}
                         />
                     </SelectItem>
                 </CardWrap>
