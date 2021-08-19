@@ -69,7 +69,7 @@ const TransferLiquidity = ({
         
         func(
             fromChain,
-            PredefinedAccounts[fromChain][fromAccount].key(),
+            PredefinedAccounts[fromChain][fromAccount].key,
             CHAIN_INFO[toChain].nonce,
             PredefinedAccounts[toChain][toAccount].account,
             amount

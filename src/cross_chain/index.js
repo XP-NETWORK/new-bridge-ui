@@ -4,6 +4,8 @@ import { ChainConfig } from './config';
 import { CHAIN_INFO } from './consts';
 import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers';
+import { Keyring } from '@polkadot/keyring';
+import { UserSigner } from '@elrondnetwork/erdjs/out';
 
 const fromHexString = hexString =>
   new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
@@ -22,6 +24,7 @@ export const txnSocket = txnSocketHelper(ChainConfig.validator_txn_socket, {
  */
 export function PolkadotHelper() {
     let polka = undefined;
+    const keyring = new Keyring();
 
     async function requirePolka() {
         if (polka === undefined) {
@@ -73,6 +76,15 @@ export function PolkadotHelper() {
             const nftDat = fromHexString(nfts.get(ident).replace("0x", ""));
 
             return tryDecodeWrappedPolkadotNft(nftDat) !== undefined;
+        },
+        /**
+         * Create keypair from uri
+         * 
+         * @param {string} pk Derivation path uri
+         * @returns Keypair signer
+         */
+        async signerFromPk(pk) {
+            return { sender: keyring.createFromUri(pk, undefined, 'sr25519') }
         }
     }
 }
@@ -109,10 +121,19 @@ export function ElrondHelper() {
          * Whether the given NFT is from a foreign chain
          * @param {address} _owner Address of the nft owner
          * @param {string} ident Identifier of the nft
-         * @returns 
+         * @returns bool
          */
         async isWrappedNft(_owner, ident) {
             return ident === ChainConfig.elrond_esdt_nft;
+        },
+        /**
+         * Create elrond user signer from pem
+         * 
+         * @param {string} pk pem content
+         * @returns Elrond UserSigner
+         */
+        async signerFromPk(pk) {
+            return UserSigner.fromPem(pk);
         }
     }
 }
@@ -151,9 +172,9 @@ export function Web3Helper(chain) {
          * Create ethers Wallet object from private key
          * 
          * @param {string} pk private key
-         * @returns 
+         * @returns ethers Wallet object
          */
-        async accountFromPkey(pk) {
+        async signerFromPk(pk) {
             await requireWeb3();
 
             return new Wallet(pk, web3Provider);

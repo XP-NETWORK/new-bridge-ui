@@ -3,7 +3,6 @@ import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
 import { ChainFactory } from './cross_chain';
 
-
 export const getBalanceThunk = (chain, address) => async dispatch => {
 
     try {
@@ -27,10 +26,11 @@ export const getBalanceThunk = (chain, address) => async dispatch => {
  * @param {*} value 
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendTokens = (chain, signer, nonce, to, value) => async dispatch => {
+export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch => {
     try {
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
+        const signer = await helper.signerFromPk(signer_);
 
         const result = inner.transferNativeToForeign(
             signer, nonce, to, value
@@ -53,10 +53,11 @@ export const sendTokens = (chain, signer, nonce, to, value) => async dispatch =>
  * @param {*} value 
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const returnWrappedTokens = (chain, signer, nonce, to, value) => async dispatch => {
+export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async dispatch => {
     try {
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
+        const signer = await helper.signerFromPk(signer_);
 
         const result = inner.transferNativeToForeign(
             signer, nonce, to, value
@@ -79,11 +80,12 @@ export const returnWrappedTokens = (chain, signer, nonce, to, value) => async di
  * @param {*} id nft id
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTNative = (chain,sender, chain_nonce, to, id) => async dispatch => {
+export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
 
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
+        const sender = await helper.signerFromPk(sender_);
 
         const result = inner.transferNftToForeign(
             sender, chain_nonce, to, id
@@ -105,11 +107,12 @@ export const sendNFTNative = (chain,sender, chain_nonce, to, id) => async dispat
  * @param {*} id the ID of the NFT
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTForeign = (chain,sender, to, id) => async dispatch => {
+export const sendNFTForeign = (chain,sender_, to, id) => async dispatch => {
     try {
 
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
+        const sender = await helper.signerFromPk(sender_);
 
         const result = inner.unfreezeWrappedNft(
             sender, to, id
