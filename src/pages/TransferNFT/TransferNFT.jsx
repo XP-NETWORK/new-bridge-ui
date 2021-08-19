@@ -1,21 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import {Container, Row, Col, Image, Form} from "react-bootstrap";
+import {Container, Row, Col} from "react-bootstrap";
 import TransferNFTSwitcher from "./components/TransferNFTSwitcher";
 import NFTSourceAccount from "./components/NFTSourceAccount";
-import XpModal from "../../UIElemnts/XpModal";
-import CardWrap from "../../UIElemnts/CardWrap";
-import AccUser from "../../assets/images/users/accuser.png";
-import Styles from "./TransferNFT.module.css";
 
 import {transferNFT} from '../../actions';
+import {CHAIN_INFO} from '../../cross_chain/consts';
+import {sendNFTNative, sendNFTForeign} from '../../thunks';
+import { PredefinedAccounts } from '../../cross_chain/accounts';
 
-const TransferNFT = ({transferNFT}) => {
+const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, id, sendWrapped}) => {
 
-    const [show, setShow] = useState(false);
+    const handleSenNFTClick = () => {
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+        // If native - sendNative
+        sendNative(
+            fromChain, 
+            PredefinedAccounts[fromChain][fromAcct].key,
+            CHAIN_INFO[toChain].nonce,
+            PredefinedAccounts[toChain][toAcct].account,
+            id
+            )
+        // Else - sendWrapped
+
+    }
 
     return (
         <Container>
@@ -30,75 +38,12 @@ const TransferNFT = ({transferNFT}) => {
                     <div className="text-center mt-3 mt-md-4 mb-5">
                         <button 
                             className="btnBrand btnBrand--primary"
-                            onClick={() => transferNFT()}
+                            onClick={handleSenNFTClick}
                             >
                             Transfer NFT
                         </button>
 
-                        <XpModal
-                            show={show}
-                            handleClose={handleClose}
-                        >
-                            <CardWrap>
-                                <div className="d-flex align-items-center">
-                                    <strong>NFT details</strong>
-                                    <button className={`${Styles.modalCloseButton} ml-auto`} onClick={handleClose}>X</button>
-                                </div>
-                                <Row className="g-2 mt-4">
-                                    <Col md>
-                                        <Image src={AccUser} fluid/>
-                                    </Col>
 
-                                    <Col md>
-                                        <form className={"mt-4 mt-md-0"}>
-                                            <div className={Styles.inputGroup}>
-                                                <label htmlFor="NFTName">NFT Name</label>
-                                                <input
-                                                    type="text"
-                                                    className={Styles.inputStyle}
-                                                    id={"NFTName"}
-                                                    value={"Treasur.dpsl..."}
-                                                    disabled
-                                                />
-                                            </div>
-                                            <div className={Styles.inputGroup}>
-                                                <label htmlFor="Description">Description</label>
-                                                <textarea
-                                                    type="text"
-                                                    className={Styles.inputStyle}
-                                                    id={"Description"}
-                                                    value={"It's red and it's a monolith!\n" +
-                                                    "3223X4357, 600 dpi"}
-                                                    style={{overflow: "hidden", minHeight: "60px"}}
-                                                    disabled
-                                                />
-                                            </div>
-                                            <div className={Styles.inputGroup}>
-                                                <label htmlFor="TokenID">Token ID</label>
-                                                <input
-                                                    type="text"
-                                                    className={Styles.inputStyle}
-                                                    id={"TokenID"}
-                                                    value={"3780914342537051"}
-                                                    disabled
-                                                />
-                                            </div>
-                                            <div className={Styles.inputGroup}>
-                                                <label htmlFor="Blockchain">Blockchain</label>
-                                                <input
-                                                    type="text"
-                                                    className={Styles.inputStyle}
-                                                    id={"Blockchain"}
-                                                    value={"XP.network"}
-                                                    disabled
-                                                />
-                                            </div>
-                                        </form>
-                                    </Col>
-                                </Row>
-
-                            </CardWrap>
-                        </XpModal>
 
                     </div>
                 </Col>
@@ -108,11 +53,18 @@ const TransferNFT = ({transferNFT}) => {
 };
 
 const mapStateToProps = state => ({
-    //...
+    fromChain: state.selectReducer.fromChain,
+    fromAcct: state.selectReducer.fromAcct,
+    toChain: state.selectReducer.toChain,
+    toAcct: state.selectReducer.toAcct,
+    id: state.selectReducer.selNFTHash,
+
   });
   
   const mapDispatchToProps = dispatch => ({
-    transferNFT: () => dispatch(transferNFT())
+    transferNFT: () => dispatch(transferNFT()),
+    sendNative: (chain, sender, nonce, to, id) => dispatch(sendNFTNative(chain, sender, nonce, to, id)),
+    sendWrapped: (chain, sender, to, id) => dispatch(sendNFTForeign(chain, sender, to, id))
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFT);

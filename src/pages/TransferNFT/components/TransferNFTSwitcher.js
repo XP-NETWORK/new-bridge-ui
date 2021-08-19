@@ -11,6 +11,7 @@ import CardWrap from "../../../UIElemnts/CardWrap";
 import SelectItem from "../../../UIElemnts/SelectItem";
 import Classes from './TransferNFTSwitcher.module.css';
 import {swapChains} from '../../../actions'
+import {mapChainToAvatar, mapCoinToAvatar} from '../../../mappers';
 
 
 const TransferNFTSwitcher = ({fromChain, toChain, fromAccount, toAccount, onSwapChainsPressed}) => {
@@ -25,7 +26,7 @@ const TransferNFTSwitcher = ({fromChain, toChain, fromAccount, toAccount, onSwap
             <CardWrap>
                 <SelectItem
                     label={"From"}
-                    iconImage={xpNetIco}
+                    iconImage={mapChainToAvatar(fromChain)}
                     optionName={fromChain}
                     downArrow={downArrow}
                 />
@@ -48,7 +49,7 @@ const TransferNFTSwitcher = ({fromChain, toChain, fromAccount, toAccount, onSwap
             <CardWrap>
                 <SelectItem
                     label={"To"}
-                    iconImage={enrollIco}
+                    iconImage={mapChainToAvatar(toChain)}
                     optionName={toChain}
                     downArrow={downArrow}
                 />

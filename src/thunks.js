@@ -36,6 +36,7 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
             signer, nonce, to, value
         )
         result.then(data => {
+            console.log(data, typeof data)
             showAlert(data)
             });
 
@@ -59,7 +60,7 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
         const inner = await helper.inner();
         const signer = await helper.signerFromPk(signer_);
 
-        const result = inner.transferNativeToForeign(
+        const result = inner.unfreezeWrapped(
             signer, nonce, to, value
         )
         result.then(data => {
@@ -137,9 +138,9 @@ export const listNFTs = (chain,owner) => async dispatch => {
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
 
-        const result = inner.listNFTs(owner);
+        const result = inner.listNft(owner);
         result.then(data => {
-            showAlert(data)
+            console.log(data);
         });
 
     } catch (error) {
