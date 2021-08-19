@@ -155,7 +155,7 @@ export function Web3Helper(chain) {
         web3 = await web3HelperFactory(
             web3Provider,
             ChainConfig.web3_minters[chain],
-            abi
+            new ethers.utils.Interface(abi)
         );
     }
 
