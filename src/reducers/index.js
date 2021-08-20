@@ -4,7 +4,7 @@ import {PredefinedAccounts} from '../cross_chain/accounts';
 import 'semantic-ui-css/semantic.min.css';
 
 let fromChain = chains[0];
-let toChain = chains[1];
+let toChain = chains[2];
 let coin = coins[0];
 
 const initialState = {
@@ -65,8 +65,8 @@ export const selectReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 toChain,
-                // toAccount: Object.keys(PredefinedAccounts[toChain])[0],
-                // toAccountS:Object.keys(PredefinedAccounts[toChain])
+                toAccount: Object.keys(PredefinedAccounts[toChain])[0],
+                toAccountS:Object.keys(PredefinedAccounts[toChain])
             }
         }
         case actionTypes.SELECT_FROM_ACCOUNT:{

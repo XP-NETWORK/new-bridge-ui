@@ -44,7 +44,8 @@ const TransferNFTSwitcher = ({
     const fromTranBridge = chains.map(item => {
         return {
             key: item,
-            text: item,
+            text: item === chains[0] || item === chains[2] ? item : `${item} - coming soon`,
+            disabled: item === chains[0] || item === chains[2] ? false : true,
             value: item,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
@@ -77,12 +78,20 @@ const TransferNFTSwitcher = ({
 
     const handleChangeFrom = (e) => {
         e.preventDefault();
-        selectFromChain(e.target.innerText)
+        
+        if(toChain === e.target.innerText){
+            selectToChain(fromChain);
+            selectFromChain(e.target.innerText);
+        }
     }
 
     const handleChangeTo = (e) => {
         e.preventDefault();
-        selectToChain(e.target.innerText)
+        if(fromChain === e.target.innerText){
+            selectFromChain(toChain);
+            selectToChain(e.target.innerText);
+        }
+       
     }
 
     const handleChangeFromAcct = (e) => {

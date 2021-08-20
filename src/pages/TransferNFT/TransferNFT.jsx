@@ -8,6 +8,7 @@ import {transferNFT} from '../../actions';
 import {CHAIN_INFO} from '../../cross_chain/consts';
 import {sendNFTNative, sendNFTForeign} from '../../thunks';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
+import SelectItem from '../../UIElemnts/SelectItem';
 
 const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, id, sendWrapped}) => {
 
@@ -43,7 +44,11 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, id, send
                             Transfer NFT
                         </button>
 
-
+                        {
+                            fromChain === 'Elrond'
+                            ? <SelectItem label={"Transfering NFTs from Elrond Testnet may take over 30 seconds"}/>
+                            : ''
+                        }
 
                     </div>
                 </Col>
