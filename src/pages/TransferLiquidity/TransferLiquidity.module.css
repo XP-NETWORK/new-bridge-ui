@@ -34,7 +34,7 @@
 }
 
 .switchModeBtn {
-    margin: 0 35px;
+    margin: 0 10px;
     flex: 0 0 56px;
     max-width: 56px;
     height: 56px;
@@ -94,6 +94,7 @@
         align-self: center !important;
     }
 }
+
 
 
 /* Chrome, Safari, Edge, Opera */

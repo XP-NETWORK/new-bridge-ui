@@ -23,7 +23,6 @@
 
 .tabNav a, .tabNavResponsive a {
     background-color: #ECEDF3;
-    margin-right: 0!important;
 }
 
 .tabNav a:hover, .linkTab a:hover {
@@ -81,3 +80,4 @@
         font-size: 14px!important;
     }
 }
+
