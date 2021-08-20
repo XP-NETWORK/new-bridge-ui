@@ -1,8 +1,8 @@
 import { nftMetaDtoMapper } from "../model/network/NFTMetaDtoMapper";
 import { networkNFTMetaRepo } from "../repository/NFTMeta/NetworkNFTMetaRepo";
-import { localNFTMetaService } from "./network";
+import { remoteNFTMetaService } from "./network";
 
-export const localNFTMeta = networkNFTMetaRepo(
-    localNFTMetaService(),
+export const remoteNFTMeta = networkNFTMetaRepo(
+    remoteNFTMetaService(),
     nftMetaDtoMapper()
 );

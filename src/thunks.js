@@ -3,7 +3,7 @@ import { NftPacked } from "validator/dist/encoding";
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
-import {localNFTMeta} from './singletons';
+import {remoteNFTMeta} from './singletons';
 import { ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
 import { Base64 } from 'js-base64';
@@ -222,7 +222,7 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
  */
 export const listNFTs = (chain,owner) => async dispatch => {
     try {
-        const dbList = await localNFTMeta.getAll();
+        const dbList = await remoteNFTMeta.getAll();
         const nfts = await listNFTNativeChains(chain, owner, dbList);
         dispatch(listNft(nfts));
 
