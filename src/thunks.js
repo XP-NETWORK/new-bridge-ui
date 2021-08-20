@@ -150,13 +150,12 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
  */
 export const listNFTs = (chain,owner) => async dispatch => {
     try {
-
         const _nfts = await localNFTMeta.getAll();
         const nfts = _nfts.filter((nft) => {
             const attrs = nft.data.split(",");
             return attrs[0] === chain && attrs[1] === owner.toString();
         });
-        console.log(nfts);
+        console.log(_nfts);
         dispatch(listNft(nfts));
 
     } catch (error) {

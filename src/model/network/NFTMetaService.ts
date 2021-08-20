@@ -33,7 +33,6 @@ export function nftMetaService(baseURL: string): NFTMetaService {
         return async () => {
             try {
                 const res = await call();
-                console.log(res.data);
                 return res.data;
             } catch (e) {
                 console.trace(e);
