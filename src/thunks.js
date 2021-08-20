@@ -26,6 +26,10 @@ export const getWrappedTokensBalances = (chain, address) => async dispatch => {
             PredefinedAccounts[chain][address].account
         )
         dispatch(tokenBalances(balances));
+
+        balances.forEach(item => {
+            console.log(item[1].toString())
+        })
         
     } catch (error) {
         console.error(error);
