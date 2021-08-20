@@ -26,7 +26,8 @@ import {
 
     swapChains, 
     changeAmount, 
-    transferCoins 
+    transferCoins, 
+    selectCoin
 
 } from '../../actions';
 import { chains, coins, exchangeRates } from '../../config';
@@ -60,6 +61,7 @@ const TransferLiquidity = ({
     selectToChain,
     selectFromAccount,
     selectToAccount,
+    selectCoin,
 
     getbalances,
     onSwapChainsPressed,
@@ -97,15 +99,15 @@ const TransferLiquidity = ({
         }
     })
 
-    const tokenBalances = balances.map((item, i) => {
+    const tokenBalances = balances.map(item => {
         return {
-            key: i,
+            key: coins[chains.indexOf(item[0])],
             text: (<TokenBox 
                 token={coins[chains.indexOf(item[0])]}
                 amount={item[1].toString()}
                 exchangeRate={exchangeRates[coins[chains.indexOf(item[0])]]}
             />),
-            value: 'Alice',
+            value: coins[chains.indexOf(item[0])],
             image: {avatar: true, src: mapChainToAvatar(item[0])},
         }
     })
@@ -165,7 +167,18 @@ const TransferLiquidity = ({
     }
 
     const handleChangeToken = (e) => {
-        console.log(e.target.innerText)
+
+        const txt = e.target.innerText;
+
+        if(txt.includes("XPNET")){selectCoin("XPNET")}
+        if(txt.includes("BNB")){selectCoin("BNB")}
+        if(txt.includes("eGLD")){selectCoin("eGLD")}
+        if(txt.includes("HT")){selectCoin("HT")}
+        if(txt.includes("ETH")){selectCoin("ETH")}
+
+        console.log(txt)
+
+        
     }
 
     return (
@@ -206,6 +219,7 @@ const TransferLiquidity = ({
                                     selection
                                     options={tokenBalances}
                                     onChange={handleChangeToken}
+                                    value={coin}
                                 />
                             </SelectItem>
 
@@ -315,6 +329,7 @@ const mapDispatchToProps = dispatch => ({
     selectToChain: value => dispatch(selectToChain(value)),
     selectFromAccount: value => dispatch(selectFromAccount(value)),
     selectToAccount: value => dispatch(selectToAccount(value)),
+    selectCoin: value => dispatch(selectCoin(value)),
 
     onSwapChainsPressed: () => dispatch(swapChains()),
     onChaneAmount: value => dispatch(changeAmount(value)),

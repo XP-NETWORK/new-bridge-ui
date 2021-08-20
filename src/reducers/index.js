@@ -99,6 +99,7 @@ export const selectReducer = (state = initialState, action) => {
         }
         case actionTypes.SELECT_COIN:{
             coin = payload;
+            console.log(coin)
             return {
                 ...state, coin
             }
