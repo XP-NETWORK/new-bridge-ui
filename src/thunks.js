@@ -1,7 +1,7 @@
-import { getBalance, listNfts } from './actions';
+import { getBalance, listNfts, tokenBalances } from './actions';
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
-import { ChainFactory } from './cross_chain';
+import { balanceOfWrappedTokens, ChainFactory } from './cross_chain';
 import {localNFTMeta} from './singletons';
 
 export const getBalanceThunk = (chain, address) => async dispatch => {
@@ -17,6 +17,21 @@ export const getBalanceThunk = (chain, address) => async dispatch => {
         console.error(error);
     }
 }
+
+export const getWrappedTokensBalances = (chain, address) => async dispatch => {
+    try {
+        const helper = ChainFactory[chain];
+        const balances = await balanceOfWrappedTokens(
+            helper,
+            PredefinedAccounts[chain][address].account
+        )
+        dispatch(tokenBalances(balances));
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 /**
  * Sending native tokens to a foreign ledger

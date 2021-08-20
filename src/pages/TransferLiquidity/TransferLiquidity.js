@@ -34,6 +34,7 @@ import {
     getBalanceThunk,
     sendTokens,
     returnWrappedTokens,
+    getWrappedTokensBalances,
 
 } from '../../thunks';
 import {CHAIN_INFO} from '../../cross_chain/consts';
@@ -59,7 +60,7 @@ const TransferLiquidity = ({
     selectFromAccount,
     selectToAccount,
 
-    getbalance,
+    getbalances,
     onSwapChainsPressed,
     onChaneAmount,
     send,
@@ -97,6 +98,7 @@ const TransferLiquidity = ({
 
     // getbalance(fromChain, fromAccount);
     // getbalance("Ropsten", 'ACC1')
+    getbalances(fromChain, fromAccount)
 
 
     const switchHandler = (e) => {
@@ -309,7 +311,7 @@ const mapDispatchToProps = dispatch => ({
     onChaneAmount: value => dispatch(changeAmount(value)),
     send: (chain, signer, nonce, to, value) => dispatch(sendTokens(chain, signer, nonce, to, value)),
     sendWrapped: (chain, signer, nonce, to, value) => dispatch(returnWrappedTokens(chain, signer, nonce, to, value)),
-    getbalance: (chain, account) => dispatch(getBalanceThunk(chain, account)),
+    getbalances: (chain, account) => dispatch(getWrappedTokensBalances(chain, account)),
 
 });
 

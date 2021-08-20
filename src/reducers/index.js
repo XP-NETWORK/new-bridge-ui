@@ -32,6 +32,7 @@ const initialState = {
 
     //Balance
     acctBalanceCoins:0,
+    balances:[],
     exchangeRate: exchangeRates[coin]
 
 };
@@ -138,6 +139,13 @@ export const selectReducer = (state = initialState, action) => {
             return{
                 ...state,
                 nftList
+            }
+        }
+        case actionTypes.GET_BALANCES:{
+            console.log("Balances",payload)
+            return{
+                ...state,
+                balances:payload
             }
         }
         case actionTypes.TRANSFER_COINS:{

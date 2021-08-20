@@ -59,4 +59,9 @@ export const getBalance = (value) => ({
 export const listNfts = (value) => ({
     type: actionTypes.LIST_NFTS,
     payload: value
+});
+
+export const tokenBalances =(value) => ({
+    type: actionTypes.GET_BALANCES,
+    payload:value
 })
