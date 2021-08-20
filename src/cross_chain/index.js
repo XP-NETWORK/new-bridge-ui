@@ -26,7 +26,7 @@ export const txnSocket = txnSocketHelper(ChainConfig.validator_txn_socket, {
  * @param {*} address address in source chain
  * @returns Array with [CHAIN IDENTIFIER, BALANCE] as elements
  */
-export const balanceOfWrappedTokens = async (helper, address) => {
+const balanceOfWrappedTokens = async (helper, address) => {
     const inner = await helper.inner();
     const ents = Object.entries(CHAIN_INFO);
     const nonces = ents.flatMap(([ident, { nonce }]) => ident != helper.ident ? [nonce] : []);
@@ -34,6 +34,14 @@ export const balanceOfWrappedTokens = async (helper, address) => {
     const bals = await inner.balanceWrappedBatch(address, nonces);
 
     return Array.from(bals).map(([nonce, bal]) => [CHAIN_BY_NONCE[nonce], bal]);
+}
+
+export const balanceAllTokens = async (helper, address) => {
+    const wrapped = await balanceOfWrappedTokens(helper, address);
+    const inner = await helper.inner();
+    wrapped.push([helper.ident, await inner.balance(address)]);
+
+    return wrapped;
 }
 
 /**
@@ -211,5 +219,5 @@ export const ChainFactory = {
     "Elrond": ElrondHelper(),
     "HECO": Web3Helper("HECO"),
     "BSC": Web3Helper("BSC"),
-    "ROPSTEN": Web3Helper("ROPSTEN")
+    "Ropsten": Web3Helper("Ropsten")
 }
