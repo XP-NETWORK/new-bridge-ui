@@ -2,7 +2,6 @@
   "name": "xp-network",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/xp-network/",
   "dependencies": {
     "@elrondnetwork/erdjs": "^6.6.2",
     "@polkadot/api": "^5.5.1",
