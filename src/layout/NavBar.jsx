@@ -6,6 +6,10 @@ import {Link, NavLink} from "react-router-dom";
 import Classes from './NavBar.module.css';
 
 const NavBar = () => {
+
+    const transferTokens = "Tokens Transfer - Coming Soon";
+    const ledger = "Ledger - Coming Soon";
+
     return (
         <Navbar expand="lg" className={Classes.navbarBorder}>
             <Container>
@@ -15,7 +19,7 @@ const NavBar = () => {
 
                 <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
                     <Link to="#link">
-                        <Image src={GreenDot} fluid/> Ledger
+                        <Image src={GreenDot} fluid/> {ledger}
                     </Link>
                 </Nav>
 
@@ -23,24 +27,24 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
+                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>{transferTokens}</NavLink>
                     </Nav>
 
                     <Nav className={`${Classes.linkTab} ml-auto`}>
-                        <Link to="#home">Link 2</Link>
-                        <Link to="#link">Link 1</Link>
+                        {/* <Link to="#home">Link 2</Link> */}
+                        <Link to="#link">Cross-Chain Bridge Demo</Link>
                     </Nav>
 
                     <Nav className={`${Classes.tabNav} d-none d-md-block`}>
                         <Link to="#link">
-                            <Image src={GreenDot} fluid/> Ledger
+                            <Image src={GreenDot} fluid/> {ledger}
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
 
                 <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-md-none mt-3`}>
                     <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
+                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>{transferTokens}</NavLink>
                 </Nav>
             </Container>
         </Navbar>

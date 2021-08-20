@@ -177,14 +177,13 @@ const TransferLiquidity = ({
         if(txt.includes("ETH")){selectCoin("ETH")}
 
         console.log(txt)
-
         
     }
 
     return (
-        <Container>
+        <Container disabled>
             <div className="title title--primary">
-                <h2>Cross Chain Liquidity Bridge</h2>
+                <h2>Cross Chain Liquidity Bridge - Coming Soon</h2>
             </div>
             <Row>
                 <Col md={{ span: 10, offset: 1 }}>
@@ -192,6 +191,7 @@ const TransferLiquidity = ({
                         <CardWrap>
                             <SelectItem 
                             label={"From"}
+                            disabled
                             >
                             <Dropdown
                                     placeholder={'Select option'}
@@ -200,6 +200,7 @@ const TransferLiquidity = ({
                                     options={fromTranBridge}
                                     onChange={e => handleChangeFrom(e)}
                                     value={fromChain}
+                                    disabled
                                 />
                             </SelectItem>
                             <SelectItem label={"Source Account"}>
@@ -210,6 +211,7 @@ const TransferLiquidity = ({
                                     options={sourceAccounts}
                                     onChange={e => handleChangeFromAcct(e)}
                                     value={fromAccount}
+                                    disabled
                                 />
                             </SelectItem>
                             <SelectItem label={"Amount"}>
@@ -220,6 +222,7 @@ const TransferLiquidity = ({
                                     options={tokenBalances}
                                     onChange={handleChangeToken}
                                     value={coin}
+                                    disabled
                                 />
                             </SelectItem>
 
@@ -242,6 +245,7 @@ const TransferLiquidity = ({
                         <button
                             className={`${Styles.switchModeBtn} d-flex flex-column`}
                             onClick={switchHandler}
+                            disabled
                         >
                             <Image src={rightArrow} />
                             <Image src={leftArrow} className={"mt-1"} />
@@ -256,6 +260,7 @@ const TransferLiquidity = ({
                                     options={toTranBridge}
                                     onChange={e => handleChangeTo(e)}
                                     value={toChain}
+                                    disabled
                                 />
                             </SelectItem>
                             <SelectItem label={"Target Account"}>
@@ -266,6 +271,7 @@ const TransferLiquidity = ({
                                     options={targetAccounts}
                                     onChange={e => handleChangeToAcct(e)}
                                     value={toAccount}
+                                    disabled
                                 />
                             </SelectItem>
                             <div style={{ marginTop: "0.6875rem" }}>
@@ -294,7 +300,8 @@ const TransferLiquidity = ({
                     <div className="text-center mt-3 mt-md-4 mb-5">
                         <button
                             className="btnBrand btnBrand--primary"
-                            onClick={sendAnyToken}
+                            // onClick={sendAnyToken}
+                            disabled
                         >
                             Send
                         </button>
