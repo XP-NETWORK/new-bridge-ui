@@ -8,6 +8,7 @@ import Styles from './TransferLiquidity.module.css';
 // Local Imports
 import CardWrap from "../../UIElemnts/CardWrap";
 import SelectItem from "../../UIElemnts/SelectItem";
+import TokenBox from '../../UIElemnts/TokenBox';
 // SVGs
 import xpNetIco from "../../assets/images/XpNet.svg";
 import downArrow from "../../assets/images/downArrow.svg";
@@ -48,7 +49,7 @@ const TransferLiquidity = ({
     fromAccount,
     toAccount,
     amount,
-    balance,
+    balances,
     coin,
     exchangeRate,
     fromAccountS, 
@@ -98,7 +99,21 @@ const TransferLiquidity = ({
 
     // getbalance(fromChain, fromAccount);
     // getbalance("Ropsten", 'ACC1')
-    getbalances(fromChain, fromAccount)
+    // getbalances(fromChain, fromAccount);
+
+    const tokenBalances = balances.map(item => {
+        return {
+            key: 'Alice',
+            text: (<TokenBox 
+                token={item[0]}
+                // amount={item[1]}
+                amount={1.1559}
+                exchangeRate={exchangeRates[item[0]]}
+            />),
+            value: 'Alice',
+            image: {avatar: true, src: xpNetIco},
+        }
+    })
 
 
     const switchHandler = (e) => {
@@ -183,22 +198,14 @@ const TransferLiquidity = ({
                                     value={fromAccount}
                                 />
                             </SelectItem>
-                            <SelectItem
-                                label={"Amount"}
-                                iconImage={xpNetIco}
-                                optionName={
-                                    (<div className={Styles.amountOption}>
-                                        <div className="d-flex align-items-center">
-                                            <strong>{coin}</strong>
-                                            <span className={`${Styles.darkAmount} ml-auto`}>${balance * exchangeRate}</span>
-                                        </div>
-                                        <span>{balance} {coin}</span>
-                                        <span> @{exchangeRate} </span>
-                                    </div>)
-                                }
-                                downArrow={downArrow}
-                                
-                            />
+                            <SelectItem label={"Amount"}>
+                            <Dropdown
+                                    placeholder='Select token'
+                                    fluid
+                                    selection
+                                    options={tokenBalances}
+                                />
+                            </SelectItem>
 
                             <div
                                 className={`${Styles.amounInput} d-flex align-items-center`}
@@ -291,7 +298,7 @@ const mapStateToProps = state => ({
     toAccount: state.selectReducer.toAccount,
 
     amount: state.selectReducer.amount,
-    balance: state.selectReducer.acctBalanceCoins,
+    balances: state.selectReducer.balances,
     coin: state.selectReducer.coin,
     exchangeRate: state.selectReducer.exchangeRate,
 
