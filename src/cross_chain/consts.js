@@ -15,7 +15,7 @@ export const CHAIN_INFO = {
         chainId: 97, 
         rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545"
     },
-    'ROPSTEN': {
+    'Ropsten': {
         nonce: 5,
         native: coins[4],
         chainId: 3,

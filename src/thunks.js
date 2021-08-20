@@ -1,7 +1,7 @@
 import { getBalance, listNfts, tokenBalances } from './actions';
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
-import { ChainFactory, balanceOfWrappedTokens, txnSocket } from './cross_chain';
+import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {localNFTMeta} from './singletons';
 import { ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
@@ -44,7 +44,7 @@ export const getBalanceThunk = (chain, address) => async dispatch => {
 export const getWrappedTokensBalances = (chain, address) => async dispatch => {
     try {
         const helper = ChainFactory[chain];
-        const balances = await balanceOfWrappedTokens(
+        const balances = await balanceAllTokens(
             helper,
             PredefinedAccounts[chain][address].account
         )
