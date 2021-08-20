@@ -125,23 +125,9 @@ export const selectReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.LIST_NFTS:{
-
-            let nftList = []
-
-            payload.forEach(nft => {
-                if(nft && nft['data']){
-                    const [_chain, _account] = nft['data'].split(',');
-                    if(fromChain === _chain && state.fromAccount === _account){
-                        nftList.push(nft)
-                    }
-                }
-            })
-
-            console.log(nftList)
-
             return{
                 ...state,
-                nftList
+                payload
             }
         }
         case actionTypes.GET_BALANCES:{

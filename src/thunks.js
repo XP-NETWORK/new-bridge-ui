@@ -14,9 +14,7 @@ const callFromInner = async (chain, func, ...args) => {
 }
 
 const waitUrl = async (target_nonce, id) => {
-    console.log("CALLEDME");
     const hash = await txnSocket.waitTxHash(target_nonce, id);
-    console.log("DONE");
 
     return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
 }
@@ -152,9 +150,13 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
  */
 export const listNFTs = (chain,owner) => async dispatch => {
     try {
-
         const _nfts = await localNFTMeta.getAll();
-        dispatch(listNft(_nfts));
+        const nfts = _nfts.filter((nft) => {
+            const attrs = nft.data.split(",");
+            return attrs[0] === chain && attrs[1] === owner.toString();
+        });
+        console.log(_nfts);
+        dispatch(listNft(nfts));
 
     } catch (error) {
         console.error(error);
