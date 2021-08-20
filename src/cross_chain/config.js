@@ -12,14 +12,14 @@ export const ChainConfig = {
     "elrond_esdt_nft": "XPNFT-594a29", //"XPNFT-ff3b98", //
     "validator_txn_socket": "ws://34.240.149.237/txsocket/", //"wss://bridge.xp.network/", //
     "web3_minters": {
-        'HECO': "0xEf5b44491d1da9E30803d666Fb7BdD06141f0b82",
-        "BSC": "0x471bF01b8C622C00652F336651747B1A5d37b5ea",
-        "ROPSTEN": "0x66b07bC16F499a0e835c5b277AF19555a05578c1"
+        'HECO': "0x9d9061EE73832C016BF74282AD63D0F4DC784d9d",
+        "BSC": "0x158D8366a2dfFEdCaC1e1B3ACDcC59a9941dd625",
+        "ROPSTEN": "0x57Fd7b0F4b2174B1B7B54D657226c3a6C5F49236"
     },
     "web3_erc1155": {
-        "HECO": "0x65c823E97d61F5Db30a433612a4AF3CC26aeD4ba",
-        "BSC": "0xaFFA531E294E8e4b6647F993c12216D8CFA90903",
-        "ROPSTEN": "0x5d9f23f7253Efef3926E934829Ab65C0092E218B",
+        "HECO": "0xfEBb57AA40bE02649B374B5B091Ccd8d53Fe24A5",
+        "BSC": "0xd6a9a86a3Cc56b23169c9492Ca5736Bdc77beF86",
+        "ROPSTEN": "0x0218B563Ee50d16b12C7CF95B9F207B69e2ED345",
     }
 };
 

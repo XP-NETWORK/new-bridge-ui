@@ -29,7 +29,7 @@ export const txnSocket = txnSocketHelper(ChainConfig.validator_txn_socket, {
 export const balanceOfWrappedTokens = async (helper, address) => {
     const inner = await helper.inner();
     const ents = Object.entries(CHAIN_INFO);
-    const nonces = ents.flatMap(([ident, { nonce }]) => ident != inner.ident ? [nonce] : []);
+    const nonces = ents.flatMap(([ident, { nonce }]) => ident != helper.ident ? [nonce] : []);
 
     const bals = await inner.balanceWrappedBatch(address, nonces);
 
@@ -174,7 +174,8 @@ export function Web3Helper(chain) {
         web3 = await web3HelperFactory(
             web3Provider,
             ChainConfig.web3_minters[chain],
-            new ethers.utils.Interface(abi)
+            new ethers.utils.Interface(abi),
+            ChainConfig.web3_erc1155[chain]
         );
     }
 
