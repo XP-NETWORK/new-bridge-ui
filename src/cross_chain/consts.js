@@ -1,4 +1,3 @@
-import BigNumber from "bignumber.js";
 import { coins } from "../config";
 
 export const CHAIN_INFO = {

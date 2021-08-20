@@ -1,10 +1,12 @@
 import { getBalance, listNft, tokenBalances } from './actions';
+import { NftPacked } from "validator/dist/encoding";
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {localNFTMeta} from './singletons';
 import { ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
+import { Base64 } from 'js-base64';
 
 const callFromInner = async (chain, func, ...args) => {
     const helper = ChainFactory[chain];
@@ -142,6 +144,68 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
     }
 }
 
+const decoder = new TextDecoder();
+
+const listNFTNativeChains = async (chain, owner, dbList) => {
+    const resM = Object.fromEntries(dbList.map((obj) => [obj.id, obj]));
+    const final = [];
+    const helper = ChainFactory[chain];
+    let owned = Array.from(await callFromInner(chain, 'listNft', owner));
+
+    let idGetter;
+    switch (chain) {
+        case "XP.network": {
+            idGetter = async (ident, data) => {
+                const datStr = decoder.decode(data);
+                if (datStr.length !== 24 || datStr.includes("\uFFFD")) {
+                    const packed = NftPacked.deserializeBinary(data);
+                    const rawDat = packed.getData_asU8();
+                    const dat = helper.tryDecodeWrappedPolkadotNft(rawDat);
+                    const orig = await callFromInner('Elrond', 'getLockedNft', dat);
+                    return { id: orig.uris[0], isWrapped: true, info: ident, originChain: "Elrond" };
+                } else {
+                    return { id: datStr, isWrapped: false, info: ident, originChain: chain };
+                }
+            }
+            break;
+        }
+        case "Elrond": {
+            idGetter = async (ident, data) => {
+                if (await helper.isWrappedNft("", ident)) {
+                    const hash = Base64.toUint8Array(data.uris[0]);
+                    const dat = await callFromInner('XP.network', 'getLockedNft', hash);
+                    return { id: dat.slice(-24), isWrapped: true, info: data.nonce, originChain: "XP.network" };
+                } else {
+                    const parts = ident.split("-");
+                    return {
+                        id: window.atob(data.uris[0]),
+                        isWrapped: false,
+                        info: { nonce: parseInt(parts.pop(), 16), token: parts.join("-"), originChain: chain }
+                    }
+                }
+            }
+            break;
+        }
+        default: {
+            throw Error(`Unhandled chain ${chain}`);
+        }
+    }
+
+    for (const [ident, data] of owned) {
+        const { id, isWrapped, info, originChain } = await idGetter(ident, data);
+        if (resM[id]  === undefined) {
+            continue;
+        }
+        resM[id].originChain = originChain;
+        resM[id].isWrapped = isWrapped;
+        resM[id].hash = info;
+
+        final.push(resM[id]);
+    }
+
+    return final;
+}
+
 /**
  * Retrievs a list of all NFTs owned by an address
  * @param {*} chain the chain of origin
@@ -150,12 +214,8 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
  */
 export const listNFTs = (chain,owner) => async dispatch => {
     try {
-        const _nfts = await localNFTMeta.getAll();
-        const nfts = _nfts.filter((nft) => {
-            const attrs = nft.data.split(",");
-            return attrs[0] === chain && attrs[1] === owner.toString();
-        });
-        console.log(_nfts);
+        const dbList = await localNFTMeta.getAll();
+        const nfts = await listNFTNativeChains(chain, owner, dbList);
         dispatch(listNft(nfts));
 
     } catch (error) {

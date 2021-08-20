@@ -29,7 +29,7 @@ export const txnSocket = txnSocketHelper(ChainConfig.validator_txn_socket, {
 const balanceOfWrappedTokens = async (helper, address) => {
     const inner = await helper.inner();
     const ents = Object.entries(CHAIN_INFO);
-    const nonces = ents.flatMap(([ident, { nonce }]) => ident != helper.ident ? [nonce] : []);
+    const nonces = ents.flatMap(([ident, { nonce }]) => ident !== helper.ident ? [nonce] : []);
 
     const bals = await inner.balanceWrappedBatch(address, nonces);
 
@@ -92,6 +92,7 @@ export function PolkadotHelper() {
 
             return polka;
         },
+        tryDecodeWrappedPolkadotNft,
         /**
          * Whether the given NFT is originally from elrond
          * 
