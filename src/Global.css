@@ -63,13 +63,20 @@ a {
 .btnBrand--primary {
     background-color: #040D27;
 }
-
+.btnBrand:disabled {
+    box-shadow: none;
+}
 .btnBrand--primary:hover {
     background-color: #fff;
     border: 2px solid #040D27;
     color: #040D27;
 }
+.btnBrand:disabled:hover {
+    border: 2px solid transparent;
+    color: #FFFFFF;
+    background-color: #040D27;
 
+}
 /*Drop Down*/
 .ui.fluid.dropdown {
     margin-top: 0.6875rem;

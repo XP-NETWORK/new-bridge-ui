@@ -19,7 +19,7 @@ const NavBar = () => {
 
                 <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
                     <Link to="#link">
-                        <Image src={GreenDot} fluid/> {ledger}
+                        <Image src={GreenDot} fluid/> Ledger - <span style={{color: '#F27603'}}>Coming Soon</span>
                     </Link>
                 </Nav>
 
@@ -27,7 +27,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>{transferTokens}</NavLink>
+                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer - <span style={{color: '#F27603'}}>Coming Soon</span></NavLink>
                     </Nav>
 
                     <Nav className={`${Classes.linkTab} ml-auto`}>
@@ -37,14 +37,14 @@ const NavBar = () => {
 
                     <Nav className={`${Classes.tabNav} d-none d-md-block`}>
                         <Link to="#link">
-                            <Image src={GreenDot} fluid/> {ledger}
+                            <Image src={GreenDot} fluid/> Ledger - <span style={{color: '#F27603'}}>Coming Soon</span>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
 
                 <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-md-none mt-3`}>
                     <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>{transferTokens}</NavLink>
+                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer - <span style={{color: '#F27603'}}>Coming Soon</span></NavLink>
                 </Nav>
             </Container>
         </Navbar>

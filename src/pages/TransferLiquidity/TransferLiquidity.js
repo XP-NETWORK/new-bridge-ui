@@ -183,11 +183,11 @@ const TransferLiquidity = ({
     return (
         <Container disabled>
             <div className="title title--primary">
-                <h2>Cross-Chain Tokens Bridge - Coming Soon</h2>
+                <h2>Cross-Chain Tokens Bridge - <span style={{color: "#F27603"}}>Coming Soon</span></h2>
             </div>
             <Row>
                 <Col md={{ span: 10, offset: 1 }}>
-                    <div className={`${Styles.switcherWrap} d-flex align-items-center justify-content-center`}>
+                    <div id="placeofitem"  className={`${Styles.switcherWrap} ${window.innerWidth < 991 ? '' : 'd-flex' } align-items-center justify-content-center`}>
                         <CardWrap>
                             <SelectItem 
                             label={"From"}
@@ -299,7 +299,10 @@ const TransferLiquidity = ({
 
                     <div className="text-center mt-3 mt-md-4 mb-5">
                         <button
-                            className="btnBrand btnBrand--primary"
+                        style ={{
+                            opacity: 0.5
+                        }}
+                            className="btnBrand btnBrand--primary btn-disa"
                             // onClick={sendAnyToken}
                             disabled
                         >

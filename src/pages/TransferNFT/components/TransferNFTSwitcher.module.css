@@ -18,7 +18,7 @@
         margin: 1.25rem 0;
         width: 56px;
         position: absolute;
-        top: 43%;
+        top: 40%;
         left: 50%;
         transform: translateX(-50%) rotate(90deg);
     }

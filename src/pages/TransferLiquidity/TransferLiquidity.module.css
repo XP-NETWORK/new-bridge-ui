@@ -5,7 +5,10 @@
 .amountOption strong {
     font-size: 14px;
 }
-
+.btn-disa {
+    opacity: 0.5;
+    background-color: blue !important;
+}
 .amountOption span {
     font-size: 12px;
     line-height: 126%;
@@ -80,7 +83,7 @@
         margin: 1.25rem 0;
         width: 56px;
         position: absolute;
-        top: 50%;
+        top: 47%;
         left: 50%;
         transform: translate(-50% ,-100%);
     }
@@ -89,7 +92,9 @@
         flex-wrap: wrap !important;
         flex-direction: column;
     }
-
+#placeofitem {
+    display: block !important;
+}
     .alignSelf {
         align-self: center !important;
     }
