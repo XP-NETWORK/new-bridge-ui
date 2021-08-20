@@ -12989,7 +12989,7 @@ test-exclude@^6.0.0:
 
 "testsuite-ts@git+https://github.com/xp-network/bridge-ui-logics#master":
   version "1.0.0"
-  resolved "git+https://github.com/xp-network/bridge-ui-logics#a18d4f7892b889cf4dace454312822357cf3f1b4"
+  resolved "git+https://github.com/xp-network/bridge-ui-logics#efe2ced4f8d70921baacb69cdd04c36c8099e8da"
   dependencies:
     "@elrondnetwork/erdjs" "^6.2.0"
     "@polkadot/api" "^5.2.1"
