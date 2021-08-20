@@ -99,11 +99,11 @@ const TransferLiquidity = ({
 
     // getbalance(fromChain, fromAccount);
     // getbalance("Ropsten", 'ACC1')
-    // getbalances(fromChain, fromAccount);
+    // 
 
-    const tokenBalances = balances.map(item => {
+    const tokenBalances = balances.map((item, i) => {
         return {
-            key: 'Alice',
+            key: i,
             text: (<TokenBox 
                 token={item[0]}
                 // amount={item[1]}
@@ -119,6 +119,7 @@ const TransferLiquidity = ({
     const switchHandler = (e) => {
         e.preventDefault();
         onSwapChainsPressed();
+        getbalances(fromChain, fromAccount);
     }
 
     const handleChangeAmount = (e) => {
@@ -160,6 +161,7 @@ const TransferLiquidity = ({
     const handleChangeFromAcct = (e) => {
         e.preventDefault();
         selectFromAccount(e.target.innerText)
+        getbalances(fromChain, e.target.innerText);
     }
 
     const handleChangeToAcct = (e) => {
