@@ -23,6 +23,7 @@
 
 .tabNav a, .tabNavResponsive a {
     background-color: #ECEDF3;
+    margin-right: 0!important;
 }
 
 .tabNav a:hover, .linkTab a:hover {
@@ -40,11 +41,11 @@
     box-sizing: border-box;
     border-radius: 10px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row!important;
     align-items: center;
     width: 100%;
     overflow: hidden;
-    padding: 0.25rem;
+    padding: 0.25rem!important;
 }
 
 .resTabNav a {
@@ -60,19 +61,23 @@
     border-radius: 8px;
 }
 
-@media (max-width: 576px) {
+
+@media (max-width: 991px) {
     .basicNav {
-        margin-top: 12px;
+        margin-top: 1rem;
     }
 
     .navbarBorder {
         border: none!important;
     }
-}
 
-@media (max-width: 768px) {
-    .navbarBorder {
-        border: none!important;
+    .navbar-nav {
+        flex-direction: row;
     }
 }
 
+@media (max-width: 330px) {
+    .basicNav a, .tabNavResponsive a, .tabNav a {
+        font-size: 14px!important;
+    }
+}

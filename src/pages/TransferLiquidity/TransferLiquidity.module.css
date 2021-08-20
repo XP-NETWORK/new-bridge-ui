@@ -34,7 +34,7 @@
 }
 
 .switchModeBtn {
-    margin: 0 27px;
+    margin: 0 35px;
     flex: 0 0 56px;
     max-width: 56px;
     height: 56px;
@@ -74,23 +74,15 @@
     right: 15px;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 
 @media (min-width: 320px) and (max-width: 991.98px) {
     .switchModeBtn {
         margin: 1.25rem 0;
         width: 56px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% ,-100%);
     }
 
     .switcherWrap {
@@ -101,4 +93,17 @@ input[type=number] {
     .alignSelf {
         align-self: center !important;
     }
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

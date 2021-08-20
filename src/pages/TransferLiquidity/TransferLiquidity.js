@@ -183,7 +183,7 @@ const TransferLiquidity = ({
     return (
         <Container disabled>
             <div className="title title--primary">
-                <h2>Cross Chain Liquidity Bridge - Coming Soon</h2>
+                <h2>Cross-Chain Tokens Bridge - Coming Soon</h2>
             </div>
             <Row>
                 <Col md={{ span: 10, offset: 1 }}>
