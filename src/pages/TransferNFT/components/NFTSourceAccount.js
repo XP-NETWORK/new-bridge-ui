@@ -18,9 +18,8 @@ import { selectNFT } from '../../../actions';
 
 const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(-1);
+  const handleClose = () => setShow(-1);
 
   const [users, setUsers] = useState({
     activeMark: null,
@@ -59,7 +58,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
           >
             <div className={`${Styles.userThumb} d-flex align-items-center justify-content-center`}>
               <Image src={nft.link} fluid />
-              <button className={Styles.infoBtn} onClick={handleShow}> i </button>
+              <button className={Styles.infoBtn} onClick={() => setShow(index)}> i </button>
               {toggleCheckMark(index) && (
                 <div className={Styles.chekMark}>
                   <Image src={checkmarkicon} fluid />
@@ -67,7 +66,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
               )}
 
               <XpModal
-                show={show}
+                show={show === index}
                 handleClose={handleClose}
               >
                 <CardWrap>
