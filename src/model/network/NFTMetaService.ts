@@ -14,7 +14,6 @@ export type NFTMetaService = {
 export function nftMetaService(baseURL: string): NFTMetaService {
     const client = axios.create({
         baseURL,
-        responseType: 'json',
         headers: {
             'Content-Type': 'application/json'
         }
@@ -34,8 +33,10 @@ export function nftMetaService(baseURL: string): NFTMetaService {
         return async () => {
             try {
                 const res = await call();
+                console.log(res.data);
                 return res.data;
-            } catch (_) {
+            } catch (e) {
+                console.trace(e);
                 return undefined;
             }
         }
