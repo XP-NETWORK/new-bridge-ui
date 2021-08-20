@@ -20,9 +20,6 @@ const initialState = {
     // Dropdown Accounts:
     fromAccountS:Object.keys(PredefinedAccounts[fromChain]),
     toAccountS:Object.keys(PredefinedAccounts[toChain]),
-    // NFT related
-    selNFTHash:'',
-    selNFTNonce:'',
     nftList:[],
 
     // Liquidity related
@@ -49,7 +46,6 @@ export const selectReducer = (state = initialState, action) => {
 
             const fromAccount = Object.keys(PredefinedAccounts[fromChain])[0];
             coin = coins[chains.indexOf(fromChain)];
-
             return {
                 ...state,
                 coin,
@@ -105,11 +101,9 @@ export const selectReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.SELECT_NFT:{
-            console.log(payload.hash, payload.nonce)
             return {
                 ...state,
-                selNFTHash:payload.hash,
-                selNFTNonce:payload.nonce
+                selNFTData: payload
             }
         }
         case actionTypes.CHANGE_AMMOUNT:{
@@ -127,7 +121,7 @@ export const selectReducer = (state = initialState, action) => {
         case actionTypes.LIST_NFTS:{
             return{
                 ...state,
-                payload
+                nftList: payload
             }
         }
         case actionTypes.GET_BALANCES:{

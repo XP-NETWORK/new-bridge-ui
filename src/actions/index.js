@@ -1,4 +1,3 @@
-import { listNFTs } from '../thunks';
 import actionTypes from './actionTypes';
 
 export const selectFromChain = (value) => ({
@@ -21,12 +20,9 @@ export const selectToAccount = (value) => ({
     payload: value
 });
 
-export const selectNFT = (hash, nonce) => ({
+export const selectNFT = (data) => ({
     type: actionTypes.SELECT_NFT,
-    payload: {
-        hash,
-        nonce
-    }
+    payload: data
 });
 
 export const selectCoin = (value) => ({
