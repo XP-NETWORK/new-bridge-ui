@@ -149,12 +149,31 @@ a {
         max-width: 1280px !important;
     }
 }
-
+@media (min-width: 1200px) and (max-width: 1399px) {
+.CardWrap_switchCard__2DAxh.mx-md-4.my-4 {
+    width: 789px !important;
+    position: relative;
+    left: -50px !important;
+}
+}
+@media (min-width: 993px) and (max-width: 1199px) {
+.CardWrap_switchCard__2DAxh.mx-md-4.my-4 {
+    width: 795px !important;
+    position: relative;
+    left: -113px !important;
+}
+}
 
 @media (max-width: 991px) {
     .btnBrand {
         width: 100% !important;
     }
+	.CardWrap_switchCard__2DAxh{
+		border-radius: 1.25rem;
+		background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(308.78deg
+	, rgba(167, 177, 255, 0.12) -24.07%, rgba(123, 255, 239, 0.55) 285.12%);
+		padding: 1.25rem 1.5rem 1.5rem;
+	}
 }
 
 @media (min-width: 576px) {
