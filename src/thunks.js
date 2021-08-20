@@ -16,7 +16,7 @@ const callFromInner = async (chain, func, ...args) => {
 }
 
 const waitUrl = async (target_nonce, id) => {
-    const hash = await txnSocket.waitTxHash(target_nonce, id);
+    const hash = await txnSocket.waitTxHash(target_nonce, id.toString());
 
     return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
 }
@@ -134,13 +134,18 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
  */
 export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
-        const result = callFromInnerSigned(chain, 'unfreezeWrappedNft', sender_, chain_nonce, to, id);
+        const helper = ChainFactory[chain];
+        const inner = await helper.inner();
+        const sender = await helper.signerFromPk(sender_);
+    
+        const [, aid] = await inner.unfreezeWrappedNft(sender, to, id);
+        const result = waitUrl(chain_nonce, aid);
         result.then(data => {
             showAlert(data)
         });
 
-    } catch (error) {
-        console.error(error);
+    } catch(e) {
+        console.error(e);
     }
 }
 
@@ -158,11 +163,11 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
             idGetter = async (ident, data) => {
                 const datStr = decoder.decode(data);
                 if (datStr.length !== 24 || datStr.includes("\uFFFD")) {
-                    const packed = NftPacked.deserializeBinary(data);
+                    const packed = NftPacked.deserializeBinary(Uint8Array.from(data));
                     const rawDat = packed.getData_asU8();
                     const dat = helper.tryDecodeWrappedPolkadotNft(rawDat);
                     const orig = await callFromInner('Elrond', 'getLockedNft', dat);
-                    return { id: orig.uris[0], isWrapped: true, info: ident, originChain: "Elrond" };
+                    return { id: window.atob(orig.uris[0]), isWrapped: true, info: ident, originChain: "Elrond" };
                 } else {
                     return { id: datStr, isWrapped: false, info: ident, originChain: chain };
                 }
@@ -171,16 +176,19 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
         }
         case "Elrond": {
             idGetter = async (ident, data) => {
-                if (await helper.isWrappedNft("", ident)) {
+                const parts = ident.split("-");
+                const nonce = parseInt(parts.pop(), 16);
+                const token = parts.join("-");
+                if (await helper.isWrappedNft("", token)) {
                     const hash = Base64.toUint8Array(data.uris[0]);
                     const dat = await callFromInner('XP.network', 'getLockedNft', hash);
-                    return { id: dat.slice(-24), isWrapped: true, info: data.nonce, originChain: "XP.network" };
+                    return { id: decoder.decode(dat.slice(-24)), isWrapped: true, info: data.nonce, originChain: "XP.network" };
                 } else {
-                    const parts = ident.split("-");
                     return {
                         id: window.atob(data.uris[0]),
                         isWrapped: false,
-                        info: { nonce: parseInt(parts.pop(), 16), token: parts.join("-"), originChain: chain }
+                        info: { nonce, token },
+                        originChain: chain
                     }
                 }
             }

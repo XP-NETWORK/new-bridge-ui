@@ -11,14 +11,13 @@ import { PredefinedAccounts } from '../../cross_chain/accounts';
 import SelectItem from '../../UIElemnts/SelectItem';
 
 const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrapped, getNfts}) => {
-    const [nft, setNft] = useState({});
+    const [nft, setNft] = useState(undefined);
 
     useEffect(() => {
         getNfts(fromChain, PredefinedAccounts[fromChain][fromAcct].account)
     }, [fromChain, fromAcct, getNfts])
 
-    const handleSenNFTClick = () => {
-        console.log(toAcct, toChain);
+    const handleSenNFTClick = async () => {
         if (nft.originChain === fromChain) {
             sendNative(
                 fromChain, 
@@ -31,15 +30,11 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrap
             sendWrapped(
                 fromChain,
                 PredefinedAccounts[fromChain][fromAcct].key,
+                CHAIN_INFO[toChain].nonce,
                 PredefinedAccounts[toChain][toAcct].account,
                 nft.hash
             )
         }
-
-        // If native - sendNative
-
-        // Else - sendWrapped
-
     }
 
     return (
@@ -83,7 +78,7 @@ const mapStateToProps = state => ({
   const mapDispatchToProps = dispatch => ({
     transferNFT: () => dispatch(transferNFT()),
     sendNative: (chain, sender, nonce, to, id) => dispatch(sendNFTNative(chain, sender, nonce, to, id)),
-    sendWrapped: (chain, sender, to, id) => dispatch(sendNFTForeign(chain, sender, to, id)),
+    sendWrapped: (chain, sender, nonce, to, id) => dispatch(sendNFTForeign(chain, sender, nonce, to, id)),
     getNfts: (chain, owner) => dispatch(listNFTs(chain, owner)),
   });
 

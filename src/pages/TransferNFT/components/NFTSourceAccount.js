@@ -28,15 +28,14 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
   });
 
   const toggleCheck = (index, data) => {
-    setUsers({ ...users, activeMark: users.allUsers[index] });
-    selectCb(data)
+    const nIndex = index === users.activeMark ? null : index;
+    setUsers({ ...users, activeMark: nIndex });
+    nIndex !== null ? selectCb(data) : selectCb(undefined);
   };
 
 
   const toggleCheckMark = (index) => {
-    if (users.allUsers[index] === users.activeMark) {
-      return users.activeMark = true;
-    }
+    return index === users.activeMark
   }
 
 
@@ -78,7 +77,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
                   </div>
                   <Row className="g-2 mt-4">
                     <Col md>
-                      <Image src={AccUser} fluid />
+                      <Image src={nft.link} fluid />
                     </Col>
 
                     <Col md>
