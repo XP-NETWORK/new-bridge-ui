@@ -33,13 +33,17 @@ const balanceOfWrappedTokens = async (helper, address) => {
 
     const bals = await inner.balanceWrappedBatch(address, nonces);
 
-    return Array.from(bals).map(([nonce, bal]) => [CHAIN_BY_NONCE[nonce], bal]);
+    return Array.from(bals).map(([nonce, bal]) => {
+        const chain = CHAIN_BY_NONCE[nonce];
+        return [chain, bal.div(CHAIN_INFO[chain].decimals)];
+    });
 }
 
 export const balanceAllTokens = async (helper, address) => {
     const wrapped = await balanceOfWrappedTokens(helper, address);
     const inner = await helper.inner();
-    wrapped.push([helper.ident, await inner.balance(address)]);
+    const bal = await inner.balance(address);
+    wrapped.push([helper.ident, bal.div(CHAIN_INFO[helper.ident].decimals)]);
 
     return wrapped;
 }
