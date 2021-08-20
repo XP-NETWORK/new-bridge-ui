@@ -12,29 +12,35 @@ import SelectItem from '../../UIElemnts/SelectItem';
 
 const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrapped, getNfts}) => {
     const [nft, setNft] = useState(undefined);
+    const [loader, setLoader] = useState()
 
     useEffect(() => {
         getNfts(fromChain, PredefinedAccounts[fromChain][fromAcct].account)
     }, [fromChain, fromAcct, getNfts])
 
     const handleSenNFTClick = async () => {
-        if (nft.originChain === fromChain) {
-            sendNative(
-                fromChain, 
-                PredefinedAccounts[fromChain][fromAcct].key,
-                CHAIN_INFO[toChain].nonce,
-                PredefinedAccounts[toChain][toAcct].account,
-                nft.hash
-            )
-        } else {
-            sendWrapped(
-                fromChain,
-                PredefinedAccounts[fromChain][fromAcct].key,
-                CHAIN_INFO[toChain].nonce,
-                PredefinedAccounts[toChain][toAcct].account,
-                nft.hash
-            )
+        if(!loader){
+            setLoader(true)
+            if (nft.originChain === fromChain) {
+                await sendNative(
+                    fromChain, 
+                    PredefinedAccounts[fromChain][fromAcct].key,
+                    CHAIN_INFO[toChain].nonce,
+                    PredefinedAccounts[toChain][toAcct].account,
+                    nft.hash
+                )
+            } else {
+                await sendWrapped(
+                    fromChain,
+                    PredefinedAccounts[fromChain][fromAcct].key,
+                    CHAIN_INFO[toChain].nonce,
+                    PredefinedAccounts[toChain][toAcct].account,
+                    nft.hash
+                )
+            };
+            setLoader(false)
         }
+        
     }
 
     return (
@@ -48,16 +54,19 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrap
                     <NFTSourceAccount selectCb={(data) => setNft(data)}/>
 
                     <div className="text-center mt-3 mt-md-4 mb-5">
+
+
+
                         <button 
                             className="btnBrand btnBrand--primary"
                             onClick={handleSenNFTClick}
                             >
-                            Transfer NFT
+                            {loader ? "Transfering NFTs" : "Send NFTs"}
                         </button>
 
                         {
                             fromChain === 'Elrond'
-                            ? <SelectItem label={"Transfering NFTs from Elrond Testnet may take over 30 seconds"}/>
+                            ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''}/>
                             : ''
                         }
 
