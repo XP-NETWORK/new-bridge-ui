@@ -26,9 +26,9 @@ export const ChainConfig = {
 export const ExplorerPrefix = Object.fromEntries(
     [
         [chains[0], polkadotBlockPrefix],
-        [chains[1], elrondTxnPrefix],
-        [chains[2], "heco"],
-        [chains[3], "bsc"],
-        [chains[4], "ropsten"]
+        [chains[2], elrondTxnPrefix],
+        [chains[3], "https://testnet.hecoinfo.com/tx"],
+        [chains[1], "https://testnet.bscscan.com/tx"],
+        [chains[4], "https://ropsten.etherscan.io/tx"]
     ]
 );
