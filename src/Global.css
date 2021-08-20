@@ -22,7 +22,12 @@ a {
     background: url('./assets/images/mainBg.svg') center center/cover no-repeat;
     min-height: 100vh;
 }
-
+.CardWrap_switchCard__2DAxh{
+    border-radius: 1.25rem;
+    background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(308.78deg
+, rgba(167, 177, 255, 0.12) -24.07%, rgba(123, 255, 239, 0.55) 285.12%);
+    padding: 1.25rem 2.25rem 1.5rem !important;
+}
 .title h2 {
     text-align: center;
     font-family: 'Work Sans', sans-serif;
@@ -156,6 +161,12 @@ a {
     .modal-dialog {
         max-width: 736px !important;
     }
+	.CardWrap_switchCard__2DAxh{
+		border-radius: 1.25rem;
+		background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(308.78deg
+	, rgba(167, 177, 255, 0.12) -24.07%, rgba(123, 255, 239, 0.55) 285.12%);
+		padding: 1.25rem 1.5rem 1.5rem;
+	}
 }
 
 @media (max-width: 330px) {
@@ -167,6 +178,5 @@ a {
         max-width: 135px!important;
     }
 }
-
 
 
