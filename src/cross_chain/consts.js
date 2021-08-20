@@ -22,4 +22,9 @@ export const CHAIN_INFO = {
         rpcUrl: "https://ropsten.infura.io/v3/182b3d3fb2d14d5fbe7421348624d1ce"
     }
 };
+
+export const CHAIN_BY_NONCE = Object.fromEntries(
+    Object.entries(CHAIN_INFO).map(([ident, { nonce }]) => [nonce, ident])
+);
+
 export const web3TokenStds = ["ERC721", "ERC1155"];

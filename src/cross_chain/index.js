@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { elrondHelperFactory, polkadotPalletHelperFactory, web3HelperFactory, txnSocketHelper } from 'testsuite-ts';
 import { ChainConfig } from './config';
-import { CHAIN_INFO } from './consts';
+import { CHAIN_BY_NONCE, CHAIN_INFO } from './consts';
 import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers';
 import { Keyring } from '@polkadot/keyring';
@@ -18,6 +18,23 @@ const decoder = new TextDecoder();
 export const txnSocket = txnSocketHelper(ChainConfig.validator_txn_socket, {
     path: "/txsocket/socket.io"
 });
+
+/**
+ * Get balances of all wrapped tokens for an address
+ * 
+ * @param {PolkadotHelper | ElrondHelper | Web3Helper} helper helper object in this project
+ * @param {*} address address in source chain
+ * @returns Array with [CHAIN IDENTIFIER, BALANCE] as elements
+ */
+export const balanceOfWrappedTokens = async (helper, address) => {
+    const inner = await helper.inner();
+    const ents = Object.entries(CHAIN_INFO);
+    const nonces = ents.flatMap(([ident, { nonce }]) => ident != inner.ident ? [nonce] : []);
+
+    const bals = await inner.balanceWrappedBatch(address, nonces);
+
+    return Array.from(bals).map(([nonce, bal]) => [CHAIN_BY_NONCE[nonce], bal]);
+}
 
 /**
  * Wrapper over PolkadotPalletHelper
@@ -54,6 +71,7 @@ export function PolkadotHelper() {
     }
 
     return {
+        ident: 'XP.network',
         /**
          * @returns inner PolkadotPalletHelper 
          */
@@ -108,6 +126,7 @@ export function ElrondHelper() {
     }
 
     return {
+        ident: 'Elrond',
         /**
          * 
          * @returns Inner ElrondHelper from testsuite-ts
@@ -160,6 +179,7 @@ export function Web3Helper(chain) {
     }
 
     return {
+        ident: chain,
         /**
          * @returns Inner Web3Helper from testsuite-ts
          */
