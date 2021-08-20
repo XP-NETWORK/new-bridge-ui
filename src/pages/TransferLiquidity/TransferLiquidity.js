@@ -97,21 +97,16 @@ const TransferLiquidity = ({
         }
     })
 
-    // getbalance(fromChain, fromAccount);
-    // getbalance("Ropsten", 'ACC1')
-    // 
-
     const tokenBalances = balances.map((item, i) => {
         return {
             key: i,
             text: (<TokenBox 
-                token={item[0]}
-                // amount={item[1]}
-                amount={1.1559}
+                token={coins[chains.indexOf(item[0])]}
+                amount={item[1].toString()}
                 exchangeRate={exchangeRates[item[0]]}
             />),
             value: 'Alice',
-            image: {avatar: true, src: xpNetIco},
+            image: {avatar: true, src: mapChainToAvatar(item[0])},
         }
     })
 
