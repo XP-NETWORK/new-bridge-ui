@@ -10,7 +10,7 @@ export const ChainConfig = {
     "elrond_event_rest": "http://34.240.149.237/event_rest", //"https://bridge.xp.network/event_rest", //
     "elrond_esdt": "XPNET-1dba6e", //"XPNET-cdf688", //
     "elrond_esdt_nft": "XPNFT-594a29", //"XPNFT-ff3b98", //
-    "validator_txn_socket": "ws://34.240.149.237/txsocket/", //"wss://bridge.xp.network/", //
+    "validator_txn_socket": "ws://34.240.149.237", //"wss://bridge.xp.network/", //
     "web3_minters": {
         'HECO': "0x9d9061EE73832C016BF74282AD63D0F4DC784d9d",
         "BSC": "0x158D8366a2dfFEdCaC1e1B3ACDcC59a9941dd625",
