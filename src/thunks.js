@@ -1,16 +1,39 @@
 import { getBalance, listNfts, tokenBalances } from './actions';
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
-import { balanceOfWrappedTokens, ChainFactory } from './cross_chain';
+import { ChainFactory, balanceOfWrappedTokens, txnSocket } from './cross_chain';
 import {localNFTMeta} from './singletons';
+import { ExplorerPrefix } from './cross_chain/config';
+import { CHAIN_BY_NONCE } from './cross_chain/consts';
+
+const callFromInner = async (chain, func, ...args) => {
+    const helper = ChainFactory[chain];
+    const inner = await helper.inner();
+
+    return await inner[func](...args);
+}
+
+const waitUrl = async (target_nonce, id) => {
+    console.log("CALLEDME");
+    const hash = await txnSocket.waitTxHash(target_nonce, id);
+    console.log("DONE");
+
+    return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
+}
+
+const callFromInnerSigned = async (chain, func, signer_, chain_nonce, ...args) => {
+    const helper = ChainFactory[chain];
+    const inner = await helper.inner();
+    const signer = await helper.signerFromPk(signer_);
+
+    const [, id] = await inner[func](signer, chain_nonce, ...args);
+    return await waitUrl(chain_nonce, id);
+}
 
 export const getBalanceThunk = (chain, address) => async dispatch => {
 
     try {
-        const helper = ChainFactory[chain];
-        const inner = await helper.inner();
-        console.log(chain, address, helper, inner)
-        const balance = await inner.balance(PredefinedAccounts[chain][address].account);
+        const balance = await callFromInner(chain, 'balance', PredefinedAccounts[chain][address].account);
         dispatch(getBalance(balance['c'][0] / 10 ** (balance['e'] - 14)));
 
     } catch (error) {
@@ -48,13 +71,7 @@ export const getWrappedTokensBalances = (chain, address) => async dispatch => {
  */
 export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch => {
     try {
-        const helper = ChainFactory[chain];
-        const inner = await helper.inner();
-        const signer = await helper.signerFromPk(signer_);
-
-        const result = inner.transferNativeToForeign(
-            signer, nonce, to, value
-        )
+        const result = callFromInnerSigned(chain, 'transferNativeToForeign', signer_, nonce, to, value);
         result.then(data => {
             console.log(data, typeof data)
             showAlert(data)
@@ -76,13 +93,7 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
  */
 export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async dispatch => {
     try {
-        const helper = ChainFactory[chain];
-        const inner = await helper.inner();
-        const signer = await helper.signerFromPk(signer_);
-
-        const result = inner.unfreezeWrapped(
-            signer, nonce, to, value
-        )
+        const result = callFromInnerSigned(chain, 'unfreezeWrapped', signer_, nonce, to, value);
         result.then(data => {
             showAlert(data)
             });
@@ -103,14 +114,7 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
  */
 export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
-
-        const helper = ChainFactory[chain];
-        const inner = await helper.inner();
-        const sender = await helper.signerFromPk(sender_);
-
-        const result = inner.transferNftToForeign(
-            sender, chain_nonce, to, id
-        );
+        const result = callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, id);
         result.then(data => {
             showAlert(data)
         });
@@ -128,16 +132,9 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
  * @param {*} id the ID of the NFT
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTForeign = (chain,sender_, to, id) => async dispatch => {
+export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
-
-        const helper = ChainFactory[chain];
-        const inner = await helper.inner();
-        const sender = await helper.signerFromPk(sender_);
-
-        const result = inner.unfreezeWrappedNft(
-            sender, to, id
-        );
+        const result = callFromInnerSigned(chain, 'unfreezeWrappedNft', sender_, chain_nonce, to, id);
         result.then(data => {
             showAlert(data)
         });

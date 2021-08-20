@@ -27,8 +27,8 @@ export const ExplorerPrefix = Object.fromEntries(
     [
         [chains[0], polkadotBlockPrefix],
         [chains[1], elrondTxnPrefix],
-        [chains[2], "heco/"],
-        [chains[3], "bsc/"],
-        [chains[4], "ropsten/"]
+        [chains[2], "heco"],
+        [chains[3], "bsc"],
+        [chains[4], "ropsten"]
     ]
 );
