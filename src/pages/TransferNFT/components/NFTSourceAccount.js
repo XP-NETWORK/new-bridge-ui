@@ -24,7 +24,7 @@ import {listNFTs} from '../../../thunks';
 import { PredefinedAccounts } from '../../../cross_chain/accounts';
 
 
-const NFTSourceAccount = ({fromChain, fromAccount, selectNFT, getNfts}) => {
+const NFTSourceAccount = ({fromChain, fromAccount, selectNFT, getNfts, listNFTs}) => {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -32,6 +32,10 @@ const NFTSourceAccount = ({fromChain, fromAccount, selectNFT, getNfts}) => {
 
   const loadNfts = getNfts(fromChain, PredefinedAccounts[fromChain][fromAccount].account);
   
+  loadNfts.then(data =>{
+    console.log(listNFTs)
+  })
+    
 
   const NFT = [
     {
@@ -188,6 +192,8 @@ const NFTSourceAccount = ({fromChain, fromAccount, selectNFT, getNfts}) => {
 const mapStateToProps = state => ({
   fromChain: state.selectReducer.fromChain,
   fromAccount: state.selectReducer.fromAccount,
+  listNFTs: state.selectReducer.listNFTs,
+
 });
 
 const mapDispatchToProps = dispatch => ({

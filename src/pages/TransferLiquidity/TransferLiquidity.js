@@ -103,7 +103,7 @@ const TransferLiquidity = ({
             text: (<TokenBox 
                 token={coins[chains.indexOf(item[0])]}
                 amount={item[1].toString()}
-                exchangeRate={exchangeRates[item[0]]}
+                exchangeRate={exchangeRates[coins[chains.indexOf(item[0])]]}
             />),
             value: 'Alice',
             image: {avatar: true, src: mapChainToAvatar(item[0])},
@@ -114,7 +114,7 @@ const TransferLiquidity = ({
     const switchHandler = (e) => {
         e.preventDefault();
         onSwapChainsPressed();
-        getbalances(fromChain, fromAccount);
+        getbalances(toChain, toAccount);
     }
 
     const handleChangeAmount = (e) => {
@@ -164,6 +164,10 @@ const TransferLiquidity = ({
         selectToAccount(e.target.innerText)
     }
 
+    const handleChangeToken = (e) => {
+        console.log(e.target.innerText)
+    }
+
     return (
         <Container>
             <div className="title title--primary">
@@ -201,6 +205,7 @@ const TransferLiquidity = ({
                                     fluid
                                     selection
                                     options={tokenBalances}
+                                    onChange={handleChangeToken}
                                 />
                             </SelectItem>
 

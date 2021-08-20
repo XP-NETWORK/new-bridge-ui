@@ -1,4 +1,4 @@
-import { getBalance, listNfts, tokenBalances } from './actions';
+import { getBalance, listNft, tokenBalances } from './actions';
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
@@ -154,11 +154,11 @@ export const listNFTs = (chain,owner) => async dispatch => {
     try {
 
         const _nfts = await localNFTMeta.getAll();
-        dispatch(listNfts(_nfts));
+        dispatch(listNft(_nfts));
 
     } catch (error) {
         console.error(error);
-        dispatch(listNfts([]));
+        dispatch(listNft([]));
     }
 }
 

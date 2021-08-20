@@ -136,6 +136,8 @@ export const selectReducer = (state = initialState, action) => {
                 }
             })
 
+            console.log(nftList)
+
             return{
                 ...state,
                 nftList
