@@ -58,7 +58,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
 
 
                         <button 
-                            className="btnBrand btnBrand--primary"
+                            className={`${loader ? 'interacted-button' : ''} btnBrand btnBrand--primary`}
                             onClick={handleSenNFTClick}
                             >
                             {loader ? "Transfering NFTs" : "Send NFTs"}

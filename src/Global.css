@@ -243,3 +243,16 @@ a {
         left: 0px !important;
     }
 }
+
+.interacted-button{
+    background-color: #F3F4F9;
+    color: #040D27;
+    box-shadow: none;
+}
+
+.interacted-button:hover{
+    background-color: #F3F4F9;
+    color: #040D27;
+    box-shadow: none;
+    border-color: #F3F4F9;
+}
