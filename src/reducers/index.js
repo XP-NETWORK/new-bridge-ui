@@ -30,7 +30,11 @@ const initialState = {
     //Balance
     acctBalanceCoins:0,
     balances:[],
-    exchangeRate: exchangeRates[coin]
+    exchangeRate: exchangeRates[coin],
+
+    // UI related
+    loader: false,
+
 
 };
 
@@ -129,6 +133,13 @@ export const selectReducer = (state = initialState, action) => {
             return{
                 ...state,
                 balances:payload
+            }
+        }
+        case actionTypes.SHOW_LOADER:{
+            console.log('Inside reducer loader:', payload)
+            return {
+                ...state,
+                loader:payload
             }
         }
         case actionTypes.TRANSFER_COINS:{

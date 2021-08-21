@@ -4,23 +4,23 @@ import {Container, Row, Col} from "react-bootstrap";
 import TransferNFTSwitcher from "./components/TransferNFTSwitcher";
 import NFTSourceAccount from "./components/NFTSourceAccount";
 
-import {transferNFT} from '../../actions';
+import {transferNFT, showLoader} from '../../actions';
 import {CHAIN_INFO} from '../../cross_chain/consts';
 import {sendNFTNative, sendNFTForeign, listNFTs} from '../../thunks';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
 import SelectItem from '../../UIElemnts/SelectItem';
 
-const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrapped, getNfts}) => {
+const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader}) => {
     const [nft, setNft] = useState(undefined);
-    const [loader, setLoader] = useState()
 
     useEffect(() => {
         getNfts(fromChain, PredefinedAccounts[fromChain][fromAcct].account)
     }, [fromChain, fromAcct, getNfts])
 
     const handleSenNFTClick = async () => {
+        
         if(!loader){
-            setLoader(true)
+            showLoader(true)
             if (nft.originChain === fromChain) {
                 await sendNative(
                     fromChain, 
@@ -38,7 +38,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, sendNative, sendWrap
                     nft.hash
                 )
             };
-            setLoader(false)
+           
         }
         
     }
@@ -82,6 +82,8 @@ const mapStateToProps = state => ({
     fromAcct: state.selectReducer.fromAccount,
     toChain: state.selectReducer.toChain,
     toAcct: state.selectReducer.toAccount,
+    loader: state.selectReducer.loader,
+
   });
   
   const mapDispatchToProps = dispatch => ({
@@ -89,6 +91,8 @@ const mapStateToProps = state => ({
     sendNative: (chain, sender, nonce, to, id) => dispatch(sendNFTNative(chain, sender, nonce, to, id)),
     sendWrapped: (chain, sender, nonce, to, id) => dispatch(sendNFTForeign(chain, sender, nonce, to, id)),
     getNfts: (chain, owner) => dispatch(listNFTs(chain, owner)),
+    showLoader: show => dispatch(showLoader(show)),
+
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFT);

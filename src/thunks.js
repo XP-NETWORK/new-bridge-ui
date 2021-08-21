@@ -1,4 +1,4 @@
-import { getBalance, listNft, tokenBalances } from './actions';
+import { getBalance, listNft, tokenBalances, showLoader } from './actions';
 import { NftPacked } from "validator/dist/encoding";
 import { chains, coins, exchangeRates } from './config';
 import { PredefinedAccounts } from './cross_chain/accounts';
@@ -74,7 +74,7 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
         const result = callFromInnerSigned(chain, 'transferNativeToForeign', signer_, nonce, to, value);
         result.then(data => {
             console.log(data, typeof data)
-            showAlert(data)
+            dispatch(showAlert(data))
             });
 
     } catch (error) {
@@ -95,7 +95,7 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
     try {
         const result = callFromInnerSigned(chain, 'unfreezeWrapped', signer_, nonce, to, value);
         result.then(data => {
-            showAlert(data)
+            dispatch(showAlert(data))
             });
 
     } catch (error) {
@@ -116,7 +116,7 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
     try {
         const result = callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, id);
         result.then(data => {
-            showAlert(data)
+            dispatch(showAlert(data))
         });
 
     } catch (error) {
@@ -141,7 +141,7 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
         const [, aid] = await inner.unfreezeWrappedNft(sender, to, id);
         const result = waitUrl(chain_nonce, aid);
         result.then(data => {
-            showAlert(data)
+            dispatch(showAlert(data))
         });
 
     } catch(e) {
@@ -237,7 +237,8 @@ export const listNFTs = (chain,owner) => async dispatch => {
  * Unified way of displaying a link
  * @param {string} message 
  */
-const showAlert = message => {
-    alert(message)
+const showAlert = message => async dispatch => {
+    dispatch(showLoader(false));
+    alert(message);
 }
 

@@ -57,7 +57,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
             onClick={() => toggleCheck(index, nft)}
           >
             <div className={`${Styles.userThumb} d-flex align-items-center justify-content-center`}>
-              <Image src={nft.link} fluid />
+              <Image className={"Dima"} style={{width: '83px !important', height: '83px !important'}} src={nft.link} fluid />
               <button className={Styles.infoBtn} onClick={() => setShow(index)}> i </button>
               {toggleCheckMark(index) && (
                 <div className={Styles.chekMark}>

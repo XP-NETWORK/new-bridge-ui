@@ -19,6 +19,9 @@ const actionTypes = {
 
     LIST_NFTS              : "LIST_NFTS",
 
+    SHOW_LOADER             : "SHOW_LOADER",
+    
+
     
 }
 

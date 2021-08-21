@@ -143,6 +143,12 @@ a {
     padding: 0.25rem !important;
 }
 
+.Dima.img-fluid{
+    width:83px !important;
+    height: 83px !important;
+    border-radius: 8px;
+}
+
 /*Modify Bootstrap*/
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
