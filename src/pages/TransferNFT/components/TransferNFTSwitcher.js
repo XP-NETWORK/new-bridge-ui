@@ -79,29 +79,29 @@ const TransferNFTSwitcher = ({
     const handleChangeFrom = (e) => {
         e.preventDefault();
         
-        if(toChain === e.target.innerText){
+        if(toChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')){
             selectToChain(fromChain);
-            selectFromChain(e.target.innerText);
+            selectFromChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
         }
     }
 
     const handleChangeTo = (e) => {
         e.preventDefault();
-        if(fromChain === e.target.innerText){
+        if(fromChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')){
             selectFromChain(toChain);
-            selectToChain(e.target.innerText);
+            selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
         }
        
     }
 
     const handleChangeFromAcct = (e) => {
         e.preventDefault();
-        selectFromAccount(e.target.innerText)
+        selectFromAccount(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''))
     }
 
     const handleChangeToAcct = (e) => {
         e.preventDefault();
-        selectToAccount(e.target.innerText)
+        selectToAccount(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''))
     }
 
     return (

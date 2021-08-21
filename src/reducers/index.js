@@ -60,8 +60,7 @@ export const selectReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.SELECT_TO_CHAIN:{
-            toChain = payload;
-            console.log("Clicked to chain", payload)
+            toChain = payload.replace(/(?:\r\n|\r|\n)/g, '');
             return {
                 ...state, 
                 toChain,
@@ -70,14 +69,13 @@ export const selectReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.SELECT_FROM_ACCOUNT:{
-            console.log("Clicked from Acct", payload)
             return{
-                ...state, fromAccount: payload
+                ...state, fromAccount: payload.replace(/(?:\r\n|\r|\n)/g, '')
             }
         }
         case actionTypes.SELECT_TO_ACCOUNT:{
             return {
-                ...state, toAccount: payload
+                ...state, toAccount: payload.replace(/(?:\r\n|\r|\n)/g, '')
             }
         }
         case actionTypes.SWAP_CHAINS:{

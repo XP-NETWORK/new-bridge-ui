@@ -14,7 +14,12 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
     const [nft, setNft] = useState(undefined);
 
     useEffect(() => {
-        getNfts(fromChain, PredefinedAccounts[fromChain][fromAcct].account)
+        const name = typeof fromAcct === 'string' ? fromAcct.replace(/(?:\r\n|\r|\n)/g, '') : ''
+
+        console.log(fromChain, name, PredefinedAccounts)
+        if(PredefinedAccounts && PredefinedAccounts[fromChain] && PredefinedAccounts[fromChain][name]) {
+            getNfts(fromChain, PredefinedAccounts[fromChain][name].account)
+        }
     }, [fromChain, fromAcct, getNfts])
 
     const handleSenNFTClick = async () => {
