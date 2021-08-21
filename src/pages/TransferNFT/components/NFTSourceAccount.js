@@ -40,7 +40,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
 
 
   return (
-    <CardWrap className={"mx-md-4 my-4"}>
+    <CardWrap className={"mx-md-4 my-4 lalalalalala"}>
       <div className={`${Styles.srcAcc} d-flex align-items-center`}>
         <span>NFTs on </span>
         <div className={`${Styles.user} d-flex align-items-center ml-2`}>

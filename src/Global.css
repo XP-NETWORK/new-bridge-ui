@@ -199,3 +199,41 @@ a {
 }
 
 
+
+.lalalalalala {
+    width: 740px;
+    position: relative;
+    left: 20px !important;
+}
+
+@media( max-width:1399px) {
+    .lalalalalala {
+        width: 740px;
+        position: relative;
+        left: -25px !important;
+    }
+}
+
+@media(max-width: 1199px)  {
+    .lalalalalala {
+        width: 740px;
+        position: relative;
+        left: -85px !important;
+    }
+}
+
+@media(max-width: 991px) {
+    .lalalalalala {
+        width: 100%;
+        position: relative;
+        left: -20px !important;
+    }
+}
+
+@media(max-width: 767px) {
+    .lalalalalala {
+        width: 100%;
+        position: relative;
+        left: 0px !important;
+    }
+}
