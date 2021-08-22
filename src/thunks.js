@@ -22,13 +22,25 @@ const waitUrl = async (target_nonce, id) => {
     return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
 }
 
+const handleConcurrentSend = () => {
+	// handle concurrent send error
+};
+
 const callFromInnerSigned = async (chain, func, signer_, chain_nonce, ...args) => {
     const helper = ChainFactory[chain];
     const inner = await helper.inner();
     const signer = await helper.signerFromPk(signer_);
 
-    const [, id] = await inner[func](signer, chain_nonce, ...args);
-    return await waitUrl(chain_nonce, id);
+	try {
+    	const [, id] = await inner[func](signer, chain_nonce, ...args);
+		return await waitUrl(chain_nonce, id);
+	} catch (e) {
+		if (e.message === "concurrent_send") {
+			handleConcurrentSend();
+			// people tried to send the same nft/use the same account
+			// add any custom logic here
+		}
+	}
 }
 
 export const getBalanceThunk = (chain, address) => async dispatch => {
