@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {Container, Row, Col} from "react-bootstrap";
 import TransferNFTSwitcher from "./components/TransferNFTSwitcher";
 import NFTSourceAccount from "./components/NFTSourceAccount";
@@ -14,6 +14,7 @@ import CardWrap from "../../UIElemnts/CardWrap";
 
 const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader, modalMessage, closePopup}) => {
     const [nft, setNft] = useState(undefined);
+    const dispatch = useDispatch()
     const [loadingInterval, setLoadingInterval] = useState()
     const [n, setN] = useState(0)
     useEffect(() => {
@@ -34,6 +35,9 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
             else if(i < 85) i += 0.01
             else i += 0.001
             setN(i > 100 ? 100 : i)
+            if(count > 400) {
+                dispatch(showLoader(false))
+            }
         },100)
         setLoadingInterval(l)
     }
@@ -44,7 +48,6 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
             clearInterval(loadingInterval)
         }
     },[loader])
-    console.log(n, n > 80 )
     const handleSenNFTClick = async () => {
         console.log(nft)
         if(!loader && nft){

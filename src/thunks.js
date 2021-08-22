@@ -22,25 +22,13 @@ const waitUrl = async (target_nonce, id) => {
     return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
 }
 
-const handleConcurrentSend = () => {
-	// handle concurrent send error
-};
-
 const callFromInnerSigned = async (chain, func, signer_, chain_nonce, ...args) => {
     const helper = ChainFactory[chain];
     const inner = await helper.inner();
     const signer = await helper.signerFromPk(signer_);
 
-	try {
-    	const [, id] = await inner[func](signer, chain_nonce, ...args);
-		return await waitUrl(chain_nonce, id);
-	} catch (e) {
-		if (e.message === "concurrent_send") {
-			handleConcurrentSend();
-			// people tried to send the same nft/use the same account
-			// add any custom logic here
-		}
-	}
+    const [, id] = await inner[func](signer, chain_nonce, ...args);
+    return await waitUrl(chain_nonce, id);
 }
 
 export const getBalanceThunk = (chain, address) => async dispatch => {
@@ -107,10 +95,19 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
  */
 export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async dispatch => {
     try {
+        let user = signer_ === '//Alice//stash' ? 'Alice_Stash' : signer_ === '//Bob//stash' ? 'Bob_Stash' : signer_.replace('//', '')
+        if(user.length > 20) {
+            user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === signer_)[0]
+        }
         const result = callFromInnerSigned(chain, 'unfreezeWrapped', signer_, nonce, to, value);
+        console.log(signer_, user, 'hello')
         result.then(data => {
+            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showAlert(data))
-            });
+            }).catch(er => {
+                if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+                dispatch(showLoader(false))
+            })
 
     } catch (error) {
         dispatch(showLoader(false))
@@ -176,7 +173,9 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
         })
 
     } catch(e) {
-        console.log('sendNFTForeign')
+        let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
+        if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
         dispatch(showLoader(false))
         console.error(e);
     }
