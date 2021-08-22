@@ -97,7 +97,6 @@ export const selectReducer = (state = initialState, action) => {
         }
         case actionTypes.SELECT_COIN:{
             coin = payload;
-            console.log(coin)
             return {
                 ...state, coin
             }
@@ -127,28 +126,16 @@ export const selectReducer = (state = initialState, action) => {
             }
         }
         case actionTypes.GET_BALANCES:{
-            console.log("Balances",payload)
             return{
                 ...state,
                 balances:payload
             }
         }
         case actionTypes.SHOW_LOADER:{
-            console.log('Inside reducer loader:', payload)
             return {
                 ...state,
                 loader:payload
             }
-        }
-        case actionTypes.TRANSFER_COINS:{
-            // CODE HERE
-            console.log("Transfer Tokens Click");
-            return state;
-        }
-        case actionTypes.TRANSFER_NFT:{
-            // CODE HERE
-            console.log("Transfer NFT Click");
-            return state;
         }
         default:{
             return state;

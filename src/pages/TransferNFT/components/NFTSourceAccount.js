@@ -1,5 +1,5 @@
 // External Imports
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Image, Form } from "react-bootstrap";
 // Internal Imports
@@ -25,6 +25,12 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
     activeMark: null,
     allUsers: nftList
   });
+
+  useEffect(() => {
+    // change the NFT list after sending one
+    
+
+  }, [nftList])
 
   const toggleCheck = (index, data) => {
     const nIndex = index === users.activeMark ? null : index;
