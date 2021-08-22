@@ -78,6 +78,8 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
             });
 
     } catch (error) {
+        dispatch(showLoader(false))
+        console.log('sendTokens')
         console.error(error);
     }
 }
@@ -99,6 +101,8 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
             });
 
     } catch (error) {
+        dispatch(showLoader(false))
+        console.log('returnWrappedTokens')
         console.error(error);
     }
 }
@@ -122,9 +126,14 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
             result.then(data => {
              if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showAlert(data))
-        });
+        }).catch(er => {
+            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+            dispatch(showLoader(false))
+        })
 
     } catch (error) {
+        dispatch(showLoader(false))
+        console.log('sendNFTNative')
         console.error(error);
     }
 }
@@ -149,9 +158,14 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
         result.then(data => {
             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showAlert(data))
-        });
+        }).catch(er => {
+            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+            dispatch(showLoader(false))
+        })
 
     } catch(e) {
+        console.log('sendNFTForeign')
+        dispatch(showLoader(false))
         console.error(e);
     }
 }
