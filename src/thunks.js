@@ -1,12 +1,13 @@
-import { getBalance, listNft, tokenBalances, showLoader } from './actions';
+import { getBalance, listNft, tokenBalances, showLoader, nftLoader, setModalMessage } from './actions';
 import { NftPacked } from "validator/dist/encoding";
 import { chains, coins, exchangeRates } from './config';
-import { PredefinedAccounts } from './cross_chain/accounts';
+import { NewElrondAccounts, PredefinedAccounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {remoteNFTMeta} from './singletons';
 import { ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
 import { Base64 } from 'js-base64';
+import { toast } from 'react-toastify';
 
 const callFromInner = async (chain, func, ...args) => {
     const helper = ChainFactory[chain];
@@ -73,7 +74,6 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
     try {
         const result = callFromInnerSigned(chain, 'transferNativeToForeign', signer_, nonce, to, value);
         result.then(data => {
-            console.log(data, typeof data)
             dispatch(showAlert(data))
             });
 
@@ -114,8 +114,13 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
  */
 export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
+        let user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
+        if(user.length > 20) {
+            user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
+        }
         const result = callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, id);
-        result.then(data => {
+            result.then(data => {
+             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showAlert(data))
         });
 
@@ -134,13 +139,15 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
  */
 export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async dispatch => {
     try {
+        let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
+        if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
         const sender = await helper.signerFromPk(sender_);
-    
         const [, aid] = await inner.unfreezeWrappedNft(sender, to, id);
         const result = waitUrl(chain_nonce, aid);
         result.then(data => {
+            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showAlert(data))
         });
 
@@ -156,7 +163,6 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
     const final = [];
     const helper = ChainFactory[chain];
     let owned = Array.from(await callFromInner(chain, 'listNft', owner));
-
     let idGetter;
     switch (chain) {
         case "XP.network": {
@@ -220,8 +226,10 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
  * @param {*} owner the owner's address
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const listNFTs = (chain,owner) => async dispatch => {
+export const listNFTs = (chain, owner) => async dispatch => {
+    console.log(chain, owner, 'list nfts hello')
     try {
+        dispatch(nftLoader(true))
         const dbList = await remoteNFTMeta.getAll();
         const nfts = await listNFTNativeChains(chain, owner, dbList);
         dispatch(listNft(nfts));
@@ -230,6 +238,8 @@ export const listNFTs = (chain,owner) => async dispatch => {
         console.error(error);
         dispatch(listNft([]));
     }
+    dispatch(nftLoader(false))
+
 }
 
 
@@ -239,6 +249,8 @@ export const listNFTs = (chain,owner) => async dispatch => {
  */
 const showAlert = message => async dispatch => {
     dispatch(showLoader(false));
-    alert(message);
+    // alert(message);
+    // toast(message)
+    dispatch(setModalMessage(message))
 }
 

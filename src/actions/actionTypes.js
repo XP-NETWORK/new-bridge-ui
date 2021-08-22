@@ -19,9 +19,12 @@ const actionTypes = {
 
     LIST_NFTS              : "LIST_NFTS",
 
+    NFT_LOADING           : 'NFT_LOADING',
+
     SHOW_LOADER             : "SHOW_LOADER",
     
 
+    SHOW_MODAL :'SHOW_MODAL'
     
 }
 

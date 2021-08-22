@@ -1,6 +1,6 @@
 import { chains } from "../config";
 
-const NewElrondAccounts = {
+export const NewElrondAccounts = {
     Alice: {
         name:"Alice",
         account: "erd192jvkmmd6neqallnftgjyxpml5t7juktu38nlvq8ar7hqn4amy0sufrwer",

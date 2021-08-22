@@ -137,6 +137,18 @@ export const selectReducer = (state = initialState, action) => {
                 loader:payload
             }
         }
+        case actionTypes.SHOW_MODAL: {
+            return {
+                ...state,
+                modalMessage: payload
+            }
+        }
+        case actionTypes.NFT_LOADING: {
+            return {
+                ...state,
+                nftLoader: payload
+            }
+        }
         default:{
             return state;
         }

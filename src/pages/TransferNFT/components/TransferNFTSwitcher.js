@@ -5,8 +5,8 @@ import { Dropdown } from 'semantic-ui-react';
 import { Image } from "react-bootstrap";
 // SVG Icons
 import userAvatar from '../../../assets/images/userAvatar.svg';
-import leftArrow from '../../../assets/images/leftArrow.svg';
-import rightArrow from '../../../assets/images/rightArrow.svg';
+import {ReactComponent as RightArrow} from "../../../assets/images/rightArrow.svg";
+import {ReactComponent as LeftArrow} from "../../../assets/images/leftArrow.svg";
 // User components
 import CardWrap from "../../../UIElemnts/CardWrap";
 import SelectItem from "../../../UIElemnts/SelectItem";
@@ -29,10 +29,12 @@ const TransferNFTSwitcher = ({
     fromChain, 
     toChain, 
     fromAccount, 
+    setNft,
     toAccount, 
     fromAccountS, 
     toAccountS, 
     onSwapChainsPressed,
+    loader,
 
     selectFromChain,
     selectToChain,
@@ -72,8 +74,12 @@ const TransferNFTSwitcher = ({
     })
 
     const switchHandler = (e) => {
-        e.preventDefault();
-        onSwapChainsPressed();
+            e.preventDefault();
+            if(!loader) {
+            setNft(undefined)
+            onSwapChainsPressed();
+        }
+
     }
 
     const handleChangeFrom = (e) => {
@@ -87,7 +93,7 @@ const TransferNFTSwitcher = ({
 
     const handleChangeTo = (e) => {
         e.preventDefault();
-        if(fromChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')){
+        if(fromChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')) {
             selectFromChain(toChain);
             selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
         }
@@ -101,6 +107,7 @@ const TransferNFTSwitcher = ({
 
     const handleChangeToAcct = (e) => {
         e.preventDefault();
+        setNft(undefined)
         selectToAccount(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''))
     }
 
@@ -116,6 +123,7 @@ const TransferNFTSwitcher = ({
                             options={fromTranBridge}
                             onChange={e => handleChangeFrom(e)}
                             value={fromChain}
+                            disabled={loader}
                         />
                     </SelectItem>
 
@@ -127,16 +135,17 @@ const TransferNFTSwitcher = ({
                             options={sourceAccounts}
                             onChange={e=>handleChangeFromAcct(e)}
                             value={fromAccount}
+                            disabled={loader}
                         />
                     </SelectItem>
                 </CardWrap>
 
                 <button
-                    className={`${Classes.switchModeBtn} d-flex flex-column`}
+                    className={`${Classes.switchModeBtn} d-flex flex-column asdadddssaads ${loader ? 'disabled-arrows' : ''}`}
                     onClick={switchHandler}
                 >
-                    <Image src={rightArrow} />
-                    <Image src={leftArrow} className={"mt-1"} />
+                            <RightArrow />
+                            <LeftArrow className="mt-1" />
                 </button>
 
                 <CardWrap>
@@ -146,6 +155,7 @@ const TransferNFTSwitcher = ({
                             fluid
                             selection
                             options={toTranBridge}
+                            disabled={loader}
                             onChange={e=>handleChangeTo(e)}
                             value={toChain}
                         />
@@ -156,6 +166,7 @@ const TransferNFTSwitcher = ({
                             fluid
                             selection
                             options={targetAccounts}
+                            disabled={loader}
                             onChange={e=>handleChangeToAcct(e)}
                             value={toAccount}
                         />
@@ -171,6 +182,7 @@ const mapStateToProps = state => ({
 
     fromChain: state.selectReducer.fromChain,
     toChain: state.selectReducer.toChain,
+    loader: state.selectReducer.loader,
 
     fromAccount: state.selectReducer.fromAccount,
     toAccount: state.selectReducer.toAccount,

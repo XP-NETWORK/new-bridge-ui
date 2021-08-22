@@ -7,6 +7,8 @@ import Styles from './NFTSourceAccount.module.css';
 // Custom Components
 import CardWrap from "../../../UIElemnts/CardWrap";
 import XpModal from "../../../UIElemnts/XpModal";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import X from '../../../assets/images/closepopup.svg'
 // 
 import userAvatar from '../../../assets/images/userAvatar.svg';
 import AccUser from "../../../assets/images/users/accuser.png";
@@ -14,11 +16,14 @@ import checkmarkicon from "../../../assets/images/checkmark.svg";
 
 // Actions & thunks
 import { selectNFT } from '../../../actions';
+import Loader from '../../../global/Loader/Loader';
+import { mapChainToAvatar } from '../../../mappers';
 
 
-const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
+const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
 
   const [show, setShow] = useState(-1);
+  const [copied, setCopied] = useState()
   const handleClose = () => setShow(-1);
 
   const [users, setUsers] = useState({
@@ -28,9 +33,13 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
 
   useEffect(() => {
     // change the NFT list after sending one
-    
+    setCopied(false)
 
   }, [nftList])
+
+  useEffect(() => {
+    if(!nft) setUsers({ ...users, activeMark: undefined })
+  },[nft])
 
   const toggleCheck = (index, data) => {
     const nIndex = index === users.activeMark ? null : index;
@@ -44,7 +53,6 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
   }
 
 
-
   return (
     <CardWrap className={"mx-md-4 my-4 lalalalalala"}>
       <div className={`${Styles.srcAcc} d-flex align-items-center`}>
@@ -56,17 +64,20 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
       </div>
 
       <div className="d-flex align-items-center flex-wrap">
-        {nftList.map((nft, index) => {     
+
+        {!nftLoader ? nftList && nftList.length > 0 ? nftList.map((nft, index) => {     
         return (<div
             className={Styles.userItem}
             key={index}
             onClick={() => toggleCheck(index, nft)}
           >
             <div className={`${Styles.userThumb} d-flex align-items-center justify-content-center`}>
-              <Image className={"Dima"} style={{width: '83px !important', height: '83px !important'}} src={nft.link} fluid />
-              <button className={Styles.infoBtn} onClick={() => setShow(index)}> i </button>
+              <Image className={"Dima"}src={nft.link} fluid />
+              <button className={Styles.infoBtn} 
+              onClick={() => setShow(index)}> 
+              i </button>
               {toggleCheckMark(index) && (
-                <div className={Styles.chekMark}>
+                <div className={`${Styles.chekMark} checkmark-chosen-container`}>
                   <Image src={checkmarkicon} fluid />
                 </div>
               )}
@@ -77,8 +88,13 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
               >
                 <CardWrap>
                   <div className="d-flex align-items-center">
-                    <strong>NFT details</strong>
-                    <button className={`${Styles.modalCloseButton} ml-auto`} onClick={handleClose}>X</button>
+                    <strong className="nft-details">NFT Details</strong>
+                    <button 
+                      className={`${Styles.modalCloseButton} ml-auto close-nft-popup`} 
+                      onClick={handleClose}
+                    >
+                      <img src={X} />
+                    </button>
                   </div>
                   <Row className="g-2 mt-4">
                     <Col md>
@@ -98,18 +114,25 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
                           />
                         </div>
                         <div className={Styles.inputGroup}>
-                          <label htmlFor="Description">Description</label>
-                          <textarea
+                          <label htmlFor="Description">Details</label>
+                          <div
                             type="text"
-                            className={Styles.inputStyle}
+                            className={`${Styles.inputStyle} nft-description`}
                             id={"Description"}
                             value={nft.data}
-                            style={{ overflow: "hidden", minHeight: "60px" }}
+                            style={{ overflow: "hidden", minHeight: "60px", width: '100%', whiteSpace: 'break-all' }}
                             disabled
-                          />
+                          >
+                            {nft.data.split(',').map(n => <p>{n}</p>)}
+                          </div>
                         </div>
                         <div className={Styles.inputGroup}>
-                          <label htmlFor="TokenID">Token ID</label>
+                          <label htmlFor="TokenID">Token ID -  
+                          <CopyToClipboard text={JSON.stringify(nft.hash)}
+                              onCopy={() => setCopied(true)}>
+                              <span style={{cursor: 'pointer'}}>{copied ? ' Copied' : ' Copy'}</span>
+                            </CopyToClipboard>
+                          </label>
                           <input
                             type="text"
                             className={Styles.inputStyle}
@@ -120,13 +143,17 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
                         </div>
                         <div className={Styles.inputGroup}>
                           <label htmlFor="Blockchain">Blockchain</label>
-                          <input
+                          <div
                             type="text"
-                            className={Styles.inputStyle}
+                            className={`${Styles.inputStyle} nft-popup-blockchain`}
                             id={"Blockchain"}
                             value={nft.originChain}
                             disabled
-                          />
+                          >
+                          <img src={ mapChainToAvatar(nft.originChain) } />
+
+                            {nft.originChain}
+                          </div>
                         </div>
                       </form>
                     </Col>
@@ -138,7 +165,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
             </div>
             <p>{nft.name}</p>
           </div>
-        );})}
+        );}) : <p className="your-wallet-is-empty">Your wallet is empty</p> : <div className="nft-loader-container"><Loader /></div> }
       </div>
     </CardWrap>
   );
@@ -147,6 +174,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList}) => {
 const mapStateToProps = state => ({
   fromAccount: state.selectReducer.fromAccount,
   nftList: state.selectReducer.nftList,
+  nftLoader: state.selectReducer.nftLoader
 });
 
 const mapDispatchToProps = dispatch => ({

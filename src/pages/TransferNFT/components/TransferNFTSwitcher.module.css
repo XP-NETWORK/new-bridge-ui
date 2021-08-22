@@ -16,9 +16,10 @@
 @media (min-width: 320px) and (max-width: 991.98px) {
     .switchModeBtn {
         margin: 1.25rem 0;
-        width: 56px;
+        height: 50px;
+        width: 50px;
         position: absolute;
-        top: 40%;
+        top: 41%;
         left: 50%;
         transform: translateX(-50%) rotate(90deg);
     }
