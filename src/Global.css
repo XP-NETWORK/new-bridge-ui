@@ -357,17 +357,17 @@ body {
 }
 
 .interacted-button{
-    background-color: #E8E5EE;
-    color: #040D27;
+    background-color: #25345F;
+    color: #FFFFFF;
     box-shadow: none;
     cursor: default !important;
 }
 
 .interacted-button:hover{
-    background-color: #E8E5EE;
-    color: #040D27;
+    background-color: #25345F;
+    color: #FFFFFF ;
     box-shadow: none;
-    border-color: #E8E5EE;
+    border-color: #25345F;
 }
 
 .nft-loader-container {
