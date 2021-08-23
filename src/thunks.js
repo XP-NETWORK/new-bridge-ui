@@ -213,7 +213,7 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
                 if (await helper.isWrappedNft("", token)) {
                     const hash = Base64.toUint8Array(data.uris[0]);
                     const dat = await callFromInner('XP.network', 'getLockedNft', hash);
-                    return { id: decoder.decode(dat.slice(-24)), isWrapped: true, info: data.nonce, originChain: "XP.network" };
+                    return { id: dat ? decoder.decode(dat.slice(-24)) : [], isWrapped: true, info: data.nonce, originChain: "XP.network" };
                 } else {
                     return {
                         id: window.atob(data.uris[0]),
