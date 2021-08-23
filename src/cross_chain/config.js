@@ -1,10 +1,10 @@
 import { chains } from "../config";
 
-const polkadotBlockPrefix = "https://explorer.xp.network/#/explorer/query";
+const polkadotBlockPrefix = "https://testing-explorer.xp.network/#/explorer/query";
 const elrondTxnPrefix = "https://devnet-explorer.elrond.com/transactions";
 
 export const ChainConfig = {
-    "xpnode": "wss://bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
+    "xpnode": "wss://testing-bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
     "elrond_node": "https://devnet-api.elrond.com",
     "elrond_minter": "erd1qqqqqqqqqqqqqpgquvs7p7lj2th4rge03rfpa8trlthwekd4k4as966la8", //"erd1qqqqqqqqqqqqqpgq7ysztrj922cs53e5wh2vdmeds9pd69wms3ysy3tyy9", //
     "elrond_event_rest": "https://testing-bridge.xp.network/event_rest", //"https://bridge.xp.network/event_rest", //
@@ -20,6 +20,9 @@ export const ChainConfig = {
         "HECO": "0xfEBb57AA40bE02649B374B5B091Ccd8d53Fe24A5",
         "BSC": "0x18AB7860b10c648630FC6DE2CBC67ca999297F96",
         "Ropsten": "0x0218B563Ee50d16b12C7CF95B9F207B69e2ED345",
+    },
+    "web3_predefined": {
+        "BSC": "0xf6fceC833bFb9bd26a898143A6b41799F5Abfe0f"
     }
 };
 

@@ -9,7 +9,7 @@ export function networkNFTMetaRepo(service: NFTMetaService, mapper: NFTMetaDtoMa
         getByHash: (hash) => service.byHash(hash).then(res => res && mapper.toDomain(res)),
         create: (...args) => service.create(...args).then(res => res && mapper.toDomain(res)),
         createEmpty: () => service.createEmpty().then((v) => v?._id),
-        updateById: (id) => service.updateById(id).then(res => res && mapper.toDomain(res)),
+        updateById: (...args) => service.updateById(...args).then(res => res && mapper.toDomain(res)),
         deleteById: (id) => service.deleteById(id).then(res => res && mapper.toDomain(res))
     }
 }

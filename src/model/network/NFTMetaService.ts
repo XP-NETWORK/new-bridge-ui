@@ -7,7 +7,7 @@ export type NFTMetaService = {
     byHash: (hash: string) => Promise<NFTMetaDtoNully | undefined>;
     create: (hash: string, link: string, name: string, data: string) => Promise<NFTMetaDtoNully | undefined>; // TODO: Return Object id?
     createEmpty: () => Promise<BaseDoc | undefined>; // TODO: Return object id?
-    updateById: (id: string, hash?: string, link?: string, name?: string, data?: string) => Promise<NFTMetaDtoNully | undefined>;
+    updateById: (id: string, hash: string | null, link: string | null, name: string | null, data: string | null) => Promise<NFTMetaDtoNully | undefined>;
     deleteById: (id: string) => Promise<NFTMetaDtoNully | undefined>;
 }
 
@@ -54,7 +54,7 @@ export function nftMetaService(baseURL: string): NFTMetaService {
             })
         ),
         createEmpty: tryWrapNr(() => client.post<BaseDoc>("/create")),
-        updateById: tryWrap((id: string, hash?: string, link?: string, name?: string, data?: string) => {
+        updateById: tryWrap((id: string, hash: string | null, link: string | null, name: string | null, data: string | null) => {
             return client.put<NFTMetaDtoNully>(`/update/${id}`, {
                 ...(hash && { hash }),
                 ...(link && { link }),

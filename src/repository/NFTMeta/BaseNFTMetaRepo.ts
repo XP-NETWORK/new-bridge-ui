@@ -40,7 +40,7 @@ export type NFTMetaRepo = {
      * @param name (opt) name to set
      * @param data (opt) data to set
      */
-    updateById(id: string, hash?: string, link?: string, name?: string, data?: string): Promise<NFTMeta | undefined>;
+    updateById(id: string, hash: string | null, link: string | null, name: string | null, data: string | null): Promise<NFTMeta | undefined>;
     /**
      * delete nft by id
      * 

@@ -1,13 +1,10 @@
 import { getBalance, listNft, tokenBalances, showLoader, nftLoader, setModalMessage } from './actions';
-import { NftPacked } from "validator/dist/encoding";
-import { chains, coins, exchangeRates } from './config';
 import { NewElrondAccounts, PredefinedAccounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {remoteNFTMeta} from './singletons';
-import { ExplorerPrefix } from './cross_chain/config';
+import { ChainConfig, ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
-import { Base64 } from 'js-base64';
-import { toast } from 'react-toastify';
+import { BigNumber as EthBN } from "ethers";
 
 const callFromInner = async (chain, func, ...args) => {
     const helper = ChainFactory[chain];
@@ -16,11 +13,7 @@ const callFromInner = async (chain, func, ...args) => {
     return await inner[func](...args);
 }
 
-const waitUrl = async (target_nonce, id) => {
-    const hash = await txnSocket.waitTxHash(target_nonce, id.toString());
-
-    return `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
-}
+const explorerUrl = (target_nonce, hash) => `${ExplorerPrefix[CHAIN_BY_NONCE[target_nonce]]}/${hash}`;
 
 const callFromInnerSigned = async (chain, func, signer_, chain_nonce, ...args) => {
     const helper = ChainFactory[chain];
@@ -28,7 +21,7 @@ const callFromInnerSigned = async (chain, func, signer_, chain_nonce, ...args) =
     const signer = await helper.signerFromPk(signer_);
 
     const [, id] = await inner[func](signer, chain_nonce, ...args);
-    return await waitUrl(chain_nonce, id);
+    return await txnSocket.waitTxHash(chain_nonce, id.toString());
 }
 
 export const getBalanceThunk = (chain, address) => async dispatch => {
@@ -74,7 +67,7 @@ export const sendTokens = (chain, signer_, nonce, to, value) => async dispatch =
     try {
         const result = callFromInnerSigned(chain, 'transferNativeToForeign', signer_, nonce, to, value);
         result.then(data => {
-            dispatch(showAlert(data))
+            dispatch(showAlert(explorerUrl(nonce, data)))
             });
 
     } catch (error) {
@@ -100,10 +93,9 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
             user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === signer_)[0]
         }
         const result = callFromInnerSigned(chain, 'unfreezeWrapped', signer_, nonce, to, value);
-        console.log(signer_, user, 'hello')
         result.then(data => {
             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-            dispatch(showAlert(data))
+            dispatch(showAlert(explorerUrl(nonce, data)))
             }).catch(er => {
                 if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
                 dispatch(showLoader(false))
@@ -125,21 +117,33 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
  * @param {*} id nft id
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispatch => {
+export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async dispatch => {
     try {
         let user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
         if(user.length > 20) {
             user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         }
-        const result = callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, id);
-            result.then(data => {
-             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-            dispatch(showAlert(data))
-        }).catch(er => {
+        let err;
+        const data = await callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, nft.hash).catch(er => {
+            err = er;
             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showLoader(false))
-        })
+        });
+        if (err) {
+            return;
+        }
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        dispatch(showAlert(explorerUrl(chain_nonce, data)))
 
+        if (chain_nonce === 0x1 || chain_nonce === 0x2) {
+            return;
+        }
+
+        const targetChain = CHAIN_BY_NONCE[chain_nonce];
+        const targetHelper = ChainFactory[targetChain];
+        const receipt = await targetHelper.getReceiptFromHash(data);
+        const ev = await targetHelper.getArgsFromErcTransfer(receipt, ChainConfig.web3_erc1155[targetChain]);
+        await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${ChainConfig.web3_erc1155[targetChain]},${to},${ev[3].toString()}`);
     } catch (error) {
         dispatch(showLoader(false))
         console.log('sendNFTNative')
@@ -155,23 +159,44 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, id) => async dispa
  * @param {*} id the ID of the NFT
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async dispatch => {
+export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dispatch => {
     try {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
         const sender = await helper.signerFromPk(sender_);
-        const [, aid] = await inner.unfreezeWrappedNft(sender, to, id);
-        const result = waitUrl(chain_nonce, aid);
-        result.then(data => {
-            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-            dispatch(showAlert(data))
-        }).catch(er => {
+        const [, aid] = await inner.unfreezeWrappedNft(sender, to, nft.hash);
+        let err;
+        const data = await txnSocket.waitTxHash(chain_nonce, aid).catch(er => {
+            err = er;
             if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
             dispatch(showLoader(false))
-        })
+        });
+        if (err) {
+            return;
+        }
 
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        dispatch(showAlert(explorerUrl(chain_nonce, data)))
+
+        if (chain === "XP.network" || chain === "Elrond") {
+            console.log("ret?!")
+            return;
+        }
+
+        const targetChain = CHAIN_BY_NONCE[chain_nonce];
+        if (chain_nonce === 0x1 || chain_nonce === 0x2) {
+            console.log("updating");
+            await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
+            return;
+        }
+
+        const targetHelper = ChainFactory[targetChain];
+        const receipt = await targetHelper.getReceiptFromHash(data);
+        const predefined = ChainConfig.web3_predefined[targetChain];
+        const ev = await targetHelper.getArgsFromErcTransfer(receipt, predefined);
+        await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${predefined},${to},${ev[3].toString()}`);
     } catch(e) {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
@@ -183,24 +208,56 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, id) => async disp
 
 const decoder = new TextDecoder();
 
+const getWrappedNft = async (source_chain_helper, identifier, nft_data) => {
+    const source_inner = await source_chain_helper.inner();
+    const native_data = await source_inner.decodeWrappedNft(nft_data)
+    const foreign_helper = ChainFactory[CHAIN_BY_NONCE[native_data.chain_nonce]];
+    const foreign_inner = await foreign_helper.inner();
+
+    return {
+        id: await foreign_inner.decodeUrlFromRaw(native_data.data),
+        isWrapped: true,
+        hash: identifier,
+        originChain: CHAIN_BY_NONCE[native_data.chain_nonce],
+    }
+}
+
+const getOwnedNative = async (chain_helper, owner, dbList) => {
+    const inner = await chain_helper.inner();
+    if (inner.listNft) {
+        return Array.from(await inner.listNft(owner));
+    }
+    // Web3 chain, use dbList
+    return await Promise.all(dbList.filter(({data}) => {
+        const attrs = data.split(",");
+        return attrs[0] === chain_helper.ident && attrs[2] === owner;
+    }).map(async ({ data }) => {
+        const attrs = data.split(",");
+        const ident = {
+            contract_type: "ERC1155",
+            contract: attrs[1],
+            token: EthBN.from(attrs[3]),
+        };
+        const id = await inner.nftUri(ident);
+
+        return [ident, id];
+    }));
+}
+
 const listNFTNativeChains = async (chain, owner, dbList) => {
     const resM = Object.fromEntries(dbList.map((obj) => [obj.id, obj]));
     const final = [];
     const helper = ChainFactory[chain];
-    let owned = Array.from(await callFromInner(chain, 'listNft', owner));
+    let owned = await getOwnedNative(helper, owner, dbList);
     let idGetter;
     switch (chain) {
         case "XP.network": {
             idGetter = async (ident, data) => {
                 const datStr = decoder.decode(data);
                 if (datStr.length !== 24 || datStr.includes("\uFFFD")) {
-                    const packed = NftPacked.deserializeBinary(Uint8Array.from(data));
-                    const rawDat = packed.getData_asU8();
-                    const dat = helper.tryDecodeWrappedPolkadotNft(rawDat);
-                    const orig = await callFromInner('Elrond', 'getLockedNft', dat);
-                    return { id: window.atob(orig.uris[0]), isWrapped: true, info: ident, originChain: "Elrond" };
+                    return await getWrappedNft(helper, ident, data);
                 } else {
-                    return { id: datStr, isWrapped: false, info: ident, originChain: chain };
+                    return { id: datStr, isWrapped: false, hash: ident, originChain: chain };
                 }
             }
             break;
@@ -210,15 +267,30 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
                 const parts = ident.split("-");
                 const nonce = parseInt(parts.pop(), 16);
                 const token = parts.join("-");
-                if (await helper.isWrappedNft("", token)) {
-                    const hash = Base64.toUint8Array(data.uris[0]);
-                    const dat = await callFromInner('XP.network', 'getLockedNft', hash);
-                    return { id: decoder.decode(dat.slice(-24)), isWrapped: true, info: data.nonce, originChain: "XP.network" };
+                if (await helper.isWrappedNft(owner, token)) {
+                    return await getWrappedNft(helper, nonce, data);
                 } else {
                     return {
                         id: window.atob(data.uris[0]),
                         isWrapped: false,
-                        info: { nonce, token },
+                        hash: { nonce, token },
+                        originChain: chain
+                    }
+                }
+            }
+            break;
+        }
+        case "Ropsten":
+        case "BSC":
+        case "HECO": {
+            idGetter = async (ident, data) => {
+                if (ident.contract === ChainConfig.web3_erc1155[chain]) {
+                    return await getWrappedNft(helper, ident.token, data);
+                } else {
+                    return {
+                        id: data,
+                        isWrapped: false,
+                        hash: ident,
                         originChain: chain
                     }
                 }
@@ -231,13 +303,13 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
     }
 
     for (const [ident, data] of owned) {
-        const { id, isWrapped, info, originChain } = await idGetter(ident, data);
+        const { id, isWrapped, hash, originChain } = await idGetter(ident, data);
         if (resM[id]  === undefined) {
             continue;
         }
         resM[id].originChain = originChain;
         resM[id].isWrapped = isWrapped;
-        resM[id].hash = info;
+        resM[id].hash = hash;
 
         final.push(resM[id]);
     }
@@ -252,7 +324,6 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
  * @returns Transaction and the Identifier of this action to track the status
  */
 export const listNFTs = (chain, owner) => async dispatch => {
-    console.log(chain, owner, 'list nfts hello')
     try {
         dispatch(nftLoader(true))
         const dbList = await remoteNFTMeta.getAll();

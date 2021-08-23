@@ -61,7 +61,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                     PredefinedAccounts[fromChain][fromAcct].key,
                     CHAIN_INFO[toChain].nonce,
                     PredefinedAccounts[toChain][toAcct].account,
-                    nft.hash
+                    nft
                 )
             } else {
                 await sendWrapped(
@@ -69,7 +69,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                     PredefinedAccounts[fromChain][fromAcct].key,
                     CHAIN_INFO[toChain].nonce,
                     PredefinedAccounts[toChain][toAcct].account,
-                    nft.hash
+                    nft
                 )
             };
            

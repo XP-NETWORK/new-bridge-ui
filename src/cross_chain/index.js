@@ -6,6 +6,7 @@ import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers';
 import { Keyring } from '@polkadot/keyring';
 import { UserSigner } from '@elrondnetwork/erdjs/out';
+import { abi as ERC1155_abi } from "testsuite-ts/dist/fakeERC1155.json";
 
 const fromHexString = hexString =>
   new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
@@ -178,6 +179,8 @@ export function ElrondHelper() {
 export function Web3Helper(chain) {
     let web3 = undefined;
     let web3Provider = undefined;
+    const minter_addr = ChainConfig.web3_minters[chain];
+    const erc1155_abi = new ethers.utils.Interface(ERC1155_abi); 
 
     async function requireWeb3() {
         if (!web3) {
@@ -186,7 +189,7 @@ export function Web3Helper(chain) {
         }
         web3 = await web3HelperFactory(
             web3Provider,
-            ChainConfig.web3_minters[chain],
+            minter_addr,
             new ethers.utils.Interface(abi),
             ChainConfig.web3_erc1155[chain]
         );
@@ -201,6 +204,21 @@ export function Web3Helper(chain) {
             await requireWeb3();
 
             return web3;
+        },
+        async getReceiptFromHash(tx_hash) {
+            await requireWeb3();
+            return await web3Provider.waitForTransaction(tx_hash);
+        },
+        async getArgsFromErcTransfer(receipt, target_addr) {
+            await requireWeb3();
+            const log = receipt.logs.find((log) => log.address === target_addr);
+            if (log === undefined) {
+                throw Error("couldn't extract token id");
+            }
+
+            const evdat = erc1155_abi.parseLog(log);
+
+            return evdat.args;
         },
         /**
          * Create ethers Wallet object from private key
