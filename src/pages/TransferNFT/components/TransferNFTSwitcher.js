@@ -46,8 +46,8 @@ const TransferNFTSwitcher = ({
     const fromTranBridge = chains.map(item => {
         return {
             key: item,
-            text: item === chains[0] || item === chains[2] ? item : `${item} - coming soon`,
-            disabled: item === chains[0] || item === chains[2] ? false : true,
+            text: item === chains[0] || item === chains[2] || item === chains[1] ? item : `${item} - coming soon`,
+            disabled: item === chains[0] || item === chains[2] || item === chains[1] ? false : true,
             value: item,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
@@ -74,6 +74,7 @@ const TransferNFTSwitcher = ({
     })
 
     const switchHandler = (e) => {
+        console.log(e)
             e.preventDefault();
             if(!loader) {
             setNft(undefined)
@@ -84,11 +85,12 @@ const TransferNFTSwitcher = ({
 
     const handleChangeFrom = (e) => {
         e.preventDefault();
+        console.log(toChain, e.target.innerText)
         
         if(toChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')){
             selectToChain(fromChain);
             selectFromChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
-        }
+        } else  selectFromChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
     }
 
     const handleChangeTo = (e) => {
@@ -96,8 +98,7 @@ const TransferNFTSwitcher = ({
         if(fromChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')) {
             selectFromChain(toChain);
             selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
-        }
-       
+        } else selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
     }
 
     const handleChangeFromAcct = (e) => {

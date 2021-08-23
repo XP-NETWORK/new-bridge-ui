@@ -20,7 +20,7 @@ import Loader from '../../../global/Loader/Loader';
 import { mapChainToAvatar } from '../../../mappers';
 
 
-const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
+const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toChain, fromChain}) => {
 
   const [show, setShow] = useState(-1);
   const [copied, setCopied] = useState()
@@ -42,9 +42,11 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
   },[nft])
 
   const toggleCheck = (index, data) => {
-    const nIndex = index === users.activeMark ? null : index;
-    setUsers({ ...users, activeMark: nIndex });
-    nIndex !== null ? selectCb(data) : selectCb(undefined);
+    if(!data.isDisabled) {
+      const nIndex = index === users.activeMark ? null : index;
+      setUsers({ ...users, activeMark: nIndex });
+      nIndex !== null ? selectCb(data) : selectCb(undefined);
+    }
   };
 
 
@@ -52,7 +54,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
     return index === users.activeMark
   }
 
-
+  console.log(nftList, toChain, fromChain)
   return (
     <CardWrap className={"mx-md-4 my-4 lalalalalala"}>
       <div className={`${Styles.srcAcc} d-flex align-items-center`}>
@@ -65,9 +67,13 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
 
       <div className="d-flex align-items-center flex-wrap">
 
-        {!nftLoader ? nftList && nftList.length > 0 ? nftList.map((nft, index) => {     
+        {
+        !nftLoader ? nftList && nftList.length > 0 ? 
+        nftList
+        .map(n =>({ ...n, isDisabled:  !(n.originChain === toChain || n.originChain === fromChain) })) // disable wrapped tokens that are not related to the current chains
+        .map((nft, index) => {     
         return (<div
-            className={Styles.userItem}
+            className={`${Styles.userItem} ${nft.isDisabled ? 'disabled-nft' : ''}`}
             key={index}
             onClick={() => toggleCheck(index, nft)}
           >
@@ -76,11 +82,13 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
               <button className={Styles.infoBtn} 
               onClick={() => setShow(index)}> 
               i </button>
-              {toggleCheckMark(index) && (
-                <div className={`${Styles.chekMark} checkmark-chosen-container`}>
-                  <Image src={checkmarkicon} fluid />
-                </div>
-              )}
+              {
+                !nft.isDisabled && toggleCheckMark(index) && (
+                  <div className={`${Styles.chekMark} checkmark-chosen-container`}>
+                    <Image src={checkmarkicon} fluid />
+                  </div>
+                )
+              }
 
               <XpModal
                 show={show === index}
@@ -173,6 +181,8 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft}) => {
 
 const mapStateToProps = state => ({
   fromAccount: state.selectReducer.fromAccount,
+  toChain: state.selectReducer.toChain,
+  fromChain: state.selectReducer.fromChain,
   nftList: state.selectReducer.nftList,
   nftLoader: state.selectReducer.nftLoader
 });

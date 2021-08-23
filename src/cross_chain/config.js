@@ -1,10 +1,10 @@
 import { chains } from "../config";
 
-const polkadotBlockPrefix = "https://testing-explorer.xp.network/#/explorer/query";
+const polkadotBlockPrefix = "https://explorer.xp.network/#/explorer/query";
 const elrondTxnPrefix = "https://devnet-explorer.elrond.com/transactions";
 
 export const ChainConfig = {
-    "xpnode": "wss://testing-bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
+    "xpnode": "wss://bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
     "elrond_node": "https://devnet-api.elrond.com",
     "elrond_minter": "erd1qqqqqqqqqqqqqpgquvs7p7lj2th4rge03rfpa8trlthwekd4k4as966la8", //"erd1qqqqqqqqqqqqqpgq7ysztrj922cs53e5wh2vdmeds9pd69wms3ysy3tyy9", //
     "elrond_event_rest": "https://testing-bridge.xp.network/event_rest", //"https://bridge.xp.network/event_rest", //

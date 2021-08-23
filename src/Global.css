@@ -254,6 +254,9 @@ body {
 .ui.selection.dropdown .menu>.item {
     height: 60px;
 }
+.disabled-nft {
+    opacity: 0.6;
+}
 /*Modify Bootstrap*/
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
