@@ -6,5 +6,5 @@ export function localNFTMetaService(): NFTMetaService {
 }
 
 export function remoteNFTMetaService(): NFTMetaService {
-    return nftMetaService("https://bridge.xp.network/db")
+    return nftMetaService("https://testing-bridge.xp.network/db")
 }
