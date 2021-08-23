@@ -135,11 +135,16 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
         if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
         dispatch(showAlert(explorerUrl(chain_nonce, data)))
 
+        // TODO: Refactor everything below this
+        const targetChain = CHAIN_BY_NONCE[chain_nonce];
+    
         if (chain_nonce === 0x1 || chain_nonce === 0x2) {
+            if (chain !== "Elrond" || chain !== "XP.network") {
+                await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
+            }
             return;
         }
 
-        const targetChain = CHAIN_BY_NONCE[chain_nonce];
         const targetHelper = ChainFactory[targetChain];
         const receipt = await targetHelper.getReceiptFromHash(data);
         const ev = await targetHelper.getArgsFromErcTransfer(receipt, ChainConfig.web3_erc1155[targetChain]);
@@ -180,14 +185,9 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
         if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
         dispatch(showAlert(explorerUrl(chain_nonce, data)))
 
-        if (chain === "XP.network" || chain === "Elrond") {
-            console.log("ret?!")
-            return;
-        }
-
+        // TODO: Refactor everything below this
         const targetChain = CHAIN_BY_NONCE[chain_nonce];
         if (chain_nonce === 0x1 || chain_nonce === 0x2) {
-            console.log("updating");
             await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
             return;
         }
