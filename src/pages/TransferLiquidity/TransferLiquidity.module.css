@@ -50,7 +50,12 @@
     outline: none;
     box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15);
 }
-
+.switchModeBtn svg {
+    fill: #0D0234;
+}
+.asdadddssaads svg {
+    fill: #0D0234;
+}
 .title {
     font-weight: 500;
     font-size: 14px;

@@ -7,7 +7,8 @@ import './Global.css';
 import NavBar from "./layout/NavBar";
 import TransferNFT from "./pages/TransferNFT/TransferNFT";
 import TransferLiquidity from "./pages/TransferLiquidity/TransferLiquidity";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className={"App"}>
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path={"/transfer-liquidity"} component={TransferLiquidity}/>
             </Switch>
         </Router>
+        <ToastContainer/>
     </div>
   );
 }

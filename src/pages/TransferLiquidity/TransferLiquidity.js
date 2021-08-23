@@ -13,8 +13,8 @@ import TokenBox from '../../UIElemnts/TokenBox';
 import xpNetIco from "../../assets/images/XpNet.svg";
 import downArrow from "../../assets/images/downArrow.svg";
 import userAvatar from "../../assets/images/userAvatar.svg";
-import rightArrow from "../../assets/images/rightArrow.svg";
-import leftArrow from "../../assets/images/leftArrow.svg";
+import {ReactComponent as RightArrow} from "../../assets/images/rightArrow.svg";
+import {ReactComponent as LeftArrow} from "../../assets/images/leftArrow.svg";
 import enrollIco from "../../assets/images/enroll.svg";
 // Blockchain Related
 import { 
@@ -182,7 +182,7 @@ const TransferLiquidity = ({
 
     return (
         <Container disabled>
-            <div className="title title--primary">
+            <div className="title title--primary main-title">
                 <h2>Cross-Chain Tokens Bridge - <span style={{color: "#F27603"}}>Coming Soon</span></h2>
             </div>
             <Row>
@@ -247,8 +247,8 @@ const TransferLiquidity = ({
                             onClick={switchHandler}
                             disabled
                         >
-                            <Image src={rightArrow} />
-                            <Image src={leftArrow} className={"mt-1"} />
+                            <RightArrow />
+                            <LeftArrow />
                         </button>
 
                         <CardWrap className={"align-self-start"}>

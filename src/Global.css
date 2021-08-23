@@ -16,7 +16,18 @@ a {
     text-decoration: none !important;
 }
 
+.your-wallet-is-empty {
+    margin-top: 4px !important;
+}
 
+body {
+	line-height: 1;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+    text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	font-size: 14px;
+    -webkit-text-stroke: .025em rgba(51,51,51,0.10);
+}
 /*Main Style*/
 .App {
     background: url('./assets/images/mainBg.svg') center center/cover no-repeat;
@@ -61,10 +72,49 @@ a {
     color: #FFFFFF;
     border: 2px solid transparent;
     outline: none;
-    transition: 300ms ease-in-out background-color, border, color;
+    transition: .1s ease-in-out background-color, border, color;
     font-family: 'Inter', sans-serif !important;
 }
+.nft-details {
+    font-size: 20px;
+}
+.mainBtn {
+    position:relative;
+}
+.loader-text {
+    z-index: 1;
+    position: relative;
+}
+.loading-bar-el {
+    background-color: #263359;
+    height: calc(100% + 2px);
+    position: absolute;
+    transition: all .17s;
+    left: -1px;
+    top: -1px;
+    border-radius: 16px 0px 0px 16px;
+}
+.asdadddssaads:hover svg {
+    fill: #3E64ED;
+}
+.asdadddssaads:hover :nth-child(2) {
+    fill: #3E64ED;
+}
+.asdadddssaads svg {
+    fill: #0D0234;
+}
 
+.asdadddssaads svg:nth-child(2) {
+    fill: #0D0234;
+}
+.disabled-arrows {
+    cursor: default !important;
+    opacity: 0.6;
+}
+.disabled-arrows:hover svg {
+    fill: #0D0234 !important;
+    
+}
 .btnBrand--primary {
     background-color: #040D27;
 }
@@ -72,15 +122,35 @@ a {
     box-shadow: none;
 }
 .btnBrand--primary:hover {
-    background-color: #fff;
-    border: 2px solid #040D27;
-    color: #040D27;
+    background-color: #25345F;
+}
+
+.nft-popup-blockchain img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
 }
 .btnBrand:disabled:hover {
     border: 2px solid transparent;
     color: #FFFFFF;
     background-color: #040D27;
 
+
+}
+
+.close-nft-popup img{
+    border: 1px solid #040D27;
+    padding: 4px;
+    border-radius: 50%;
+}
+.successModal {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nft-description {
+    word-break: break-all;
 }
 /*Drop Down*/
 .ui.fluid.dropdown {
@@ -104,6 +174,9 @@ a {
     font-family: 'Inter', sans-serif !important;
 }
 
+.ui.dropdown .menu .selected.item, .ui.dropdown.selected, .ui.selection.dropdown .menu>.item {
+    font-weight: 500 !important;
+}
 .amountSelectItem .ui.fluid.dropdown {
     height: 87px !important;
 }
@@ -122,7 +195,29 @@ a {
     top: 20px;
     right: 8px;
 }
+.checkmark-chosen-container {
+    background: #ffffff50;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    align-items: center;
+    margin-top: -5px;
+}
+.checkmark-chosen-container img {
+    width: 18px;
+}
+.ui.fluid.dropdown:hover:after {
+    background: #F3F4FA;
+    border-radius: 4px;
+    height: 24px;
 
+    content: url("./assets/images/downArrowHover.svg");
+}
+.ui.selection.visible.dropdown>.text:not(.default) {
+    font-weight: 500 !important;
+}
 .visible.menu {
     border: none !important;
     margin-top: 0.25rem !important;
@@ -145,10 +240,23 @@ a {
 
 .Dima.img-fluid{
     width:83px !important;
+    object-fit: cover;
     height: 83px !important;
     border-radius: 8px;
 }
-
+.ui.dropdown .menu>.item:hover, .ui.dropdown .menu .selected.item, .ui.dropdown.selected {
+    background: rgb(243, 244, 250, 0.6) !important;
+}
+.ui.active.selection.dropdown {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius:10px !important;
+}
+.ui.selection.dropdown .menu>.item {
+    height: 60px;
+}
+.disabled-nft {
+    opacity: 0.6;
+}
 /*Modify Bootstrap*/
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -171,6 +279,13 @@ a {
 }
 
 @media (max-width: 991px) {
+    .ui.selection.dropdown {
+        width: 100%;
+        min-width: 200px !important;
+    }
+    .main-title {
+        display: none;
+    }
     .btnBrand {
         width: 100% !important;
     }
@@ -245,14 +360,20 @@ a {
 }
 
 .interacted-button{
-    background-color: #F3F4F9;
-    color: #040D27;
+    background-color: #25345F;
+    color: #FFFFFF;
     box-shadow: none;
+    cursor: default !important;
 }
 
 .interacted-button:hover{
-    background-color: #F3F4F9;
-    color: #040D27;
+    background-color: #25345F;
+    color: #FFFFFF ;
     box-shadow: none;
-    border-color: #F3F4F9;
+    border-color: #25345F;
+}
+
+.nft-loader-container {
+    margin-left: 14px;
+    margin-top: 20px;
 }

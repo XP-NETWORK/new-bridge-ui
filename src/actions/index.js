@@ -42,6 +42,11 @@ export const transferNFT = () => ({
     type: actionTypes.TRANSFER_NFT
 });
 
+export const nftLoader = payload => ({
+    type: actionTypes.NFT_LOADING,
+    payload
+})
+
 export const changeAmount = (value) => ({
     type: actionTypes.CHANGE_AMMOUNT,
     payload: value
@@ -65,4 +70,9 @@ export const tokenBalances =(value) => ({
 export const showLoader = (show) => ({
     type: actionTypes.SHOW_LOADER,
     payload: show
+})
+
+export const setModalMessage = payload => ({
+    type: actionTypes.SHOW_MODAL,
+    payload
 })
