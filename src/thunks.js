@@ -132,9 +132,6 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
         if (err) {
             return;
         }
-        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-        dispatch(showAlert(explorerUrl(chain_nonce, data)))
-
         // TODO: Refactor everything below this
         const targetChain = CHAIN_BY_NONCE[chain_nonce];
     
@@ -149,6 +146,10 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
         const receipt = await targetHelper.getReceiptFromHash(data);
         const ev = await targetHelper.getArgsFromErcTransfer(receipt, ChainConfig.web3_erc1155[targetChain]);
         await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${ChainConfig.web3_erc1155[targetChain]},${to},${ev[3].toString()}`);
+        // END TODO
+
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        dispatch(showAlert(explorerUrl(chain_nonce, data)))
     } catch (error) {
         dispatch(showLoader(false))
         console.log('sendNFTNative')
@@ -182,9 +183,6 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
             return;
         }
 
-        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-        dispatch(showAlert(explorerUrl(chain_nonce, data)))
-
         // TODO: Refactor everything below this
         const targetChain = CHAIN_BY_NONCE[chain_nonce];
         if (chain_nonce === 0x1 || chain_nonce === 0x2) {
@@ -197,6 +195,10 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
         const predefined = ChainConfig.web3_predefined[targetChain];
         const ev = await targetHelper.getArgsFromErcTransfer(receipt, predefined);
         await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${predefined},${to},${ev[3].toString()}`);
+        // End todo 
+
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        dispatch(showAlert(explorerUrl(chain_nonce, data)))
     } catch(e) {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
