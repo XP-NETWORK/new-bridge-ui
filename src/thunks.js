@@ -4,7 +4,7 @@ import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {remoteNFTMeta} from './singletons';
 import { ChainConfig, ExplorerPrefix } from './cross_chain/config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
-import { BigNumber as EthBN } from "ethers";
+import { BigNumber as EthBN, constants } from "ethers";
 
 const callFromInner = async (chain, func, ...args) => {
     const helper = ChainFactory[chain];
@@ -133,20 +133,23 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
             return;
         }
         // TODO: Refactor everything below this
-        const targetChain = CHAIN_BY_NONCE[chain_nonce];
+        const task = async () => {
+            const targetChain = CHAIN_BY_NONCE[chain_nonce];
     
-        if (chain_nonce === 0x1 || chain_nonce === 0x2) {
-            if (chain !== "Elrond" || chain !== "XP.network") {
-                await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
+            if (chain_nonce === 0x1 || chain_nonce === 0x2) {
+                if (chain !== "Elrond" || chain !== "XP.network") {
+                    await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
+                }
+                return;
             }
-            return;
-        }
 
-        const targetHelper = ChainFactory[targetChain];
-        const receipt = await targetHelper.getReceiptFromHash(data);
-        const ev = await targetHelper.getArgsFromErcTransfer(receipt, ChainConfig.web3_erc1155[targetChain]);
-        await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${ChainConfig.web3_erc1155[targetChain]},${to},${ev[3].toString()}`);
-        // END TODO
+            const targetHelper = ChainFactory[targetChain];
+            const receipt = await targetHelper.getReceiptFromHash(data);
+            const ev = await targetHelper.getArgsFromErcTransfer(receipt, ChainConfig.web3_erc1155[targetChain]);
+            await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${ChainConfig.web3_erc1155[targetChain]},${to},${ev[3].toString()}`);
+            // END TODO
+        };
+        await task();
 
         if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
         dispatch(showAlert(explorerUrl(chain_nonce, data)))
@@ -184,18 +187,20 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
         }
 
         // TODO: Refactor everything below this
-        const targetChain = CHAIN_BY_NONCE[chain_nonce];
-        if (chain_nonce === 0x1 || chain_nonce === 0x2) {
-            await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
-            return;
-        }
+        const task = async () => {const targetChain = CHAIN_BY_NONCE[chain_nonce];
+            if (chain_nonce === 0x1 || chain_nonce === 0x2) {
+                await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${to}`)
+                return;
+            }
 
-        const targetHelper = ChainFactory[targetChain];
-        const receipt = await targetHelper.getReceiptFromHash(data);
-        const predefined = ChainConfig.web3_predefined[targetChain];
-        const ev = await targetHelper.getArgsFromErcTransfer(receipt, predefined);
-        await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${predefined},${to},${ev[3].toString()}`);
-        // End todo 
+            const targetHelper = ChainFactory[targetChain];
+            const receipt = await targetHelper.getReceiptFromHash(data);
+            const predefined = ChainConfig.web3_predefined[targetChain];
+            const ev = await targetHelper.getArgsFromErcTransfer(receipt, predefined);
+            await remoteNFTMeta.updateById(nft.id, null, null, null, `${targetChain},${predefined},${to},${ev[3].toString()}`);
+            // End todo 
+        }
+        await task();
 
         if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
         dispatch(showAlert(explorerUrl(chain_nonce, data)))
@@ -304,8 +309,16 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
         }
     }
 
+    console.log(resM);
     for (const [ident, data] of owned) {
-        const { id, isWrapped, hash, originChain } = await idGetter(ident, data);
+        let res;
+        try {
+            res = await idGetter(ident, data);
+        } catch (e) {
+            console.log(e);
+            continue;
+        }
+        const { id, isWrapped, hash, originChain } = res;
         if (resM[id]  === undefined) {
             continue;
         }
@@ -315,6 +328,8 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
 
         final.push(resM[id]);
     }
+
+    console.log("final", final);
 
     return final;
 }
