@@ -204,7 +204,7 @@ const getOwnedNative = async (chain_helper, owner, dbList) => {
     // Web3 chain, use dbList
     return await Promise.all(dbList.filter(({data}) => {
         const attrs = data.split(",");
-        return attrs[0] === chain_helper.ident && attrs[2] === owner;
+        return attrs[0] === chain_helper.ident && attrs[2].toLowerCase() === owner.toLowerCase();
     }).map(async ({ data }) => {
         const attrs = data.split(",");
         const ident = {
