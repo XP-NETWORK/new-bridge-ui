@@ -269,8 +269,11 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
                 const parts = ident.split("-");
                 const nonce = parseInt(parts.pop(), 16);
                 const token = parts.join("-");
-                if (await helper.isWrappedNft(owner, token)) {
-                    return await getWrappedNft(helper, nonce, data);
+                if (await helper.isWrappedNft("", token)) {
+                    // eslint-disable-next-line no-undef
+                    const hash = Base64.toUint8Array(data.uris[0]);
+                    const dat = await callFromInner('XP.network', 'getLockedNft', hash);
+                    return { id: dat ? decoder.decode(dat.slice(-24)) : [], isWrapped: true, info: data.nonce, originChain: "XP.network" };
                 } else {
                     return {
                         id: window.atob(data.uris[0]),
