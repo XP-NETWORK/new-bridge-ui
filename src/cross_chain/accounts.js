@@ -66,7 +66,7 @@ const NewParachainAccounts = {
     }
 }
 
-const Web3Accounts = {
+export const Web3Accounts = {
     "ACC1": {
         name: "ACC1",
         account: "0x50aCEC08ce70aa4f2a8ab2F45d8dCd1903ea4E14",

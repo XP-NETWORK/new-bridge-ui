@@ -89,7 +89,7 @@ body {
     background-color: #263359;
     height: calc(100% + 2px);
     position: absolute;
-    transition: all .17s;
+    transition: all 1s;
     left: -1px;
     top: -1px;
     border-radius: 16px 0px 0px 16px;

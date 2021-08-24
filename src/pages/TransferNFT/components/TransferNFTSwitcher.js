@@ -53,13 +53,14 @@ const TransferNFTSwitcher = ({
         }
     });
 
-    const toTranBridge = fromTranBridge;
+    const toTranBridge = fromTranBridge.map(n => ({...n, disabled: (n.key === fromChain) ||( n.key === chains[0] || n.key === chains[2] || n.key === chains[1] ? false : true) }))
 
     const sourceAccounts = fromAccountS.map(item => {
         return {
             key: item,
             text: item,
             value: item,
+            disabled: item === fromChain,
             image: { avatar: true, src: userAvatar }
         }
     });

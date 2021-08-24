@@ -54,7 +54,6 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toCha
     return index === users.activeMark
   }
 
-  console.log(nftList, toChain, fromChain)
   return (
     <CardWrap className={"mx-md-4 my-4 lalalalalala"}>
       <div className={`${Styles.srcAcc} d-flex align-items-center`}>
@@ -150,7 +149,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toCha
                           />
                         </div>
                         <div className={Styles.inputGroup}>
-                          <label htmlFor="Blockchain">Blockchain</label>
+                          <label htmlFor="Blockchain">Source Blockchain</label>
                           <div
                             type="text"
                             className={`${Styles.inputStyle} nft-popup-blockchain`}

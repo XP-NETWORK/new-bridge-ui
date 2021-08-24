@@ -16,7 +16,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
     const [nft, setNft] = useState(undefined);
     const dispatch = useDispatch()
     const [loadingInterval, setLoadingInterval] = useState()
-    const [n, setN] = useState(0)
+    const [n, setN] = useState(6)
     useEffect(() => {
         const name = typeof fromAcct === 'string' ? fromAcct.replace(/(?:\r\n|\r|\n)/g, '') : ''
         if(PredefinedAccounts && PredefinedAccounts[fromChain] && PredefinedAccounts[fromChain][name]) {
@@ -30,10 +30,16 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
         let count = 0
         const l = setInterval(() => {
             count += 0.1
-            if(i < 60)
-            i += 0.05
-            else if(i < 85) i += 0.01
-            else i += 0.001
+            if(fromChain === 'Elrond') {
+                if(i < 60) i += 0.05
+                else if(i < 85) i += 0.01
+                else i += 0.001
+            } else {
+                if(i < 60) i += 1
+                else if(i < 85) i += 0.5
+                else i += 0.1
+            }
+
             setN(i > 100 ? 100 : i)
             if(count > 400) {
                 dispatch(showLoader(false))
@@ -44,7 +50,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
 
     useEffect(() => {
         if(!loader) {
-            setN(0)
+            setN(6)
             clearInterval(loadingInterval)
         }
     },[loader])
@@ -52,9 +58,9 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
         console.log(nft)
         if(!loader && nft){
             showLoader(true)
-            if(fromChain === 'Elrond') {
+            // if(fromChain === 'Elrond') {
                 setLoader()
-            }
+            // }
             if (nft.originChain === fromChain) {
                 await sendNative(
                     fromChain, 
@@ -77,7 +83,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
         
     }
 
-    const bigLoad = (fromChain === 'Elrond' && loader)
+    const bigLoad = ( loader)
     return (
         <Container>
             <div className="title title--primary main-title">

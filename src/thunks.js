@@ -1,5 +1,5 @@
 import { getBalance, listNft, tokenBalances, showLoader, nftLoader, setModalMessage } from './actions';
-import { NewElrondAccounts, PredefinedAccounts } from './cross_chain/accounts';
+import { NewElrondAccounts, PredefinedAccounts, Web3Accounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {remoteNFTMeta} from './singletons';
 import { ChainConfig, ExplorerPrefix } from './cross_chain/config';
@@ -119,10 +119,9 @@ export const returnWrappedTokens = (chain, signer_, nonce, to, value) => async d
  */
 export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async dispatch => {
     try {
-        let user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
-        if(user.length > 20) {
-            user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
-        }
+        let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
+        if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
+        if(!PredefinedAccounts[chain][user]) user = Object.keys(Web3Accounts).filter(n => Web3Accounts[n].key === sender_)[0]
         let err;
         const data = await callFromInnerSigned(chain, 'transferNftToForeign', sender_, chain_nonce, to, nft.hash).catch(er => {
             err = er;
@@ -172,6 +171,8 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
     try {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
+        if(!PredefinedAccounts[chain][user]) user = Object.keys(Web3Accounts).filter(n => Web3Accounts[n].key === sender_)[0]
+
         const helper = ChainFactory[chain];
         const inner = await helper.inner();
         const sender = await helper.signerFromPk(sender_);
