@@ -4,12 +4,12 @@ const polkadotBlockPrefix = "https://explorer.xp.network/#/explorer/query";
 const elrondTxnPrefix = "https://devnet-explorer.elrond.com/transactions";
 
 export const ChainConfig = {
-    "xpnode": "wss://testing-bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
+    "xpnode": "wss://bridge.xp.network:443/node", //"wss://bridge.xp.network:443/node", //
     "elrond_node": "https://devnet-api.elrond.com",
-    "elrond_minter": "erd1qqqqqqqqqqqqqpgqe8lzlc2husrrthhyavhcj50kpneqzf9ms3ys4anmfd", //"erd1qqqqqqqqqqqqqpgq7ysztrj922cs53e5wh2vdmeds9pd69wms3ysy3tyy9", //
+    "elrond_minter": "erd1qqqqqqqqqqqqqpgq3m3nkcahd94c0wcp86nu2pnen7pjs0e5s3ysj5czvv", //"erd1qqqqqqqqqqqqqpgq7ysztrj922cs53e5wh2vdmeds9pd69wms3ysy3tyy9", //
     "elrond_event_rest": "https://bridge.xp.network/event_rest", //"https://bridge.xp.network/event_rest", //
-    "elrond_esdt": "XPNET-1dba6e", //"XPNET-cdf688", //
-    "elrond_esdt_nft": "XPNFT-594a29", //"XPNFT-ff3b98", //
+    "elrond_esdt": "XPNET-742026", //"XPNET-cdf688", //
+    "elrond_esdt_nft": "XPNFT-fc2cee", //"XPNFT-ff3b98", //
     "validator_txn_socket": "wss://bridge.xp.network", //"wss://bridge.xp.network/", //
     "web3_minters": {
         'HECO': "0x9d9061EE73832C016BF74282AD63D0F4DC784d9d",
