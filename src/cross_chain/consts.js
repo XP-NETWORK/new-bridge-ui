@@ -14,14 +14,14 @@ export const CHAIN_INFO = {
         nonce: 4,
         native: coins[3],
         chainId: 97, 
-        rpcUrl: "https://data-seed-prebsc-1-s1.binance.org:8545",
+        rpcUrl: "https://data-seed-prebsc-1-s2.binance.org:8545",
         decimals: 1E18
     },
     'Ropsten': {
         nonce: 5,
         native: coins[4],
         chainId: 3,
-        rpcUrl: "https://ropsten.infura.io/v3/182b3d3fb2d14d5fbe7421348624d1ce",
+        rpcUrl: "https://eth-ropsten.alchemyapi.io/v2/-x2YuopIsMFeUO2uF_FHPG73-2xk-60x",
         decimals: 1E18
     }
 };
