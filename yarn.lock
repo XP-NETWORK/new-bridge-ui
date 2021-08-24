@@ -9547,6 +9547,12 @@ next-tick@~1.0.0:
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
 
+"nft-db-client@git+https://github.com/xp-network/nft-db-client-#master":
+  version "1.0.0"
+  resolved "git+https://github.com/xp-network/nft-db-client-#bd55ad230f3c311fa9d033f83dadf1feff71b99b"
+  dependencies:
+    axios "^0.21.1"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -13162,7 +13168,7 @@ test-exclude@^6.0.0:
 
 "testsuite-ts@git+https://github.com/xp-network/bridge-ui-logics#master":
   version "1.0.0"
-  resolved "git+https://github.com/xp-network/bridge-ui-logics#374164d81d483d53d1bf06dd12a06dc69a518c3c"
+  resolved "git+https://github.com/xp-network/bridge-ui-logics#6adb39f2fefff4f7570321931d893de816e07709"
   dependencies:
     "@elrondnetwork/erdjs" "^6.2.0"
     "@polkadot/api" "^5.2.1"
