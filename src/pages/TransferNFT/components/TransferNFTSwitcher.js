@@ -46,14 +46,14 @@ const TransferNFTSwitcher = ({
     const fromTranBridge = chains.map(item => {
         return {
             key: item,
-            text: item === chains[0] || item === chains[2] || item === chains[1] || item === chains[4] ? item : `${item} - coming soon`,
-            disabled: item === chains[0] || item === chains[2] || item === chains[1] || item === chains[4] ? false : true,
+            text: item !== chains[3] ? item === 'Ropsten' ? 'Ethereum' : item : `${item} - coming soon`,
+            disabled: item !== chains[3] ? false : true,
             value: item,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
 
-    const toTranBridge = fromTranBridge.map(n => ({...n, disabled: (n.key === fromChain) ||( n.key === chains[0] || n.key === chains[2] || n.key === chains[1] ? false : true) }))
+    const toTranBridge = fromTranBridge.map(n => ({...n, disabled: (n.key === fromChain) ||(n.key !== chains[3] ? false : true) }))
 
     const sourceAccounts = fromAccountS.map(item => {
         return {
@@ -84,33 +84,37 @@ const TransferNFTSwitcher = ({
 
     }
 
+    const getVal = e => {
+       const v =  e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')
+       if(v === 'Ethereum') return 'Ropsten'
+       else return v
+    }
+
     const handleChangeFrom = (e) => {
         e.preventDefault();
-        console.log(toChain, e.target.innerText)
-        
-        if(toChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')){
+        if(toChain === getVal(e)){
             selectToChain(fromChain);
-            selectFromChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
-        } else  selectFromChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
+            selectFromChain(getVal(e));
+        } else  selectFromChain(getVal(e));
     }
 
     const handleChangeTo = (e) => {
         e.preventDefault();
-        if(fromChain === e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')) {
+        if(fromChain === getVal(e)) {
             selectFromChain(toChain);
-            selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
-        } else selectToChain(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''));
+            selectToChain(getVal(e));
+        } else selectToChain(getVal(e));
     }
 
     const handleChangeFromAcct = (e) => {
         e.preventDefault();
-        selectFromAccount(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''))
+        selectFromAccount(getVal(e))
     }
 
     const handleChangeToAcct = (e) => {
         e.preventDefault();
         setNft(undefined)
-        selectToAccount(e.target.innerText.replace(/(?:\r\n|\r|\n)/g, ''))
+        selectToAccount(getVal(e))
     }
 
     return (

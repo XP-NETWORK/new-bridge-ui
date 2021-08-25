@@ -159,7 +159,7 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toCha
                           >
                           <img src={ mapChainToAvatar(nft.originChain) } />
 
-                            {nft.originChain}
+                            {nft.originChain === 'Ropsten' ? 'Ethereum' : nft.originChain}
                           </div>
                         </div>
                       </form>

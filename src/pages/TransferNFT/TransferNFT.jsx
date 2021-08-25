@@ -34,6 +34,10 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                 if(i < 60) i += 0.05
                 else if(i < 85) i += 0.01
                 else i += 0.001
+            }else if(fromChain === 'Ropsten' || fromChain === 'BSC' || toChain === 'Ropsten') {
+                if(i < 60) i += 0.5
+                else if(i < 85) i += 0.1
+                else i += 0.05
             } else {
                 if(i < 60) i += 1
                 else if(i < 85) i += 0.5
