@@ -43,17 +43,14 @@ const TransferNFTSwitcher = ({
 
 }) => {
 
-    const fromTranBridge = chains.map(item => {
+    const tranBridge = chains.map(item => {
         return {
             key: item,
-            text: item !== chains[3] ? item === 'Ropsten' ? 'Ethereum' : item : `${item} - coming soon`,
-            disabled: item !== chains[3] ? false : true,
+            text: item === 'Ropsten' ? 'Ethereum' : item,
             value: item,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
-
-    const toTranBridge = fromTranBridge.map(n => ({...n, disabled: (n.key === fromChain) ||(n.key !== chains[3] ? false : true) }))
 
     const sourceAccounts = fromAccountS.map(item => {
         return {
@@ -126,7 +123,7 @@ const TransferNFTSwitcher = ({
                             placeholder='Select option'
                             fluid
                             selection
-                            options={fromTranBridge}
+                            options={tranBridge}
                             onChange={e => handleChangeFrom(e)}
                             value={fromChain}
                             disabled={loader}
@@ -160,7 +157,7 @@ const TransferNFTSwitcher = ({
                             placeholder='Select option'
                             fluid
                             selection
-                            options={toTranBridge}
+                            options={tranBridge}
                             disabled={loader}
                             onChange={e=>handleChangeTo(e)}
                             value={toChain}
