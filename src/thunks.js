@@ -276,7 +276,6 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
         }
     }
 
-    console.log(resM);
     for (const [ident, data] of owned) {
         let res;
         try {
@@ -295,8 +294,6 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
 
         final.push(resM[id]);
     }
-
-    console.log("final", final);
 
     return final;
 }
