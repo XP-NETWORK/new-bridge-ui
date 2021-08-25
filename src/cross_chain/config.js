@@ -22,6 +22,7 @@ export const ChainConfig = {
         "Ropsten": "0x0218B563Ee50d16b12C7CF95B9F207B69e2ED345",
     },
     "web3_predefined": {
+        "HECO": "0x8b9c95147C185A9d0940DC26a6EA774eE05D8853",
         "BSC": "0x5b5C8b16937F60D02aFaC76bf6614c33911636FC",
         "Ropsten": "0xf6fceC833bFb9bd26a898143A6b41799F5Abfe0f"
     }
