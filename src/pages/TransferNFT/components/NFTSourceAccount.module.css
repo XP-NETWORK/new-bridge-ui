@@ -39,10 +39,10 @@
     margin-left: 10px;
 }
 .userItem p {
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    text-align: left;
     white-space: nowrap;
+    display: inline-block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
     width: 83px;
 }
 .userItem:hover {
