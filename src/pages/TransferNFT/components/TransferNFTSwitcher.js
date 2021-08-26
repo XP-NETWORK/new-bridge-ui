@@ -114,6 +114,16 @@ const TransferNFTSwitcher = ({
         selectToAccount(getVal(e))
     }
 
+    const addIdToSelect = e => {
+        setTimeout(() => {
+            const c = Array.prototype.slice.call(document.getElementsByClassName('visible menu'),0)
+           c.forEach(n => {
+               n.setAttribute('id', 'id-of-selctor')
+           })
+        },1)
+
+    }
+
     return (
         <Fragment>
             <div className={`${Classes.switcherWrap} d-flex align-items-center justify-content-center`}>
@@ -126,11 +136,12 @@ const TransferNFTSwitcher = ({
                             options={tranBridge}
                             onChange={e => handleChangeFrom(e)}
                             value={fromChain}
+                            onOpen={addIdToSelect}
                             disabled={loader}
                         />
                     </SelectItem>
 
-                    <SelectItem label={"Source Account"}>
+                    <SelectItem className="second-title" label={"Source Account"}>
                     <Dropdown
                             placeholder='Select option'
                             fluid
@@ -138,6 +149,7 @@ const TransferNFTSwitcher = ({
                             options={sourceAccounts}
                             onChange={e=>handleChangeFromAcct(e)}
                             value={fromAccount}
+                            onOpen={addIdToSelect}
                             disabled={loader}
                         />
                     </SelectItem>
@@ -157,19 +169,25 @@ const TransferNFTSwitcher = ({
                             placeholder='Select option'
                             fluid
                             selection
+                            id="lalala"
                             options={tranBridge}
                             disabled={loader}
+                            onOpen={addIdToSelect}
                             onChange={e=>handleChangeTo(e)}
                             value={toChain}
                         />
                     </SelectItem>
-                    <SelectItem label={"Target Account"}>
+                    <SelectItem className="second-title" label={"Target Account"}>
                     <Dropdown
                             placeholder='Select option'
                             fluid
                             selection
+                            style={{
+                                
+                            }}
                             options={targetAccounts}
                             disabled={loader}
+                            onOpen={addIdToSelect}
                             onChange={e=>handleChangeToAcct(e)}
                             value={toAccount}
                         />

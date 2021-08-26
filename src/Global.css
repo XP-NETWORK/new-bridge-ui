@@ -94,6 +94,9 @@ body {
     top: -1px;
     border-radius: 16px 0px 0px 16px;
 }
+.second-title {
+    margin-top: 16px !important;
+}
 .asdadddssaads:hover svg {
     fill: #3E64ED;
 }
@@ -377,3 +380,18 @@ body {
     margin-left: 14px;
     margin-top: 20px;
 }
+
+  #id-of-selctor::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background-color: #fff;
+  }
+  
+  #id-of-selctor::-webkit-scrollbar {
+    height: 4px;
+    background-color: #fff;
+  }
+  
+  #id-of-selctor::-webkit-scrollbar-thumb {
+    border-radius: 40px;
+    background-color: #DCDDEF;
+  }

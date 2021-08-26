@@ -11,6 +11,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import X from '../../../assets/images/closepopup.svg'
 // 
 import userAvatar from '../../../assets/images/userAvatar.svg';
+import I from '../../../assets/images/i.svg';
 import AccUser from "../../../assets/images/users/accuser.png";
 import checkmarkicon from "../../../assets/images/checkmark.svg";
 
