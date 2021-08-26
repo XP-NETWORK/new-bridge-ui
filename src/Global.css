@@ -19,7 +19,38 @@ a {
 .your-wallet-is-empty {
     margin-top: 4px !important;
 }
-
+.navbar-containerr {
+    position: relative;
+}
+.coming-soon-i {
+    background: #F0D9C3;
+border-radius: 40px;
+font-size: 12px;
+color: #F5600B;
+padding: 3px 6px;
+}
+.betaa {
+    color: #2853EB;
+    font-size: 12px;
+    padding: 3px 7px;
+    background: #C1CFFF;
+border-radius: 40px;
+}
+.transaction-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -30px;
+}
+.transaction-message a {
+    font-size: 16px;
+}
+.center-of-navbar {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    color: #2853EB !important;
+}
 body {
 	line-height: 1;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
@@ -140,7 +171,9 @@ body {
 
 
 }
-
+.navbar-brand img {
+    height: 22px;
+}
 .close-nft-popup img{
     border: 1px solid #040D27;
     padding: 4px;
@@ -199,7 +232,7 @@ body {
     right: 8px;
 }
 .checkmark-chosen-container {
-    background: #ffffff50;
+    background: rgba(255,255,255,0.9);
     width: 32px;
     height: 32px;
     display: flex;
@@ -272,12 +305,20 @@ body {
     position: relative;
     left: -50px !important;
 }
+.center-of-navbar {
+    left: 60%;
+}
 }
 @media (min-width: 993px) and (max-width: 1199px) {
 .CardWrap_switchCard__2DAxh.mx-md-4.my-4 {
     width: 795px !important;
     position: relative;
     left: -113px !important;
+    
+}
+.center-of-navbar {
+    left: 69%;
+    width: 400px;
 }
 }
 
@@ -299,7 +340,20 @@ body {
 		padding: 1.25rem 1.5rem 1.5rem;
 	}
 }
-
+.check-mark {
+    margin-right: 10px;
+    margin-left: -10px;
+}
+@media(max-width: 991px) {
+    .center-of-navbar {
+        position:static;
+        transform: none;
+        left: auto;
+    }
+    .transaction-message {
+        margin-bottom: 20px;
+    }
+}
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 736px !important;

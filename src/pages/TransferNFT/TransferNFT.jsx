@@ -12,6 +12,9 @@ import SelectItem from '../../UIElemnts/SelectItem';
 import XpModal from '../../UIElemnts/XpModal';
 import CardWrap from "../../UIElemnts/CardWrap";
 
+import Check from '../../assets/images/whitecheck.svg'
+import Next from '../../assets/images/transactionhistory.svg'
+
 const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader, modalMessage, closePopup}) => {
     const [nft, setNft] = useState(undefined);
     const dispatch = useDispatch()
@@ -25,6 +28,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
     }, [fromChain, fromAcct, getNfts])
 
     const setLoader = () => {
+        closePopup()
         if(loadingInterval) clearInterval(loadingInterval)
         let i = 6
         let count = 0
@@ -110,9 +114,9 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                             >
                             {bigLoad ? <div style={{
                                 width: n + '%',
-                                borderRadius: (n > 80 ? '16px' : '')
+                                borderRadius: (n > 90 ? '16px' : '')
                                 }} className="loading-bar-el"></div> : ''}
-                            <p className="loader-text">{loader ? "Transfering NFTs" : "Send NFTs"}</p>
+                            <p className="loader-text">{modalMessage ? <><img className="check-mark" src={Check} /> Successfully sent</> : loader ? "Transfering NFTs" : "Send NFTs"}</p>
                         </button>
 
                         {
@@ -120,14 +124,20 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                             ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''}/>
                             : ''
                         }
+                      
+                    </div>
+                    <div className="transaction-message">
+                        {
+                            modalMessage ? <a target="_blank" href={modalMessage}>View transaction <img src={Next}/></a> : ''
+                        }
                     </div>
                 </Col>
             </Row>
-            <XpModal handleClose={closePopup} show={modalMessage ? true : false} >
+            {/* <XpModal handleClose={closePopup} show={modalMessage ? true : false} >
             <CardWrap className={"mx-md-2 my-2 successModal"}>
                 <a target="_blank" href={modalMessage}>View Transaction</a>
             </CardWrap>
-            </XpModal>
+            </XpModal> */}
         </Container>
     );
 };

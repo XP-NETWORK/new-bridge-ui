@@ -39,7 +39,11 @@
     margin-left: 10px;
 }
 .userItem p {
-    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    text-align: left;
+    white-space: nowrap;
+    width: 83px;
 }
 .userItem:hover {
     background-color: #F1EFF5;
@@ -108,7 +112,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
+.chekMark img {
+    width: 16px;
+    height: 16px;
+}
 
 @media (max-width: 991px) {
     .userItem {

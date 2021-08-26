@@ -12,40 +12,37 @@ const NavBar = () => {
 
     return (
         <Navbar expand="lg" className={Classes.navbarBorder}>
-            <Container>
+            <Container className="navbar-containerr">
                 <Link to="/" className={"navbar-brand"}>
                     <Image src={Logo} fluid/>
                 </Link>
 
                 <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
                     <Link to="#link">
-                        <Image src={GreenDot} fluid/> Ledger - <span style={{color: '#F27603'}}>Coming Soon</span>
+                        <Image src={GreenDot} fluid/> Ledger - <span className="coming-soon-i">Coming Soon</span>
                     </Link>
                 </Nav>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
-                    <Nav className={`${Classes.tabNav} d-none d-md-block`}>
+                    <Nav className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFTs</NavLink>
-                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer - <span style={{color: '#F27603'}}>Coming Soon</span></NavLink>
+                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
                     </Nav>
 
-                    <Nav className={`${Classes.linkTab} ml-auto`}>
+                    <Nav className={`${Classes.linkTab}`}>
                         {/* <Link to="#home">Link 2</Link> */}
-                        <Link to="#link">Cross-Chain Bridge Demo</Link>
+                        <Link to="#link">Cross-Chain Bridge Demo <span className="betaa">Beta</span></Link>
                     </Nav>
 
-                    <Nav className={`${Classes.tabNav} d-none d-md-block`}>
+                    <Nav className={`${Classes.tabNav} d-none d-md-block ml-auto`}>
                         <Link to="#link">
-                            <Image src={GreenDot} fluid/> Ledger - <span style={{color: '#F27603'}}>Coming Soon</span>
+                            <Image src={GreenDot} fluid/> Ledger
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
 
-                <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-md-none mt-3`}>
-                    <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFTs</NavLink>
-                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer - <span style={{color: '#F27603'}}>Coming Soon</span></NavLink>
-                </Nav>
+           
             </Container>
         </Navbar>
     );

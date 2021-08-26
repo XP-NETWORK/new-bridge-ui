@@ -13,7 +13,7 @@ import X from '../../../assets/images/closepopup.svg'
 import userAvatar from '../../../assets/images/userAvatar.svg';
 import I from '../../../assets/images/i.svg';
 import AccUser from "../../../assets/images/users/accuser.png";
-import checkmarkicon from "../../../assets/images/checkmark.svg";
+import checkmarkicon from "../../../assets/images/check.svg";
 
 // Actions & thunks
 import { selectNFT } from '../../../actions';

@@ -19,6 +19,7 @@ import {
     selectFromAccount,
     selectToAccount,
     swapChains,
+    setModalMessage,
 
 } from '../../../actions'
 import { mapChainToAvatar} from '../../../mappers';
@@ -35,7 +36,7 @@ const TransferNFTSwitcher = ({
     toAccountS, 
     onSwapChainsPressed,
     loader,
-
+    closePopup,
     selectFromChain,
     selectToChain,
     selectFromAccount,
@@ -74,8 +75,10 @@ const TransferNFTSwitcher = ({
     const switchHandler = (e) => {
         console.log(e)
             e.preventDefault();
-            if(!loader) {
-            setNft(undefined)
+            if(!loader) { {
+                closePopup()
+                setNft(undefined)
+            }
             onSwapChainsPressed();
         }
 
@@ -88,6 +91,7 @@ const TransferNFTSwitcher = ({
     }
 
     const handleChangeFrom = (e) => {
+        closePopup()
         e.preventDefault();
         if(toChain === getVal(e)){
             selectToChain(fromChain);
@@ -96,6 +100,7 @@ const TransferNFTSwitcher = ({
     }
 
     const handleChangeTo = (e) => {
+        closePopup()
         e.preventDefault();
         if(fromChain === getVal(e)) {
             selectFromChain(toChain);
@@ -104,11 +109,13 @@ const TransferNFTSwitcher = ({
     }
 
     const handleChangeFromAcct = (e) => {
+        closePopup()
         e.preventDefault();
         selectFromAccount(getVal(e))
     }
 
     const handleChangeToAcct = (e) => {
+        closePopup()
         e.preventDefault();
         setNft(undefined)
         selectToAccount(getVal(e))
@@ -220,6 +227,7 @@ const mapDispatchToProps = dispatch => ({
     selectToChain: value => dispatch(selectToChain(value)),
     selectFromAccount: value => dispatch(selectFromAccount(value)),
     selectToAccount: value => dispatch(selectToAccount(value)),
+    closePopup: e => dispatch(setModalMessage())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFTSwitcher);
