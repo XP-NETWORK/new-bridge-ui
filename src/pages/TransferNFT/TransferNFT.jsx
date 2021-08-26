@@ -66,9 +66,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
         console.log(nft)
         if(!loader && nft){
             showLoader(true)
-            // if(fromChain === 'Elrond') {
-                setLoader()
-            // }
+            setLoader()
             if (nft.originChain === fromChain) {
                 await sendNative(
                     fromChain, 

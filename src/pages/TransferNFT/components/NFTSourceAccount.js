@@ -21,7 +21,7 @@ import Loader from '../../../global/Loader/Loader';
 import { mapChainToAvatar } from '../../../mappers';
 
 
-const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toChain, fromChain}) => {
+const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toChain, fromChain, loader}) => {
 
   const [show, setShow] = useState(-1);
   const [copied, setCopied] = useState()
@@ -37,7 +37,12 @@ const NFTSourceAccount = ({fromAccount, selectCb, nftList, nftLoader, nft, toCha
     setCopied(false)
 
   }, [nftList])
-
+  useEffect(() => {
+    if(!loader)setUsers({ ...users, activeMark: undefined })
+  },[loader])
+  useEffect(() => {
+    setUsers({ ...users, activeMark: undefined })
+  }, [fromChain])
   useEffect(() => {
     if(!nft) setUsers({ ...users, activeMark: undefined })
   },[nft])
@@ -184,6 +189,7 @@ const mapStateToProps = state => ({
   toChain: state.selectReducer.toChain,
   fromChain: state.selectReducer.fromChain,
   nftList: state.selectReducer.nftList,
+  loader: state.selectReducer.loader,
   nftLoader: state.selectReducer.nftLoader
 });
 

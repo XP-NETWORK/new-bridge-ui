@@ -52,7 +52,15 @@ const TransferNFTSwitcher = ({
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
-
+    const toBridge = chains.map(item => {
+        return {
+            key: item,
+            text: item === 'Ropsten' ? 'Ethereum' : item,
+            value: item,
+            disabled: item === fromChain,
+            image: { avatar: true, src: mapChainToAvatar(item) }
+        }
+    });
     const sourceAccounts = fromAccountS.map(item => {
         return {
             key: item,
@@ -177,7 +185,7 @@ const TransferNFTSwitcher = ({
                             fluid
                             selection
                             id="lalala"
-                            options={tranBridge}
+                            options={toBridge}
                             disabled={loader}
                             onOpen={addIdToSelect}
                             onChange={e=>handleChangeTo(e)}
