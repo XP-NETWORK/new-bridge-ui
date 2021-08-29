@@ -20,6 +20,8 @@ jobs:
         run: yarn
 
       - name: build
+        env:
+          CI: false
         run: yarn build-prod
       
       - name: push
