@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { elrondHelperFactory, polkadotPalletHelperFactory, web3HelperFactory, txnSocketHelper } from 'testsuite-ts';
-import { ChainConfig } from './config';
+import { ChainConfig } from '../config';
 import { CHAIN_BY_NONCE, CHAIN_INFO } from './consts';
 import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers';

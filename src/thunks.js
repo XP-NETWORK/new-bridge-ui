@@ -2,7 +2,7 @@ import { getBalance, listNft, tokenBalances, showLoader, nftLoader, setModalMess
 import { NewElrondAccounts, PredefinedAccounts, Web3Accounts } from './cross_chain/accounts';
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain';
 import {remoteNFTMeta} from './singletons';
-import { ChainConfig, ExplorerPrefix } from './cross_chain/config';
+import { ChainConfig, ExplorerPrefix } from './config';
 import { CHAIN_BY_NONCE } from './cross_chain/consts';
 import { BigNumber as EthBN } from "ethers";
 
