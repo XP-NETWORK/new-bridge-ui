@@ -343,6 +343,7 @@ body {
 .check-mark {
     margin-right: 10px;
     margin-left: -10px;
+    padding-bottom: 5px;
 }
 @media(max-width: 991px) {
     .center-of-navbar {

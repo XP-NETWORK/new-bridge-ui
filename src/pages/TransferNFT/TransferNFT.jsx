@@ -114,7 +114,7 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                                 width: n + '%',
                                 borderRadius: (n > 90 ? '16px' : '')
                                 }} className="loading-bar-el"></div> : ''}
-                            <p className="loader-text">{modalMessage ? <><img className="check-mark" src={Check} /> Successfully sent</> : loader ? "Transfering NFTs" : "Send NFTs"}</p>
+                            <p className="loader-text">{modalMessage ? <><img className="check-mark" src={Check} /> Successfully Sent</> : loader ? "Transfering NFTs" : "Send NFTs"}</p>
                         </button>
 
                         {

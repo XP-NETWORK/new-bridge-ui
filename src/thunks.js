@@ -129,6 +129,7 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
             dispatch(showLoader(false))
         });
         if (err) {
+            console.log(err) ;
             return;
         }
 
