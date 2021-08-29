@@ -3,5 +3,5 @@ import { dbUrl } from "../config";
 export { nftMetaDtoMapper } from "nft-db-client"
 
 export function configNFTMetaService(): NFTMetaService {
-    return nftMetaService(dbUrl);
+    return nftMetaService(dbUrl!);
 }
