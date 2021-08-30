@@ -27,7 +27,6 @@ export const ChainConfig = {
     "xpnode": process.env.REACT_APP_XP_NODE,
     "elrond_node": process.env.REACT_APP_ELRD_NODE,
     "elrond_minter": process.env.REACT_APP_ELRD_MINTER,
-    "elrond_event_rest": process.env.REACT_APP_EVENT_REST,
     "elrond_esdt": process.env.REACT_APP_ELRD_ESDT,
     "elrond_esdt_nft": process.env.REACT_APP_ELRD_ESDT_NFT,
     "validator_txn_socket": process.env.REACT_APP_VALIDATOR_SOCK,

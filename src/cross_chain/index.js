@@ -132,7 +132,6 @@ export function ElrondHelper() {
             elrd = await elrondHelperFactory(
                 ChainConfig.elrond_node,
                 ChainConfig.elrond_minter,
-                ChainConfig.elrond_event_rest,
                 ChainConfig.elrond_esdt,
                 ChainConfig.elrond_esdt_nft
             );
