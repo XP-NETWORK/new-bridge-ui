@@ -133,10 +133,6 @@
     }
 }
 
-
-
-
-
 .inputGroup {
     margin-bottom: 12px;
 }
@@ -147,6 +143,14 @@
     }
     .inputGroup {
         margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .userItem .infoBtn {
+        opacity: 1;
+        right: 6px;
+        visibility: visible;
     }
 }
 

@@ -1,5 +1,5 @@
 .navbarBorder {
-    border-bottom: 1px solid rgb(169, 198, 254, 0.2);
+    border-bottom: 1px solid rgba(169, 198, 254, 0.2);
     padding: 16px !important;
 }
 
@@ -27,6 +27,15 @@
 
 .tabNav a:hover, .linkTab a:hover {
     background-color: #fff;
+}
+
+.linkTab {
+    border-left: 2px solid #040D27;
+    margin-left: 0.75rem;
+}
+
+.linkTab a {
+    margin-left: 0.75rem;
 }
 
 .selected {
@@ -78,6 +87,15 @@
 
     .navbar-nav {
         flex-direction: row;
+    }
+
+    .linkTab {
+        border-left: none!important;
+        margin-left: 0;
+    }
+
+    .linkTab a {
+        margin-left: 0;
     }
 }
 

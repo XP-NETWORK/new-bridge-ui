@@ -17,11 +17,7 @@ const NavBar = () => {
                     <Image src={Logo} fluid/>
                 </Link>
 
-                <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
-                    <Link to="#link">
-                        <Image src={GreenDot} fluid/> Ledger - <span className="coming-soon-i">Coming Soon</span>
-                    </Link>
-                </Nav>
+
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
@@ -30,9 +26,9 @@ const NavBar = () => {
                         <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
                     </Nav>
 
-                    <Nav className={`${Classes.linkTab}`}>
+                    <Nav className={`${Classes.linkTab} d-none d-md-block`}>
                         {/* <Link to="#home">Link 2</Link> */}
-                        <Link to="#link">Cross-Chain Bridge Demo <span className="betaa">Beta</span></Link>
+                        <Link to="#link">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</Link>
                     </Nav>
 
                     <Nav className={`${Classes.tabNav} d-none d-md-block ml-auto`}>
@@ -40,8 +36,24 @@ const NavBar = () => {
                             <Image src={GreenDot} fluid/> Ledger
                         </Link>
                     </Nav>
+
+
+                    <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
+                        <Nav className={`${Classes.linkTab} mb-2`}>
+                            {/* <Link to="#home">Link 2</Link> */}
+                            <Link to="#link">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</Link>
+                        </Nav>
+
+                        <Link to="#link">
+                            <Image src={GreenDot} fluid/> Ledger - <span className="coming-soon-i">Coming Soon</span>
+                        </Link>
+                    </Nav>
                 </Navbar.Collapse>
 
+                {/*<Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3`}>*/}
+                {/*    <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>*/}
+                {/*    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>*/}
+                {/*</Nav>*/}
            
             </Container>
         </Navbar>
