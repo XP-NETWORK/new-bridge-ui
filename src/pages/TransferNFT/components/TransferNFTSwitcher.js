@@ -48,7 +48,7 @@ const TransferNFTSwitcher = ({
         const dis = item == chains[5] || item == chains[6] || item == chains[7] ||item == chains[8]
         return {
             key: item,
-            text: item === 'Ropsten' ? 'Ethereum' : item,
+            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
             value: item,
             disabled: dis,
             image: { avatar: true, src: mapChainToAvatar(item) }
@@ -58,7 +58,7 @@ const TransferNFTSwitcher = ({
         const dis = item == chains[5] || item == chains[6] || item == chains[7] ||item == chains[8]
         return {
             key: item,
-            text: item === 'Ropsten' ? 'Ethereum' : item,
+            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
             value: item,
             disabled: item === fromChain || dis,
             image: { avatar: true, src: mapChainToAvatar(item) }
