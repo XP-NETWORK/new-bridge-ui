@@ -30,12 +30,27 @@
 }
 
 .linkTab {
-    border-left: 2px solid #040D27;
-    margin-left: 0.75rem;
+    border-left: 0px;
+    margin-left: 0rem;
+    position: relative;
+    z-index: 1;
+}
+.linkTab:before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 18px;
+    width: 2px;
+    background: #040D27;
+    content: "";
+    transform: translateY(-50%);
 }
 
 .linkTab a {
-    margin-left: 0.75rem;
+    /*margin-left: 0.75rem;*/
+    margin-left: 0;
+    padding-left: 11px;
+    margin-left: 2px;
 }
 
 .selected {
@@ -80,7 +95,7 @@
     .basicNav {
         margin-top: 1rem;
     }
-
+    
     .navbarBorder {
         border: none!important;
     }
@@ -105,3 +120,16 @@
     }
 }
 
+span.cross_ch{
+    margin-left: .75rem;
+    font-size: 15px;
+    line-height: 126%;
+    letter-spacing: .03em;
+    color: #040d27;
+    opacity: .9;
+    display: inline-block;
+    padding: .5rem .75rem;
+    margin-right: .5rem;
+    border-radius: 10px;
+    transition: color .3s ease-in-out,background-color;
+}
