@@ -45,19 +45,22 @@ const TransferNFTSwitcher = ({
 }) => {
 
     const tranBridge = chains.map(item => {
+        const dis = item == chains[5] || item == chains[6] || item == chains[7] ||item == chains[8]
         return {
             key: item,
             text: item === 'Ropsten' ? 'Ethereum' : item,
             value: item,
+            disabled: dis,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
     const toBridge = chains.map(item => {
+        const dis = item == chains[5] || item == chains[6] || item == chains[7] ||item == chains[8]
         return {
             key: item,
             text: item === 'Ropsten' ? 'Ethereum' : item,
             value: item,
-            disabled: item === fromChain,
+            disabled: item === fromChain || dis,
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
