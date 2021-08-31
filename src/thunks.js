@@ -240,7 +240,7 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
         case "Elrond": {
             idGetter = async (ident, data) => {
                 const parts = ident.split("-");
-                const nonce = parseInt(parts.pop(), 16);
+                const nonce = parseInt(parts.pop());
                 const token = parts.join("-");
                 if (await helper.isWrappedNft(owner, token)) {
                     return await getWrappedNft(helper, nonce, data);
