@@ -464,8 +464,8 @@ span.cross_ch{
     font-size: 15px;
     line-height: 126%;
     letter-spacing: .03em;
-    color: #040d27;
-    opacity: .9;
+    color: #040D27;
+    
     display: inline-block;
     padding: .5rem .75rem;
     padding-left: 11px;
@@ -588,5 +588,13 @@ span.cross_ch{
 
 .mobile-tab.navbar-nav> a {
     min-height: 32px;
+}
+.mobile-ledger.navbar-nav{
+    width: 100%;
+}
+.mobile-ledger.navbar-nav span {
+    float: right;
+        position: relative;
+    top: 2px;
 }
 }

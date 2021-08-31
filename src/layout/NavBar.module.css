@@ -41,9 +41,10 @@
     top: 50%;
     height: 18px;
     width: 2px;
-    background: #040D27;
+    background: #1C243C;
     content: "";
     transform: translateY(-50%);
+    opacity: 0.3;
 }
 
 .linkTab a {

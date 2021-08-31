@@ -2,7 +2,7 @@ import React from 'react';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap';
 import Logo from '../assets/images/mainLogo.svg';
 import GreenDot from '../assets/images/greenDot.svg';
-import GreenDots from '../assets/images/Etherium.svg';
+import GreenDots from '../assets/images/Ellipse168.svg';
 import {Link, NavLink} from "react-router-dom";
 import Classes from './NavBar.module.css';
 
