@@ -4,6 +4,10 @@ export const chains = [
     'Elrond',       // 2
     'HECO',         // 3
     'Ropsten',      // 4
+    'Cardano',      // 5
+    'Solana',       // 6
+    'Avalanche',    // 7
+    'Algorand',     // 8
 ];
 
 export const coins = [

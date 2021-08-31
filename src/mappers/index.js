@@ -4,6 +4,10 @@ import enrollIco from '../assets/images/enroll.svg';
 import binance from '../assets/images/binance.svg';
 import etherium from '../assets/images/Etherium.svg';
 import heco from '../assets/images/HECO.svg';
+import heco1 from '../assets/images/cardano.svg';
+import heco2 from '../assets/images/Solana.svg';
+import heco3 from '../assets/images/avalanche.svg';
+import heco4 from '../assets/images/Algarand.svg';
 // Blockchain related
 import {chains, coins} from '../config';
 
@@ -23,6 +27,18 @@ export const mapChainToAvatar = (chain) => {
       }
       case chains[4]:{
         return etherium;
+      }
+      case chains[5]:{
+        return heco1;
+      }
+      case chains[6]:{
+        return heco2;
+      }
+      case chains[7]:{
+        return heco3;
+      }
+      case chains[8]:{
+        return heco4;
       }
       default:{
         return xpNetIco;
