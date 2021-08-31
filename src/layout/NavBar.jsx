@@ -2,6 +2,7 @@ import React from 'react';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap';
 import Logo from '../assets/images/mainLogo.svg';
 import GreenDot from '../assets/images/greenDot.svg';
+import GreenDots from '../assets/images/Ellipse168.svg';
 import {Link, NavLink} from "react-router-dom";
 import Classes from './NavBar.module.css';
 
@@ -16,8 +17,15 @@ const NavBar = () => {
                 <Link to="/" className={"navbar-brand"}>
                     <Image src={Logo} fluid/>
                 </Link>
-
-
+                <Nav className={`${Classes.linkTab} mb-2 mobile-show`}>
+                            {/* <Link to="#home">Link 2</Link> */}
+                    <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
+                </Nav>
+                <Nav className={`${Classes.tabNav} d-md-block ml-auto mobile-ledger`}>
+                    <Link to="#link">
+                        <Image src={GreenDots} fluid/> Ledger <span className="coming-soon-i">Coming Soon</span>
+                    </Link>
+                </Nav>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
@@ -28,12 +36,12 @@ const NavBar = () => {
 
                     <Nav className={`${Classes.linkTab} d-none d-md-block`}>
                         {/* <Link to="#home">Link 2</Link> */}
-                        <Link to="#link">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</Link>
+                        <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
                     </Nav>
 
                     <Nav className={`${Classes.tabNav} d-none d-md-block ml-auto`}>
                         <Link to="#link">
-                            <Image src={GreenDot} fluid/> Ledger
+                            <Image src={GreenDot} fluid/> Ledger <span className="coming-soon-i">Coming Soon</span>
                         </Link>
                     </Nav>
 
@@ -41,7 +49,7 @@ const NavBar = () => {
                     <Nav className={`${Classes.tabNavResponsive} d-md-none`}>
                         <Nav className={`${Classes.linkTab} mb-2`}>
                             {/* <Link to="#home">Link 2</Link> */}
-                            <Link to="#link">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</Link>
+                            <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
                         </Nav>
 
                         <Link to="#link">
@@ -50,13 +58,14 @@ const NavBar = () => {
                     </Nav>
                 </Navbar.Collapse>
 
-                {/*<Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3`}>*/}
-                {/*    <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>*/}
-                {/*    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>*/}
-                {/*</Nav>*/}
+                <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3 mobile-tab`}>
+                    <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
+                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
+                </Nav>
            
             </Container>
         </Navbar>
+
     );
 };
 
