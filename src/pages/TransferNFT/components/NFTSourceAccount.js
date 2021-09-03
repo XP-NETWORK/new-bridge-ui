@@ -48,9 +48,7 @@ const NFTSourceAccount = ({ fromAccount, selectCb, nftList, nftLoader, nft, toCh
   }, [nft]);
 
   const toggleCheck = (index, data) => {
-
-    console.log("Selected NFT")
-    closePopup()
+    closePopup() //Unfreezes the Send NFT buton & removes the TX link
 
     if (!data.isDisabled) {
       const nIndex = index === users.activeMark ? null : index;

@@ -27,14 +27,13 @@ import {
 
 } from '../../actions';
 import { chains, coins, exchangeRates } from '../../config';
-import { PredefinedAccounts } from '../../cross_chain/accounts';
 import {
     sendTokens,
     returnWrappedTokens,
     getWrappedTokensBalances,
 
 } from '../../thunks';
-import {CHAIN_INFO} from '../../cross_chain/consts';
+// import {CHAIN_INFO} from '../../cross_chain/consts';
 import { mapChainToAvatar} from '../../mappers';
 
 const TransferLiquidity = ({ 
@@ -60,8 +59,8 @@ const TransferLiquidity = ({
     getbalances,
     onSwapChainsPressed,
     onChaneAmount,
-    send,
-    sendWrapped
+    // send,
+    // sendWrapped
 }) => {
 
     const fromTranBridge = chains.map(item => {
