@@ -18,7 +18,7 @@ function App() {
             </header>
             <Switch>
                 <Route exact path={"/"} component={TransferNFT}/>
-                <Route exact path={"/transfer-liquidity"} component={TransferLiquidity}/>
+                <Route exact path={"/transfer-tokens"} component={TransferLiquidity}/>
             </Switch>
         </Router>
         <ToastContainer/>

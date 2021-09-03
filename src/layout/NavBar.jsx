@@ -31,7 +31,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFTs</NavLink>
-                        <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
+                        <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
                     </Nav>
 
                     <Nav className={`${Classes.linkTab} d-none d-md-block`}>
@@ -60,7 +60,7 @@ const NavBar = () => {
 
                 <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3 mobile-tab`}>
                     <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                    <NavLink to="/transfer-liquidity" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
+                    <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
                 </Nav>
            
             </Container>
