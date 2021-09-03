@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Dropdown} from "semantic-ui-react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 // CSS
 import Styles from './TransferLiquidity.module.css';
 // Local Imports
@@ -10,12 +10,9 @@ import CardWrap from "../../UIElemnts/CardWrap";
 import SelectItem from "../../UIElemnts/SelectItem";
 import TokenBox from '../../UIElemnts/TokenBox';
 // SVGs
-import xpNetIco from "../../assets/images/XpNet.svg";
-import downArrow from "../../assets/images/downArrow.svg";
 import userAvatar from "../../assets/images/userAvatar.svg";
 import {ReactComponent as RightArrow} from "../../assets/images/rightArrow.svg";
 import {ReactComponent as LeftArrow} from "../../assets/images/leftArrow.svg";
-import enrollIco from "../../assets/images/enroll.svg";
 // Blockchain Related
 import { 
 
@@ -26,21 +23,19 @@ import {
 
     swapChains, 
     changeAmount, 
-    transferCoins, 
     selectCoin
 
 } from '../../actions';
 import { chains, coins, exchangeRates } from '../../config';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
 import {
-    getBalanceThunk,
     sendTokens,
     returnWrappedTokens,
     getWrappedTokensBalances,
 
 } from '../../thunks';
 import {CHAIN_INFO} from '../../cross_chain/consts';
-import { mapChainToAvatar, mapCoinToAvatar } from '../../mappers';
+import { mapChainToAvatar} from '../../mappers';
 
 const TransferLiquidity = ({ 
 
@@ -52,7 +47,6 @@ const TransferLiquidity = ({
     amount,
     balances,
     coin,
-    exchangeRate,
     fromAccountS, 
     toAccountS,
 
@@ -124,26 +118,26 @@ const TransferLiquidity = ({
         onChaneAmount(e.target.value);
     }
 
-    const sendAnyToken = () => {
+    // const sendAnyToken = () => {
 
-        console.log('Send any token');
+    //     console.log('Send any token');
 
-        let func = undefined;
+    //     let func = undefined;
 
-        if(coin === coins[chains.indexOf(fromChain)]){
-            func = send;
-        }else{
-            func = sendWrapped;
-        }
+    //     if(coin === coins[chains.indexOf(fromChain)]){
+    //         func = send;
+    //     }else{
+    //         func = sendWrapped;
+    //     }
         
-        func(
-            fromChain,
-            PredefinedAccounts[fromChain][fromAccount].key,
-            CHAIN_INFO[toChain].nonce,
-            PredefinedAccounts[toChain][toAccount].account,
-            amount
-        )
-    }
+    //     func(
+    //         fromChain,
+    //         PredefinedAccounts[fromChain][fromAccount].key,
+    //         CHAIN_INFO[toChain].nonce,
+    //         PredefinedAccounts[toChain][toAccount].account,
+    //         amount
+    //     )
+    // }
 
     const handleChangeFrom = (e) => {
         e.preventDefault();

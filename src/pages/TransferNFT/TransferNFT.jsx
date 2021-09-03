@@ -1,75 +1,78 @@
+// External imports
 import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import {Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+// Internal imports
 import TransferNFTSwitcher from "./components/TransferNFTSwitcher";
 import NFTSourceAccount from "./components/NFTSourceAccount";
-
-import {transferNFT, showLoader, setModalMessage} from '../../actions';
-import {CHAIN_INFO} from '../../cross_chain/consts';
-import {sendNFTNative, sendNFTForeign, listNFTs} from '../../thunks';
+import { CHAIN_INFO } from '../../cross_chain/consts';
 import { PredefinedAccounts } from '../../cross_chain/accounts';
 import SelectItem from '../../UIElemnts/SelectItem';
-import XpModal from '../../UIElemnts/XpModal';
-import CardWrap from "../../UIElemnts/CardWrap";
-
+// Images
 import Check from '../../assets/images/whitecheck.svg'
 import Next from '../../assets/images/transactionhistory.svg'
+// Actions & thunks
+import { sendNFTNative, sendNFTForeign, listNFTs } from '../../thunks';
+import { transferNFT, showLoader, setModalMessage } from '../../actions';
 
-const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader, modalMessage, closePopup}) => {
+const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader, modalMessage, closePopup }) => {
+
     const [nft, setNft] = useState(undefined);
     const dispatch = useDispatch()
     const [loadingInterval, setLoadingInterval] = useState()
     const [n, setN] = useState(6)
+
     useEffect(() => {
         const name = typeof fromAcct === 'string' ? fromAcct.replace(/(?:\r\n|\r|\n)/g, '') : ''
-        if(PredefinedAccounts && PredefinedAccounts[fromChain] && PredefinedAccounts[fromChain][name]) {
+        if (PredefinedAccounts && PredefinedAccounts[fromChain] && PredefinedAccounts[fromChain][name]) {
             getNfts(fromChain, PredefinedAccounts[fromChain][name].account)
         }
     }, [fromChain, fromAcct, getNfts])
 
     const setLoader = () => {
         closePopup()
-        if(loadingInterval) clearInterval(loadingInterval)
+        if (loadingInterval) clearInterval(loadingInterval)
         let i = 6
         let count = 0
         const l = setInterval(() => {
             count += 0.1
-            if(fromChain === 'Elrond') {
-                if(i < 60) i += 0.05
-                else if(i < 85) i += 0.01
+            if (fromChain === 'Elrond') {
+                if (i < 60) i += 0.05
+                else if (i < 85) i += 0.01
                 else i += 0.001
-            }else if(fromChain === 'Ropsten' || fromChain === 'BSC' || toChain === 'Ropsten') {
-                if(i < 60) i += 0.5
-                else if(i < 85) i += 0.1
+            } else if (fromChain === 'Ropsten' || fromChain === 'BSC' || toChain === 'Ropsten') {
+                if (i < 60) i += 0.5
+                else if (i < 85) i += 0.1
                 else i += 0.05
             } else {
-                if(i < 60) i += 1
-                else if(i < 85) i += 0.5
+                if (i < 60) i += 1
+                else if (i < 85) i += 0.5
                 else i += 0.1
             }
 
             setN(i > 100 ? 100 : i)
-            if(count > 400) {
+            if (count > 400) {
                 dispatch(showLoader(false))
             }
-        },100)
+        }, 100)
         setLoadingInterval(l)
     }
 
     useEffect(() => {
-        if(!loader) {
+        if (!loader) {
             setN(6)
             clearInterval(loadingInterval)
         }
-    },[loader])
+    }, [loader])
+
     const handleSenNFTClick = async () => {
         console.log(nft)
-        if(!loader && nft){
+        if (!loader && nft) {
             showLoader(true)
             setLoader()
             if (nft.originChain === fromChain) {
                 await sendNative(
-                    fromChain, 
+                    fromChain,
                     PredefinedAccounts[fromChain][fromAcct].key,
                     CHAIN_INFO[toChain].nonce,
                     PredefinedAccounts[toChain][toAcct].account,
@@ -84,24 +87,24 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                     nft
                 )
             };
-           
+
         }
-        
+
     }
 
-    const bigLoad = ( loader)
+    const bigLoad = (loader)
     return (
         <Container>
             <div className="title title--primary main-title">
                 <h2>Cross Chain NFT Bridge</h2>
             </div>
             <Row>
-                <Col md={{span: 8, offset: 2}}>
-                    <TransferNFTSwitcher setNft={setNft}/>
-                    <NFTSourceAccount nft={nft} selectCb={(data) => setNft(data)}/>
+                <Col md={{ span: 8, offset: 2 }}>
+                    <TransferNFTSwitcher setNft={setNft} />
+                    <NFTSourceAccount nft={nft} selectCb={(data) => setNft(data)} />
 
                     <div className="text-center mt-3 mt-md-4 mb-5">
-                        <button 
+                        <button
                             className={`${loader ? 'interacted-button' : ''} btnBrand btnBrand--primary mainBtn`}
                             onClick={handleSenNFTClick}
                             style={{
@@ -109,24 +112,29 @@ const TransferNFT = ({fromChain, fromAcct, toChain, toAcct, loader, sendNative, 
                                 color: bigLoad ? '#FFFFFF' : '',
                                 borderColor: bigLoad ? '#041032' : '',
                             }}
-                            >
+                        >
                             {bigLoad ? <div style={{
                                 width: n + '%',
                                 borderRadius: (n > 90 ? '16px' : '')
-                                }} className="loading-bar-el"></div> : ''}
-                            <p className="loader-text">{modalMessage ? <><img className="check-mark" src={Check} /> Successfully Sent</> : loader ? "Transfering NFTs" : "Send NFTs"}</p>
+                            }} className="loading-bar-el"></div> : ''}
+                            <p className="loader-text">
+                                {modalMessage
+                                    ? <>
+                                        <img className="check-mark" src={Check} alt=""/> Successfully Sent</>
+                                    : loader ? "Transfering NFTs" : "Send NFTs"}
+                            </p>
                         </button>
 
                         {
                             fromChain === 'Elrond'
-                            ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''}/>
-                            : ''
+                                ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''} />
+                                : ''
                         }
-                      
+
                     </div>
                     <div className="transaction-message">
                         {
-                            modalMessage ? <a target="_blank" href={modalMessage}>View transaction <img src={Next}/></a> : ''
+                            modalMessage ? <a target="_blank" href={modalMessage} rel="noreferrer">View transaction <img src={Next} alt=""/></a> : ''
                         }
                     </div>
                 </Col>
@@ -148,16 +156,16 @@ const mapStateToProps = state => ({
     modalMessage: state.selectReducer.modalMessage,
     loader: state.selectReducer.loader,
 
-  });
-  
-  const mapDispatchToProps = dispatch => ({
+});
+
+const mapDispatchToProps = dispatch => ({
     transferNFT: () => dispatch(transferNFT()),
     sendNative: (chain, sender, nonce, to, id) => dispatch(sendNFTNative(chain, sender, nonce, to, id)),
     sendWrapped: (chain, sender, nonce, to, id) => dispatch(sendNFTForeign(chain, sender, nonce, to, id)),
     getNfts: (chain, owner) => dispatch(listNFTs(chain, owner)),
     showLoader: show => dispatch(showLoader(show)),
-    closePopup: e => dispatch(setModalMessage())
+    closePopup: e => dispatch(setModalMessage()),
 
-  });
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFT);
