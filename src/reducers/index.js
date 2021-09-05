@@ -4,7 +4,7 @@ import {PredefinedAccounts} from '../cross_chain/accounts';
 import 'semantic-ui-css/semantic.min.css';
 
 let fromChain = chains[0];
-let toChain = chains[2];
+let toChain = chains[1];
 let coin = coins[0];
 
 const initialState = {
