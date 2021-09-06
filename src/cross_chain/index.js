@@ -241,5 +241,6 @@ export const ChainFactory = {
     "Elrond": ElrondHelper(),
     "HECO": Web3Helper("HECO"),
     "BSC": Web3Helper("BSC"),
-    "Ropsten": Web3Helper("Ropsten")
+    "Ropsten": Web3Helper("Ropsten"),
+    "Avalanche": Web3Helper("Avalanche")
 }

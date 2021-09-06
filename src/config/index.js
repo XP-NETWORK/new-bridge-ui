@@ -16,6 +16,7 @@ export const coins = [
     'eGLD',         // 2
     'HT',           // 3
     'ETH',          // 4
+    'AVAX',
 ];
 
 export const exchangeRates = {
@@ -37,17 +38,20 @@ export const ChainConfig = {
     "web3_minters": {
         "HECO": process.env.REACT_APP_HECO_MINTER,
         "BSC": process.env.REACT_APP_BSC_MINTER,
-        "Ropsten": process.env.REACT_APP_ROP_MINTER
+        "Ropsten": process.env.REACT_APP_ROP_MINTER,
+        "Avalanche": process.env.REACT_APP_AVA_MINTER,
     },
     "web3_erc1155": {
         "HECO": process.env.REACT_APP_HECO_ERC1155,
         "BSC": process.env.REACT_APP_BSC_ERC1155,
-        "Ropsten": process.env.REACT_APP_ROP_ERC1155
+        "Ropsten": process.env.REACT_APP_ROP_ERC1155,
+        "Avalanche": process.env.REACT_APP_AVA_ERC1155,
     },
     "web3_predefined": {
         "HECO": process.env.REACT_APP_HECO_PREM,
         "BSC": process.env.REACT_APP_BSC_PREM,
-        "Ropsten": process.env.REACT_APP_ROP_PREM
+        "Ropsten": process.env.REACT_APP_ROP_PREM,
+        "Avalanche": process.env.REACT_APP_AVA_PREM,
     }
 };
 
@@ -58,5 +62,6 @@ export const ExplorerPrefix = {
     "Elrond": process.env.REACT_APP_ELRD_EXPLORER,
     "HECO": process.env.REACT_APP_HECO_EXPLORER,
     "BSC": process.env.REACT_APP_BSC_EXPLORER,
-    "Ropsten": process.env.REACT_APP_ROP_EXPLORER
+    "Ropsten": process.env.REACT_APP_ROP_EXPLORER,
+    "Avalanche": process.env.REACT_APP_AVA_EXPLORER
 };

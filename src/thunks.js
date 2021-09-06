@@ -255,6 +255,7 @@ const listNFTNativeChains = async (chain, owner, dbList) => {
             }
             break;
         }
+        case "Avalanche":
         case "Ropsten":
         case "BSC":
         case "HECO": {

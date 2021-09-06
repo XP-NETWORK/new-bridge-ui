@@ -5,14 +5,14 @@ export const CHAIN_INFO = {
     'Elrond': { nonce: 2, native: 'EGLD', decimals: 1E18 },
     'HECO': {
         nonce: 3,
-        native: coins[2],
+        native: coins[3],
         chainId: 256,
         rpcUrl: "https://http-testnet.hecochain.com",
         decimals: 1E18
     },
     'BSC': {
         nonce: 4,
-        native: coins[3],
+        native: coins[1],
         chainId: 97, 
         rpcUrl: "https://data-seed-prebsc-1-s2.binance.org:8545",
         decimals: 1E18
@@ -22,6 +22,13 @@ export const CHAIN_INFO = {
         native: coins[4],
         chainId: 3,
         rpcUrl: "https://eth-ropsten.alchemyapi.io/v2/-x2YuopIsMFeUO2uF_FHPG73-2xk-60x",
+        decimals: 1E18
+    },
+    'Avalanche': {
+        nonce: 6,
+        native: coins[5],
+        chainId: 43113,
+        rpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
         decimals: 1E18
     }
 };
