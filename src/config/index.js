@@ -4,9 +4,9 @@ export const chains = [
     'Elrond',       // 2
     'HECO',         // 3
     'Ropsten',      // 4
-    'Cardano',      // 5
-    'Solana',       // 6
-    'Avalanche',    // 7
+    'Avalanche',    // 5
+    'Cardano',      // 6
+    'Solana',       // 7
     'Algorand',     // 8
 ];
 
@@ -16,7 +16,7 @@ export const coins = [
     'eGLD',         // 2
     'HT',           // 3
     'ETH',          // 4
-    'AVAX',
+    'AVAX',         // 5
 ];
 
 export const exchangeRates = {

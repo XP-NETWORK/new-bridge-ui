@@ -29,13 +29,13 @@ export const mapChainToAvatar = (chain) => {
         return etherium;
       }
       case chains[5]:{
-        return heco1;
+        return heco3;
       }
       case chains[6]:{
         return heco2;
       }
       case chains[7]:{
-        return heco3;
+        return heco1;
       }
       case chains[8]:{
         return heco4;
