@@ -46,7 +46,7 @@ const NavBar = () => {
                 <Nav className={`${Classes.tabNav} d-md-block ml-auto mobile-ledger`}>
                     <Link onClick={toggle} className="navbarmobilewallet" to="#link">
                     <div className="innerdropnav">
-                        <div><img src={GreenDots} /> Select Wallet</div><img className="dropdnav" src={Drop} /> 
+                        <div><img src={XPWallet} />Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
                         </div>
                     </Link>
                 </Nav>
@@ -55,7 +55,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFTs</NavLink>
-                        <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
+                        <NavLink to="/transfer-tokens" className="tokens-tranfer-s" activeClassName={`${Classes.selected}`}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
                     </Nav>
 
                     <Nav className={`${Classes.linkTab} d-none d-md-block`}>
@@ -65,7 +65,7 @@ const NavBar = () => {
 
                     <Nav onClick={toggle} className={`${Classes.tabNav} d-none d-md-block ml-auto dropdownnav`}>
                         <div className="innerdropnav">
-                        <div><img src={GreenDots} /> Select Wallet</div><img className="dropdnav" src={Drop} /> 
+                        <div><img src={XPWallet} /> Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
                         </div>
                     </Nav>
 
