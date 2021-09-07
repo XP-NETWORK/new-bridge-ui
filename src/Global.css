@@ -728,5 +728,8 @@ span.cross_ch{
     .nav-bar-modal .modal-dialog {
         max-width: 100% !important;
     }
+    .innerdropnav {
+        height: 32px;
+    }
 }
 
