@@ -36,9 +36,9 @@ const NavBar = () => {
     return (
         <Navbar expand="lg" className={`${Classes.navbarBorder} navbar-container-main`}>
             <Container className="navbar-containerr">
-                <Link to="https://xp.network" target="_blank" className={"navbar-brand"}>
+                <a href="https://xp.network" target="_blank" className={"navbar-brand"}>
                     <Image src={Logo} fluid/>
-                </Link>
+                </a>
                 <Nav className={`${Classes.linkTab} mb-2 mobile-show`}>
                             {/* <Link to="#home">Link 2</Link> */}
                     <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
