@@ -731,6 +731,10 @@ span.cross_ch{
 .assadkladslkads img {
     margin-right: 6px;
 }
+.assadkladslkads {
+    display: flex;
+    align-items: center;
+}
 @media (max-width: 576px) {
     .nav-bar-modal .modal-content {
         width: 100% !important;
