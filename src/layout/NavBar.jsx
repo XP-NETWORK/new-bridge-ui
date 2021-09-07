@@ -65,7 +65,7 @@ const NavBar = () => {
 
                     <Nav onClick={toggle} className={`${Classes.tabNav} d-none d-md-block ml-auto dropdownnav`}>
                         <div className="innerdropnav">
-                        <div><img src={XPWallet} /> Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
+                        <div className="assadkladslkads"><img src={XPWallet} />Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
                         </div>
                     </Nav>
 

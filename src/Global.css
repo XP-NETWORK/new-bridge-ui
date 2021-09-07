@@ -381,7 +381,7 @@ opacity: 0.7 !important;
     padding: 0px !important;
     background: #D2D4E8 !important;
 border: 1px solid #C5CBDC !important;
-width: 246px;
+width: 265px;
 min-width: 180px !important;
 font-size: 15px !important;
 margin-top: -3px;
@@ -412,7 +412,7 @@ cursor: pointer;
     left: -50px !important;
 }
 .center-of-navbar {
-    left: 60%;
+    left: 54%;
 }
 }
 @media (min-width: 993px) and (max-width: 1199px) {
@@ -727,7 +727,9 @@ span.cross_ch{
 .navbarmobilewallet:hover, .navbarmobilewallet {
     background-color: transparent !important;
 }
-
+.assadkladslkads img {
+    margin-right: 6px;
+}
 @media (max-width: 576px) {
     .nav-bar-modal .modal-content {
         width: 100% !important;
