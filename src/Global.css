@@ -27,10 +27,11 @@ a {
     font-size: 12px;
     line-height: 116%;
     letter-spacing: 0.01em;
-    color: #5728E5;
-    background: rgb(87 40 229 / 10%);
     padding: 3px 6px;
     border-radius: 5px;
+    background: rgba(243, 60, 126, 0.1);
+    color: #F41E6B;
+    font-weight: 500;
 }
 .betaa {
     color: #2853EB;

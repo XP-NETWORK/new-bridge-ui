@@ -36,7 +36,7 @@ const NavBar = () => {
     return (
         <Navbar expand="lg" className={`${Classes.navbarBorder} navbar-container-main`}>
             <Container className="navbar-containerr">
-                <Link to="/" className={"navbar-brand"}>
+                <Link to="https://xp.network" target="_blank" className={"navbar-brand"}>
                     <Image src={Logo} fluid/>
                 </Link>
                 <Nav className={`${Classes.linkTab} mb-2 mobile-show`}>
@@ -55,7 +55,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}>
                         <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFTs</NavLink>
-                        <NavLink to="/transfer-tokens" className="tokens-tranfer-s" activeClassName={`${Classes.selected}`}>Tokens Transfer <span className="coming-soon-i">Coming Soon</span></NavLink>
+                        <NavLink to="/transfer-tokens" className="tokens-tranfer-s" activeClassName={`${Classes.selected}`}>Tokens Transfer <span className="coming-soon-i">Coming soon</span></NavLink>
                     </Nav>
 
                     <Nav className={`${Classes.linkTab} d-none d-md-block`}>
@@ -77,7 +77,7 @@ const NavBar = () => {
                         </Nav>
 
                         <Link to="#link">
-                            <Image src={GreenDot} fluid/> Ledger - <span className="coming-soon-i">Coming Soon</span>
+                            <Image src={GreenDot} fluid/> Ledger - <span className="coming-soon-i">Coming soon</span>
                         </Link>
                     </Nav>
                 </Navbar.Collapse>
