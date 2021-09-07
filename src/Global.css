@@ -467,10 +467,8 @@ cursor: pointer;
 }
 @media (min-width: 576px) {
     .nav-bar-modal .modal-content {
-        width: 100% !important;
     }
     .nav-bar-modal .modal-dialog {
-        max-width: 100% !important;
     }
     .modal-dialog {
         max-width: 736px !important;
