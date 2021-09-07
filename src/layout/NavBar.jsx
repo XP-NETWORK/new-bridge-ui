@@ -46,7 +46,7 @@ const NavBar = () => {
                 <Nav className={`${Classes.tabNav} d-md-block ml-auto mobile-ledger`}>
                     <Link onClick={toggle} className="navbarmobilewallet" to="#link">
                     <div className="innerdropnav">
-                        <div><img src={XPWallet} />Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
+                        <div className="assadkladslkads"><img src={XPWallet} />Demo XP.network wallet</div><img className="dropdnav" src={Drop} /> 
                         </div>
                     </Link>
                 </Nav>

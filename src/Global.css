@@ -739,5 +739,15 @@ span.cross_ch{
     .innerdropnav {
         height: 32px;
     }
+    .innerdropnav img {
+        margin-right: 10px;
+    }
+    .innerdropnav p {
+        margin-top: 2px;
+    }
+    .assadkladslkads {
+        display: flex;
+        align-items: center;
+    }
 }
 
