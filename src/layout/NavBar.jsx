@@ -50,7 +50,7 @@ const NavBar = () => {
                         </div>
                     </Link>
                 </Nav>
-
+{/*  */}
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className={Classes.basicNav}>
                     <Nav className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}>
