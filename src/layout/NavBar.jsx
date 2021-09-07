@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Navbar, Container, Nav, Image} from 'react-bootstrap';
 import Logo from '../assets/images/mainLogo.svg';
 import GreenDot from '../assets/images/greenDot.svg';
-import GreenDots from '../assets/images/Ellipse168q.svg';
+import GreenDots from '../assets/images/emptywal.svg';
+import Drop from '../assets/images/dropdown.svg';
+import Close from '../assets/images/closepopup.svg';
 import {Link, NavLink} from "react-router-dom";
 import Classes from './NavBar.module.css';
+import { Dropdown } from 'semantic-ui-react';
+import XpModal from '../UIElemnts/XpModal';
+
+
+import Choose from '../assets/images/wallet/choose.svg'
+import XPWallet from '../assets/images/wallet/xpwallet.svg'
+import WalletConnect from '../assets/images/wallet/walletconnect.svg'
+import Trezor from '../assets/images/wallet/trezor.svg'
+import MetaMask from '../assets/images/wallet/metamask.svg'
+import Ledger from '../assets/images/wallet/ledger.svg'
 
 const NavBar = () => {
-
+    const [open, setOpen] = useState()
+    const toggle = () => setOpen(!open)
     const transferTokens = "Tokens Transfer - Coming Soon";
     const ledger = "Ledger - Coming Soon";
 
+    const wallets = [
+        {text: 'Demo XP.network wallet', image: XPWallet},
+        {text: 'Ledger', image: Ledger, disabled: true},
+        {text: 'MetaMask', image: MetaMask, disabled: true},
+        {text: 'Trezor', image: Trezor, disabled: true},
+        {text: 'WalletConnect', image: WalletConnect, disabled: true},
+    ]
+    
+   
     return (
-        <Navbar expand="lg" className={Classes.navbarBorder}>
+        <Navbar expand="lg" className={`${Classes.navbarBorder} navbar-container-main`}>
             <Container className="navbar-containerr">
                 <Link to="/" className={"navbar-brand"}>
                     <Image src={Logo} fluid/>
@@ -22,8 +44,10 @@ const NavBar = () => {
                     <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
                 </Nav>
                 <Nav className={`${Classes.tabNav} d-md-block ml-auto mobile-ledger`}>
-                    <Link to="#link">
-                        <Image src={GreenDots} fluid/> Ledger <span className="coming-soon-i">Coming Soon</span>
+                    <Link onClick={toggle} className="navbarmobilewallet" to="#link">
+                    <div className="innerdropnav">
+                        <div><img src={GreenDots} /> Select Wallet</div><img className="dropdnav" src={Drop} /> 
+                        </div>
                     </Link>
                 </Nav>
 
@@ -39,10 +63,10 @@ const NavBar = () => {
                         <span className="cross_ch">Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}</span>
                     </Nav>
 
-                    <Nav className={`${Classes.tabNav} d-none d-md-block ml-auto`}>
-                        <Link to="#link">
-                            <Image src={GreenDot} fluid/> Ledger <span className="coming-soon-i">Coming Soon</span>
-                        </Link>
+                    <Nav onClick={toggle} className={`${Classes.tabNav} d-none d-md-block ml-auto dropdownnav`}>
+                        <div className="innerdropnav">
+                        <div><img src={GreenDots} /> Select Wallet</div><img className="dropdnav" src={Drop} /> 
+                        </div>
                     </Nav>
 
 
@@ -64,6 +88,26 @@ const NavBar = () => {
                 </Nav>
            
             </Container>
+            <XpModal
+                className="nav-bar-modal"
+                show={open}
+                handleClose={toggle}
+            >
+                <div className="navbar-modal">
+                    <div className="navbar-modal-header">
+                        <h2>
+                            <img src={Choose} />
+                            Choose a Wallet
+                        </h2>
+                        <img onClick={toggle} className="closemodal" src={Close} />
+                    </div>
+
+                    <p className="select-wallet-desc">Please select a wallet to connect to the bridge:</p>
+                    {wallets.map((n,i) => <div onClick={() => n.disabled ? '' : toggle()} className={`wallet-navbar ${n.disabled ? 'disabled-wallet':''}`} key={i}>
+                        <img src={n.image} /> <p>{n.text}</p> {n.disabled ? <span className="coming-soon-wallet">Coming soon</span> : ''}
+                    </div>)}
+                </div>
+            </XpModal>
         </Navbar>
 
     );

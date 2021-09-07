@@ -160,7 +160,80 @@ body {
 .btnBrand--primary:hover {
     background-color: #25345F;
 }
+.modal-content {
+    box-shadow: 0px 6px 24px rgba(28, 27, 48, 0.25);
+border-radius: 15px !important;
+border: none !important;
+}
+.nav-bar-modal .modal-content{
+    width: 360px;
+    padding: 24px;
 
+}
+.navbar-modal h2 {
+    font-size: 18px;
+}
+.navbar-modal h2 img {
+    margin-right: 14px;
+}
+.wallet-navbar {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 52px;
+    border-radius: 10px;
+}
+.select-wallet-desc {
+    width: 225px;
+    color: #000000;
+    margin-top: 20px;
+opacity: 0.8;
+font-size: 14px;
+}
+.modal-backdrop {
+    background: #041031;
+    background-color: #041031 !important;
+opacity: 0.7 !important;
+}
+.closemodal {
+    cursor: pointer;
+    border: 1px solid #040D27;
+    border-radius: 50%;
+    padding: 3px;
+    margin-top: -5px;
+}
+.navbar-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wallet-navbar  p {
+    margin: 0px;
+    margin-right: 12px;
+}
+.wallet-navbar img {
+    margin-right: 14px;
+    margin-left: 14px;
+}
+.disabled-wallet p, .disabled-wallet img{
+    opacity: 0.6;
+}
+.coming-soon-wallet {
+    background: rgba(243, 60, 126, 0.1);
+    color: #F41E6B;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 2px;
+    border-radius: 5px;
+
+
+}
+.wallet-navbar:hover {
+    background: #F8F8FC;
+}
+.nav-bar-modal .modal-dialog {
+    max-width: 360px !important;
+}
 .nft-popup-blockchain img {
     width: 24px;
     height: 24px;
@@ -222,7 +295,15 @@ body {
 .amountSelectItem .ui.fluid.dropdown:after {
     top: 32px;
 }
-
+.dropdnav {
+}
+.innerdropnav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .dropdown.icon {
     display: none;
 }
@@ -295,6 +376,29 @@ body {
 .disabled-nft {
     opacity: 0.6;
 }
+
+.dropdownnav  {
+    padding: 0px !important;
+    background: #D2D4E8 !important;
+border: 1px solid #C5CBDC !important;
+width: 186px;
+min-width: 180px !important;
+font-size: 15px !important;
+margin-top: -3px;
+padding-left: 12px !important;
+padding-right: 12px !important;
+border-radius: 10px !important;
+height: 32px !important;
+min-height: 32px !important;
+display: flex;
+align-items: center;
+cursor: pointer;
+}
+.innerdropnav img {
+    margin-right: 4px;
+}
+.dropdownnav {
+}
 /*Modify Bootstrap*/
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -362,6 +466,12 @@ body {
     }
 }
 @media (min-width: 576px) {
+    .nav-bar-modal .modal-content {
+        width: 100% !important;
+    }
+    .nav-bar-modal .modal-dialog {
+        max-width: 100% !important;
+    }
     .modal-dialog {
         max-width: 736px !important;
     }
@@ -416,6 +526,9 @@ body {
 }
 
 @media(max-width: 767px) {
+    .ui.selection.dropdown .menu {
+        max-height: 14rem !important;
+    }
     .lalalalalala {
         width: 100%;
         position: relative;
@@ -599,3 +712,21 @@ span.cross_ch{
     top: 1px;
 }
 }
+.mobile-ledger.navbar-nav {
+    background-color: #d2d4e84d !important;
+    
+}
+.navbarmobilewallet:hover, .navbarmobilewallet {
+    background-color: transparent !important;
+}
+
+@media (max-width: 576px) {
+    .nav-bar-modal .modal-content {
+        width: 100% !important;
+        margin-top: 130px;
+    }
+    .nav-bar-modal .modal-dialog {
+        max-width: 100% !important;
+    }
+}
+
