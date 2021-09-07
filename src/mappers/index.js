@@ -31,10 +31,10 @@ export const mapChainToAvatar = (chain) => {
       case chains[5]:{
         return heco3;
       }
-      case chains[6]:{
+      case chains[7]:{
         return heco2;
       }
-      case chains[7]:{
+      case chains[6]:{
         return heco1;
       }
       case chains[8]:{

@@ -84,7 +84,7 @@ const NavBar = () => {
 
                 <Nav className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3 mobile-tab`}>
                     <NavLink exact={true} to="/" activeClassName={Classes.selected}>Transfer NFT</NavLink>
-                    <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>Transfer Liquidity</NavLink>
+                    <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>Transfer Tokens</NavLink>
                 </Nav>
            
             </Container>
