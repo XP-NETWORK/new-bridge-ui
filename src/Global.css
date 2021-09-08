@@ -536,7 +536,7 @@ cursor: pointer;
 
 @media(max-width: 767px) {
     .ui.selection.dropdown .menu {
-        max-height: 14rem !important;
+        max-height: 15rem !important;
     }
     .lalalalalala {
         width: 100%;
