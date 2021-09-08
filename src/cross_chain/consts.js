@@ -30,6 +30,13 @@ export const CHAIN_INFO = {
         chainId: 43113,
         rpcUrl: "https://api.avax-test.network/ext/bc/C/rpc",
         decimals: 1E18
+    },
+    'Polygon':{
+        nonce: 7,
+        native: coins[6],
+        chainId: 80001,
+        rpcUrl: "https://matic-testnet-archive-rpc.bwarelabs.com",
+        decimals: 1E18
     }
 };
 
