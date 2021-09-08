@@ -48,9 +48,9 @@ const TransferNFTSwitcher = ({
         const dis =   item === chains[7] || item === chains[8] ||  item === chains[9]
         return {
             key: item,
-            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
+            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum - offline' : item,
             value: item,
-            disabled: dis,
+            disabled: dis || item === 'Ropsten',
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
@@ -58,9 +58,9 @@ const TransferNFTSwitcher = ({
         const dis =    item === chains[7] || item === chains[8]||  item === chains[9]
         return {
             key: item,
-            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
+            text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum - offline' : item,
             value: item,
-            disabled: item === fromChain || dis,
+            disabled: item === fromChain || dis || item === 'Ropsten',
             image: { avatar: true, src: mapChainToAvatar(item) }
         }
     });
