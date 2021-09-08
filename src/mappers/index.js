@@ -3,11 +3,12 @@ import xpNetIco from '../assets/images/XpNet.svg';
 import enrollIco from '../assets/images/enroll.svg';
 import binance from '../assets/images/binance.svg';
 import etherium from '../assets/images/Etherium.svg';
-import heco from '../assets/images/HECO.svg';
-import heco1 from '../assets/images/cardano.svg';
-import heco2 from '../assets/images/Solana.svg';
-import heco3 from '../assets/images/avalanche.svg';
-import heco4 from '../assets/images/Algarand.svg';
+import Heco from '../assets/images/HECO.svg';
+import Cardano from '../assets/images/cardano.svg';
+import Polygon from '../assets/images/polygon.svg';
+import Solana from '../assets/images/Solana.svg';
+import Avalanche from '../assets/images/avalanche.svg';
+import Algorand from '../assets/images/Algarand.svg';
 // Blockchain related
 import {chains, coins} from '../config';
 
@@ -23,22 +24,25 @@ export const mapChainToAvatar = (chain) => {
         return enrollIco;
       }
       case chains[3]:{
-        return heco;
+        return Heco;
       }
       case chains[4]:{
         return etherium;
       }
       case chains[5]:{
-        return heco3;
+        return Avalanche;
+      }
+      case chains[6]: {
+        return Polygon
       }
       case chains[8]:{
-        return heco2;
+        return Solana;
       }
       case chains[7]:{
-        return heco1;
+        return Cardano;
       }
       case chains[9]:{
-        return heco4;
+        return Algorand;
       }
       default:{
         return xpNetIco;
@@ -58,7 +62,7 @@ export const mapChainToAvatar = (chain) => {
         return enrollIco;
       }
       case coins[3]:{
-        return heco;
+        return Heco;
       }
       case coins[4]:{
         return etherium;
