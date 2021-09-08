@@ -5,9 +5,10 @@ export const chains = [
     'HECO',         // 3
     'Ropsten',      // 4
     'Avalanche',    // 5
-    'Cardano',      // 6
-    'Solana',       // 7
-    'Algorand',     // 8
+    'Polygon',      // 6
+    'Cardano',      // 7
+    'Solana',       // 8
+    'Algorand',     // 9
 ];
 
 export const coins = [
@@ -25,7 +26,6 @@ export const exchangeRates = {
     'eGLD':     146.55,
     'HT':       14.10,
     'ETH':      3033.80,
-
 }
 
 export const ChainConfig = {
