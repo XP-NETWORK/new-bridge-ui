@@ -36,6 +36,7 @@ const TransferNFTSwitcher = ({
     toAccountS, 
     onSwapChainsPressed,
     loader,
+    nftLoader,
     closePopup,
     selectFromChain,
     selectToChain,
@@ -86,7 +87,7 @@ const TransferNFTSwitcher = ({
     const switchHandler = (e) => {
         console.log(e)
             e.preventDefault();
-            if(!loader) { {
+            if(!loader && !nftLoader) { {
                 closePopup()
                 setNft(undefined)
             }
@@ -155,7 +156,7 @@ const TransferNFTSwitcher = ({
                             onChange={e => handleChangeFrom(e)}
                             value={fromChain}
                             onOpen={addIdToSelect}
-                            disabled={loader}
+                            disabled={loader || nftLoader}
                         />
                     </SelectItem>
 
@@ -168,13 +169,13 @@ const TransferNFTSwitcher = ({
                             onChange={e=>handleChangeFromAcct(e)}
                             value={fromAccount}
                             onOpen={addIdToSelect}
-                            disabled={loader}
+                            disabled={loader || nftLoader}
                         />
                     </SelectItem>
                 </CardWrap>
 
                 <button
-                    className={`${Classes.switchModeBtn} d-flex flex-column asdadddssaads ${loader ? 'disabled-arrows' : ''}`}
+                    className={`${Classes.switchModeBtn} d-flex flex-column asdadddssaads ${loader || nftLoader ? 'disabled-arrows' : ''}`}
                     onClick={switchHandler}
                 >
                             <RightArrow />
@@ -189,7 +190,7 @@ const TransferNFTSwitcher = ({
                             selection
                             id="lalala"
                             options={toBridge}
-                            disabled={loader}
+                            disabled={loader || nftLoader}
                             onOpen={addIdToSelect}
                             onChange={e=>handleChangeTo(e)}
                             value={toChain}
@@ -204,7 +205,7 @@ const TransferNFTSwitcher = ({
                                 
                             }}
                             options={targetAccounts}
-                            disabled={loader}
+                            disabled={loader|| nftLoader}
                             onOpen={addIdToSelect}
                             onChange={e=>handleChangeToAcct(e)}
                             value={toAccount}
@@ -222,6 +223,7 @@ const mapStateToProps = state => ({
     fromChain: state.selectReducer.fromChain,
     toChain: state.selectReducer.toChain,
     loader: state.selectReducer.loader,
+    nftLoader: state.selectReducer.nftLoader,
 
     fromAccount: state.selectReducer.fromAccount,
     toAccount: state.selectReducer.toAccount,
