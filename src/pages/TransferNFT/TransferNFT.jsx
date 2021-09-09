@@ -66,7 +66,6 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
     }, [loader])
 
     const handleSenNFTClick = async () => {
-        console.log(nft)
         if (!loader && nft) {
             showLoader(true)
             setLoader()
@@ -92,6 +91,7 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
 
     }
 
+    console.log("modalMessage: ",modalMessage);
     const bigLoad = (loader)
     return (
         <Container>
@@ -104,8 +104,9 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                     <NFTSourceAccount nft={nft} selectCb={(data) => setNft(data)} />
 
                     <div className="text-center mt-3 mt-md-4 mb-5">
+                        
                         <button
-                            className={`${loader ? 'interacted-button' : ''} btnBrand btnBrand--primary mainBtn`}
+                            className={` ${loader ? 'interacted-button ' : ''} ${nft ? 'btnBrand btnBrand--primary mainBtn ' : 'btnBrand btnBrand--primary mainBtn disable-nft-button'} ${modalMessage ? 'disable-nft-button-Successfully' : ''}`}
                             onClick={handleSenNFTClick}
                             style={{
                                 backgroundColor: bigLoad ? '#041032' : '',
@@ -116,11 +117,11 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                             {bigLoad ? <div style={{
                                 width: n + '%',
                                 borderRadius: (n > 90 ? '16px' : '')
-                            }} className="loading-bar-el"></div> : ''}
-                            <p className="loader-text">
+                            }} className="loading-bar-el "></div> : ''}
+                            <p className="loader-text ">
                                 {modalMessage
                                     ? <>
-                                        <img className="check-mark" src={Check} alt=""/> Successfully Sent</>
+                                        <img className="check-mark " src={Check} alt=""/> Successfully Sent</>
                                     : loader ? "Transfering NFTs" : "Send NFTs"}
                             </p>
                         </button>

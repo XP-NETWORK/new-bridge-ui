@@ -378,6 +378,15 @@ opacity: 0.7 !important;
     opacity: 0.6;
 }
 
+.disable-nft-button {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.disable-nft-button-Successfully{
+    pointer-events: none;
+}
+
 .dropdownnav  {
     padding: 0px !important;
     background: #D2D4E8 !important;
