@@ -23,6 +23,7 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
     const [n, setN] = useState(6)
 
     useEffect(() => {
+        setNft()
         const name = typeof fromAcct === 'string' ? fromAcct.replace(/(?:\r\n|\r|\n)/g, '') : ''
         if (PredefinedAccounts && PredefinedAccounts[fromChain] && PredefinedAccounts[fromChain][name]) {
             getNfts(fromChain, PredefinedAccounts[fromChain][name].account)
