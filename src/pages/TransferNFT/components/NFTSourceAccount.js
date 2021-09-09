@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Image } from "react-bootstrap";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import IIcon from '../../../assets/images/i-icon.svg'
 // Internal Imports
 import Styles from './NFTSourceAccount.module.css';
 // Custom Components
