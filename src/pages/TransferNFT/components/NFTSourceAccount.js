@@ -88,7 +88,7 @@ const NFTSourceAccount = ({ fromAccount, selectCb, nftList, nftLoader, nft, toCh
                     <Image className={"Dima"} src={nft.link} fluid />
                     <button className={Styles.infoBtn}
                       onClick={() => setShow(index)}>
-                      i </button>
+                      <img src={IIcon} /> </button>
                     {
                       !nft.isDisabled && toggleCheckMark(index) && (
                         <div className={`${Styles.chekMark} checkmark-chosen-container`}>
