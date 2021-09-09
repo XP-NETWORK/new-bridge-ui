@@ -37,7 +37,6 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
         let i = 6
         let count = 0
         const l = setInterval(() => {
-            console.log(isMultiChain)
             count += 0.1
             if (fromChain === 'Elrond' || isMultiChain) {
                 if (i < 60) i += 0.05
@@ -107,9 +106,9 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                         true
                     )
                     // fetch nfts to get nfts new hash(contract)
-                    const dbList = await remoteNFTMeta.getAll();
-                    const nfts = await listNFTNativeChains(originChain, nativeAccount.account, dbList);
-                    const sentNFT = nfts.filter(n => n.id === nft.id)[0]
+                    let i = 0
+                    const sentNFT = await getNFT(originChain, nativeAccount.account, nft, i)
+
                     await sendNative(
                         originChain,
                         nativeAccount.key,
@@ -121,12 +120,23 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                 }
 
             }
-            isMultiChain(false)
+            setIsMultiChain(false)
         }
 
     }
 
-    console.log("modalMessage: ",modalMessage);
+    const getNFT = async (originChain, account, nft, retries) => {
+        const dbList = await remoteNFTMeta.getAll();
+        const nfts = await listNFTNativeChains(originChain, account, dbList);
+        const sentNFT = nfts.filter(n => n.id === nft.id)[0]
+        if(sentNFT) return sentNFT
+        else {
+            retries ++
+            if(retries > 15) return false
+            return await getNFT(originChain, account, nft, retries)
+        }
+    }
+
     const bigLoad = (loader)
     return (
         <Container>
@@ -164,7 +174,9 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                         {
                             fromChain === 'Elrond'
                                 ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''} />
-                                : ''
+
+                                : isMultiChain 
+                                ? <SelectItem label={loader ? "Transfering NFTs from  may take over 30 seconds" : ''} /> : ''
                         }
 
                     </div>
