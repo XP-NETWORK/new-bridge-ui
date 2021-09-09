@@ -150,7 +150,8 @@ export const sendNFTNative = (chain,sender_, chain_nonce, to, nft) => async disp
  * @param {*} id the ID of the NFT
  * @returns Transaction and the Identifier of this action to track the status
  */
-export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dispatch => {
+export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft, keepLoader) => async dispatch => {
+    console.log(keepLoader,'keepLoader')
     try {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
@@ -163,19 +164,20 @@ export const sendNFTForeign = (chain,sender_, chain_nonce, to, nft) => async dis
         let err;
         const data = await txnSocket.waitTxHash(chain_nonce, aid).catch(er => {
             err = er;
-            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-            dispatch(showLoader(false))
+            if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user] && !keepLoader) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+            if(!keepLoader) dispatch(showLoader(false))
         });
         if (err) {
             return;
         }
 
-        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
-        dispatch(showAlert(explorerUrl(chain_nonce, data)))
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user] && !keepLoader) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        if(!keepLoader) dispatch(showAlert(explorerUrl(chain_nonce, data)))
     } catch(e) {
         let user = Object.keys(NewElrondAccounts).filter(n => NewElrondAccounts[n].key === sender_)[0]
         if(!PredefinedAccounts[chain][user]) user = sender_ === '//Alice//stash' ? 'Alice_Stash' : sender_ === '//Bob//stash' ? 'Bob_Stash' : sender_.replace('//', '')
-        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user]) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        if(PredefinedAccounts[chain] && PredefinedAccounts[chain][user] && !keepLoader) dispatch(listNFTs(chain, PredefinedAccounts[chain][user].account))
+        if(!keepLoader)
         dispatch(showLoader(false))
         console.error(e);
     }
@@ -219,7 +221,7 @@ const getOwnedNative = async (chain_helper, owner, dbList) => {
     }));
 }
 
-const listNFTNativeChains = async (chain, owner, dbList) => {
+export const listNFTNativeChains = async (chain, owner, dbList) => {
     const resM = Object.fromEntries(dbList.map((obj) => [obj.id, obj]));
     const final = [];
     const helper = ChainFactory[chain];

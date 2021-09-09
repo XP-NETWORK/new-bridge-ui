@@ -76,7 +76,7 @@ const NFTSourceAccount = ({ fromAccount, selectCb, nftList, nftLoader, nft, toCh
         {
           !nftLoader ? nftList && nftList.length > 0 ?
             nftList
-              .map(n => ({ ...n, isDisabled: !(n.originChain === toChain || n.originChain === fromChain) })) // disable wrapped tokens that are not related to the current chains
+              .map(n => ({ ...n })) // disable wrapped tokens that are not related to the current chains
               .map((nft, index) => {
                 return (<div
                   className={`${Styles.userItem} ${nft.isDisabled ? 'disabled-nft' : ''}`}
