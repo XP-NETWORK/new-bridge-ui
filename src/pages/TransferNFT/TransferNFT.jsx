@@ -12,11 +12,12 @@ import SelectItem from '../../UIElemnts/SelectItem';
 import Check from '../../assets/images/whitecheck.svg'
 import Next from '../../assets/images/transactionhistory.svg'
 // Actions & thunks
-import { sendNFTNative, sendNFTForeign, listNFTs } from '../../thunks';
+import { sendNFTNative, sendNFTForeign, listNFTs, listNFTNativeChains } from '../../thunks';
 import { transferNFT, showLoader, setModalMessage } from '../../actions';
+import { remoteNFTMeta } from '../../singletons';
 
 const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative, sendWrapped, getNfts, showLoader, modalMessage, closePopup }) => {
-
+    const [isMultiChain, setIsMultiChain] = useState()
     const [nft, setNft] = useState(undefined);
     const dispatch = useDispatch()
     const [loadingInterval, setLoadingInterval] = useState()
@@ -30,14 +31,14 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
         }
     }, [fromChain, fromAcct, getNfts])
 
-    const setLoader = () => {
+    const setLoader = (isMultiChain) => {
         closePopup()
         if (loadingInterval) clearInterval(loadingInterval)
         let i = 6
         let count = 0
         const l = setInterval(() => {
             count += 0.1
-            if (fromChain === 'Elrond') {
+            if (fromChain === 'Elrond' || isMultiChain) {
                 if (i < 60) i += 0.05
                 else if (i < 85) i += 0.01
                 else i += 0.001
@@ -67,10 +68,14 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
     }, [loader])
 
     const handleSenNFTClick = async () => {
+
         if (!loader && nft) {
+            const { originChain } = nft
+            const isMultiChain = !(nft.originChain === fromChain || originChain === toChain)
+            setIsMultiChain(isMultiChain)
             showLoader(true)
-            setLoader()
-            if (nft.originChain === fromChain) {
+            setLoader(isMultiChain)
+            if (originChain === fromChain) {
                 await sendNative(
                     fromChain,
                     PredefinedAccounts[fromChain][fromAcct].key,
@@ -79,20 +84,59 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                     nft
                 )
             } else {
-                await sendWrapped(
-                    fromChain,
-                    PredefinedAccounts[fromChain][fromAcct].key,
-                    CHAIN_INFO[toChain].nonce,
-                    PredefinedAccounts[toChain][toAcct].account,
-                    nft
-                )
-            };
+                if(originChain === toChain) {
+                    // send nft back to its origin chain
+                    await sendWrapped(
+                        fromChain,
+                        PredefinedAccounts[fromChain][fromAcct].key,
+                        CHAIN_INFO[toChain].nonce,
+                        PredefinedAccounts[toChain][toAcct].account,
+                        nft
+                    )
+                } else {
+                    // send nft back to its origin chain then to target chain
+                   
+                    const nativeAccount = PredefinedAccounts[originChain][Object.keys(PredefinedAccounts[originChain])[0]]
+                    await sendWrapped(
+                        fromChain,
+                        PredefinedAccounts[fromChain][fromAcct].key,
+                        CHAIN_INFO[originChain].nonce,
+                        nativeAccount.account,
+                        nft,
+                        true
+                    )
+                    // fetch nfts to get nfts new hash(contract)
+                    let i = 0
+                    const sentNFT = await getNFT(originChain, nativeAccount.account, nft, i)
 
+                    await sendNative(
+                        originChain,
+                        nativeAccount.key,
+                        CHAIN_INFO[toChain].nonce,
+                        PredefinedAccounts[toChain][toAcct].account,
+                        sentNFT
+                    )
+                    setIsMultiChain(false)
+                }
+
+            }
+            setIsMultiChain(false)
         }
 
     }
 
-    console.log("modalMessage: ",modalMessage);
+    const getNFT = async (originChain, account, nft, retries) => {
+        const dbList = await remoteNFTMeta.getAll();
+        const nfts = await listNFTNativeChains(originChain, account, dbList);
+        const sentNFT = nfts.filter(n => n.id === nft.id)[0]
+        if(sentNFT) return sentNFT
+        else {
+            retries ++
+            if(retries > 15) return false
+            return await getNFT(originChain, account, nft, retries)
+        }
+    }
+
     const bigLoad = (loader)
     return (
         <Container>
@@ -130,7 +174,9 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                         {
                             fromChain === 'Elrond'
                                 ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''} />
-                                : ''
+
+                                : isMultiChain 
+                                ? <SelectItem label={loader ? "Transfering NFTs from  may take over 30 seconds" : ''} /> : ''
                         }
 
                     </div>
@@ -163,7 +209,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     transferNFT: () => dispatch(transferNFT()),
     sendNative: (chain, sender, nonce, to, id) => dispatch(sendNFTNative(chain, sender, nonce, to, id)),
-    sendWrapped: (chain, sender, nonce, to, id) => dispatch(sendNFTForeign(chain, sender, nonce, to, id)),
+    sendWrapped: (chain, sender, nonce, to, id, keepLoader) => dispatch(sendNFTForeign(chain, sender, nonce, to, id, keepLoader)),
     getNfts: (chain, owner) => dispatch(listNFTs(chain, owner)),
     showLoader: show => dispatch(showLoader(show)),
     closePopup: e => dispatch(setModalMessage()),

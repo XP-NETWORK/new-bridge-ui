@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Image } from "react-bootstrap";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import IIcon from '../../../assets/images/i-icon.svg'
 // Internal Imports
 import Styles from './NFTSourceAccount.module.css';
 // Custom Components
@@ -76,7 +77,7 @@ const NFTSourceAccount = ({ fromAccount, selectCb, nftList, nftLoader, nft, toCh
         {
           !nftLoader ? nftList && nftList.length > 0 ?
             nftList
-              .map(n => ({ ...n, isDisabled: !(n.originChain === toChain || n.originChain === fromChain) })) // disable wrapped tokens that are not related to the current chains
+              .map(n => ({ ...n })) // disable wrapped tokens that are not related to the current chains
               .map((nft, index) => {
                 return (<div
                   className={`${Styles.userItem} ${nft.isDisabled ? 'disabled-nft' : ''}`}
@@ -87,7 +88,7 @@ const NFTSourceAccount = ({ fromAccount, selectCb, nftList, nftLoader, nft, toCh
                     <Image className={"Dima"} src={nft.link} fluid />
                     <button className={Styles.infoBtn}
                       onClick={() => setShow(index)}>
-                      i </button>
+                      <img src={IIcon} /> </button>
                     {
                       !nft.isDisabled && toggleCheckMark(index) && (
                         <div className={`${Styles.chekMark} checkmark-chosen-container`}>
