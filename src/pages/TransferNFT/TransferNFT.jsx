@@ -38,10 +38,10 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
         let count = 0
         const l = setInterval(() => {
             count += 0.1
-            if (fromChain === 'Elrond' || isMultiChain) {
-                if (i < 60) i += 0.05
-                else if (i < 85) i += 0.01
-                else i += 0.001
+            if (isMultiChain) {
+                if (i < 60) i += 0.5
+                else if (i < 85) i += 0.3
+                else i += 0.03
             } else if (fromChain === 'Ropsten' || fromChain === 'BSC' || toChain === 'Ropsten') {
                 if (i < 60) i += 0.5
                 else if (i < 85) i += 0.1
@@ -176,7 +176,7 @@ const TransferNFT = ({ fromChain, fromAcct, toChain, toAcct, loader, sendNative,
                                 ? <SelectItem label={loader ? "Transfering NFTs from Elrond Testnet may take over 30 seconds" : ''} />
 
                                 : isMultiChain 
-                                ? <SelectItem label={loader ? "Transfering NFTs from  may take over 30 seconds" : ''} /> : ''
+                                ? <SelectItem label={loader ? "" : ''} /> : ''
                         }
 
                     </div>
