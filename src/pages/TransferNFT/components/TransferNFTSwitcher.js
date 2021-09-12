@@ -1,5 +1,5 @@
 // External Imports
-import React, { Fragment } from 'react'
+import React, { Fragment,useState } from 'react'
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Image } from 'react-bootstrap'
@@ -71,6 +71,9 @@ const TransferNFTSwitcher = ({
       image: { avatar: true, src: mapChainToAvatar(item) },
     }
   })
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const [isCn,setIsCn] = useState(params.get("cn"))
   const sourceAccounts = fromAccountS.map((item) => {
     return {
       key: item,
@@ -157,7 +160,7 @@ const TransferNFTSwitcher = ({
         className={`${Classes.switcherWrap} d-flex align-items-center justify-content-center`}
       >
         <CardWrap>
-          <SelectItem label={'From'}>
+          <SelectItem label={isCn ?  '自': 'From'}>
             <Dropdown
               placeholder="Select option"
               fluid
@@ -170,7 +173,7 @@ const TransferNFTSwitcher = ({
             />
           </SelectItem>
 
-          <SelectItem className="second-title" label={'Source Account'}>
+          <SelectItem className="second-title" label={isCn ? '源帐户': 'Source Account'}>
             <Dropdown
               placeholder="Select option"
               fluid
@@ -197,7 +200,7 @@ const TransferNFTSwitcher = ({
         </button>
 
         <CardWrap>
-          <SelectItem label={'To'}>
+          <SelectItem label={isCn ? '至' : 'To'}>
             <Dropdown
               placeholder="Select option"
               fluid
@@ -210,7 +213,7 @@ const TransferNFTSwitcher = ({
               value={toChain}
             />
           </SelectItem>
-          <SelectItem className="second-title" label={'Target Account'}>
+          <SelectItem className="second-title" label={isCn ? '目标账户': 'Target Account'}>
             <Dropdown
               placeholder="Select option"
               fluid

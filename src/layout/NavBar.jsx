@@ -22,14 +22,19 @@ const NavBar = () => {
   const toggle = () => setOpen(!open)
   const transferTokens = 'Tokens Transfer - Coming Soon'
   const ledger = 'Ledger - Coming Soon'
-
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const [isCn,setIsCn] = useState(params.get("cn"))
+  const cn = new URLSearchParams(window.location.search).get('cn') === 'true'
   const wallets = [
-    { text: 'Demo XP.network wallet', image: XPWallet },
+    { text: cn ? 'XP.network演示钱包' : 'Demo XP.network wallet', image: XPWallet },
     { text: 'Ledger', image: Ledger, disabled: true },
     { text: 'MetaMask', image: MetaMask, disabled: true },
     { text: 'Trezor', image: Trezor, disabled: true },
     { text: 'WalletConnect', image: WalletConnect, disabled: true },
   ]
+
+  
 
   return (
     <Navbar
@@ -43,7 +48,7 @@ const NavBar = () => {
         <Nav className={`${Classes.linkTab} mb-2 mobile-show`}>
           {/* <Link to="#home">Link 2</Link> */}
           <span className="cross_ch">
-            Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}
+            {isCn ? '跨链桥展示' : 'Cross-Chain Bridge Demo'} {/*<span className="betaa">Beta</span>*/}
           </span>
         </Nav>
         <Nav className={`${Classes.tabNav} d-md-block ml-auto mobile-ledger`}>
@@ -51,7 +56,8 @@ const NavBar = () => {
             <div className="innerdropnav">
               <div className="assadkladslkads">
                 <img src={XPWallet} />
-                Demo XP.network wallet
+                {isCn ? 'XP.network演示钱包' : 'Demo XP.network wallet'}
+                
               </div>
               <img className="dropdnav" src={Drop} />
             </div>
@@ -63,22 +69,28 @@ const NavBar = () => {
           <Nav
             className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}
           >
-            <NavLink exact={true} to="/" activeClassName={Classes.selected}>
-              Transfer NFTs
+            <NavLink exact={true} to={`/${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
+              
+              {isCn ? '转移NFT ' : 'Transfer NFTs'}
             </NavLink>
             <NavLink
-              to="/transfer-tokens"
+              to={`/transfer-tokens${cn ? '?cn=true' : ''}`}
               className="tokens-tranfer-s"
               activeClassName={`${Classes.selected}`}
             >
-              Tokens Transfer <span className="coming-soon-i">Coming soon</span>
+               
+              {isCn ? '代币转移 ' : 'Tokens Transfer'}
+
+              <span className="coming-soon-i">{isCn ? '即将推出' : 'Coming soon'}</span>
             </NavLink>
           </Nav>
 
           <Nav className={`${Classes.linkTab} d-none d-md-block`}>
             {/* <Link to="#home">Link 2</Link> */}
             <span className="cross_ch">
-              Cross-Chain Bridge Demo {/*<span className="betaa">Beta</span>*/}
+            {isCn ? '跨链桥展示' : 'Cross-Chain Bridge Demo'}
+
+               {/*<span className="betaa">Beta</span>*/}
             </span>
           </Nav>
 
@@ -89,7 +101,9 @@ const NavBar = () => {
             <div className="innerdropnav">
               <div className="assadkladslkads">
                 <img src={XPWallet} />
-                Demo XP.network wallet
+                {isCn ? 'XP.network演示钱包' : 'Demo XP.network wallet'}
+
+                
               </div>
               <img className="dropdnav" src={Drop} />
             </div>
@@ -99,14 +113,15 @@ const NavBar = () => {
             <Nav className={`${Classes.linkTab} mb-2`}>
               {/* <Link to="#home">Link 2</Link> */}
               <span className="cross_ch">
-                Cross-Chain Bridge Demo{' '}
+              {isCn ? '跨链桥展示' : 'Cross-Chain Bridge Demo'}
+
                 {/*<span className="betaa">Beta</span>*/}
               </span>
             </Nav>
 
             <Link to="#link">
-              <Image src={GreenDot} fluid /> Ledger -{' '}
-              <span className="coming-soon-i">Coming soon</span>
+              <Image src={GreenDot} fluid /> {isCn ? '分布式总账技术' : 'Ledger'} -{' '}
+              <span className="coming-soon-i">{isCn ? '即将推出' : 'Coming soon'}</span>
             </Link>
           </Nav>
         </Navbar.Collapse>
@@ -114,11 +129,13 @@ const NavBar = () => {
         <Nav
           className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3 mobile-tab`}
         >
-          <NavLink exact={true} to="/" activeClassName={Classes.selected}>
+          <NavLink exact={true} to={`/${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
             Transfer NFT
+            
           </NavLink>
-          <NavLink to="/transfer-tokens" activeClassName={Classes.selected}>
+          <NavLink to={`/transfer-tokens${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
             Transfer Tokens
+            
           </NavLink>
         </Nav>
       </Container>
@@ -127,13 +144,17 @@ const NavBar = () => {
           <div className="navbar-modal-header">
             <h2>
               <img src={Choose} />
-              Choose a Wallet
+
+              {isCn ? '选择一个钱包 ' : 'Choose a Wallet'}
+
             </h2>
             <img onClick={toggle} className="closemodal" src={Close} />
           </div>
 
           <p className="select-wallet-desc">
-            Please select a wallet to connect to the bridge:
+            
+            {isCn ? '请选择链接到桥梁的钱包：' : 'Please select a wallet to connect to the bridge:'}
+
           </p>
           {wallets.map((n, i) => (
             <div
@@ -143,7 +164,7 @@ const NavBar = () => {
             >
               <img src={n.image} /> <p>{n.text}</p>{' '}
               {n.disabled ? (
-                <span className="coming-soon-wallet">Coming soon</span>
+                <span className="coming-soon-wallet">{isCn ? '即将推出' : 'Coming soon'}</span>
               ) : (
                 ''
               )}

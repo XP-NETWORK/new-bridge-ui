@@ -1,5 +1,5 @@
 // External Imports
-import React from 'react'
+import React,{useState} from 'react'
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Col, Container, Row } from 'react-bootstrap'
@@ -65,6 +65,10 @@ const TransferLiquidity = ({
       image: { avatar: true, src: mapChainToAvatar(item) },
     }
   })
+
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const [isCn,setIsCn] = useState(params.get("cn"))
 
   const toTranBridge = fromTranBridge
 
@@ -180,8 +184,9 @@ const TransferLiquidity = ({
     <Container disabled>
       <div className="title title--primary main-title">
         <h2>
-          Cross-Chain Tokens Bridge -{' '}
-          <span style={{ color: '#F27603' }}>Coming Soon</span>
+        {isCn ?  '跨链代币桥': 'Cross-Chain Tokens Bridge'}
+           -{' '}
+          <span style={{ color: '#F27603' }}>{isCn ? '即将推出': 'Coming Soon'}</span>
         </h2>
       </div>
       <Row>
@@ -193,7 +198,7 @@ const TransferLiquidity = ({
             } align-items-center justify-content-center`}
           >
             <CardWrap>
-              <SelectItem label={'From'} disabled>
+              <SelectItem label={isCn ?  '自': 'From'} disabled>
                 <Dropdown
                   placeholder={'Select option'}
                   fluid
@@ -204,7 +209,7 @@ const TransferLiquidity = ({
                   disabled
                 />
               </SelectItem>
-              <SelectItem label={'Source Account'}>
+              <SelectItem label={isCn ? '源帐户': 'Source Account'}>
                 <Dropdown
                   placeholder="Select option"
                   fluid
@@ -215,7 +220,7 @@ const TransferLiquidity = ({
                   disabled
                 />
               </SelectItem>
-              <SelectItem label={'Amount'}>
+              <SelectItem label={isCn ? '数量' : 'Amount'}>
                 <Dropdown
                   placeholder="Select token"
                   fluid
@@ -252,7 +257,7 @@ const TransferLiquidity = ({
             </button>
 
             <CardWrap className={'align-self-start'}>
-              <SelectItem label={'To'}>
+              <SelectItem label={isCn ? '至' : 'To'}>
                 <Dropdown
                   placeholder="Select option"
                   fluid
@@ -263,7 +268,7 @@ const TransferLiquidity = ({
                   disabled
                 />
               </SelectItem>
-              <SelectItem label={'Target Account'}>
+              <SelectItem label={isCn ? '目标账户': 'Target Account'}>
                 <Dropdown
                   placeholder="Select option"
                   fluid
@@ -275,7 +280,7 @@ const TransferLiquidity = ({
                 />
               </SelectItem>
               <div style={{ marginTop: '0.6875rem' }}>
-                <div className={Styles.title}>Amount</div>
+                <div className={Styles.title}>{isCn ? '数量' : 'Amount'}</div>
                 <div
                   className={`${Styles.amounInput} d-flex align-items-center`}
                 >
@@ -290,7 +295,7 @@ const TransferLiquidity = ({
               </div>
 
               <div className={Styles.title} style={{ marginTop: '0.6875rem' }}>
-                <span>Fee:</span> 0.0%
+                <span>{isCn ? '费用' : 'Fee'}:</span> 0.0%
               </div>
             </CardWrap>
           </div>
@@ -304,7 +309,7 @@ const TransferLiquidity = ({
               // onClick={sendAnyToken}
               disabled
             >
-              Send
+              {isCn ? '发送' : 'Send'}
             </button>
           </div>
         </Col>

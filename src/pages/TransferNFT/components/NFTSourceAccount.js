@@ -64,7 +64,9 @@ const NFTSourceAccount = ({
       nIndex !== null ? selectCb(data) : selectCb(undefined)
     }
   }
-
+  const windowUrl = window.location.search;
+  const params = new URLSearchParams(windowUrl);
+  const [isCn,setIsCn] = useState(params.get("cn"))
   const toggleCheckMark = (index) => {
     return index === users.activeMark
   }
@@ -72,7 +74,7 @@ const NFTSourceAccount = ({
   return (
     <CardWrap className={'mx-md-4 my-4 lalalalalala'}>
       <div className={`${Styles.srcAcc} d-flex align-items-center`}>
-        <span>NFTs on </span>
+        <span>{isCn ? 'NFT来自' : 'NFTs on'} </span>
         <div className={`${Styles.user} d-flex align-items-center ml-2`}>
           <Image src={userAvatar} />
           <span className="name ml-2">{fromAccount}</span>
@@ -114,7 +116,7 @@ const NFTSourceAccount = ({
                       <XpModal show={show === index} handleClose={handleClose}>
                         <CardWrap>
                           <div className="d-flex align-items-center">
-                            <strong className="nft-details">NFT Details</strong>
+                            <strong className="nft-details">{isCn ? 'NFT详情' : 'NFT Details'}</strong>
                             <button
                               className={`${Styles.modalCloseButton} ml-auto close-nft-popup`}
                               onClick={handleClose}
@@ -130,7 +132,7 @@ const NFTSourceAccount = ({
                             <Col md>
                               <form className={'mt-4 mt-md-0'}>
                                 <div className={Styles.inputGroup}>
-                                  <label htmlFor="NFTName">NFT Name</label>
+                                  <label htmlFor="NFTName">{isCn ? 'NFT名称' : 'NFT Name'}NFT Name</label>
                                   <input
                                     type="text"
                                     className={Styles.inputStyle}
@@ -140,7 +142,7 @@ const NFTSourceAccount = ({
                                   />
                                 </div>
                                 <div className={Styles.inputGroup}>
-                                  <label htmlFor="Description">Details</label>
+                                  <label htmlFor="Description">{isCn ? '详情' : 'Details'}</label>
                                   <div
                                     type="text"
                                     className={`${Styles.inputStyle} nft-description`}
@@ -161,7 +163,7 @@ const NFTSourceAccount = ({
                                 </div>
                                 <div className={Styles.inputGroup}>
                                   <label htmlFor="TokenID">
-                                    Token ID -
+                                  {isCn ? '令牌ID' : 'Token ID' }-
                                     <CopyToClipboard
                                       text={JSON.stringify(nft.hash)}
                                       onCopy={() => setCopied(true)}
@@ -181,7 +183,7 @@ const NFTSourceAccount = ({
                                 </div>
                                 <div className={Styles.inputGroup}>
                                   <label htmlFor="Blockchain">
-                                    Source Blockchain
+                                    {isCn ? '源区块链' : 'Source Blockchain'}
                                   </label>
                                   <div
                                     type="text"
@@ -211,7 +213,7 @@ const NFTSourceAccount = ({
                 )
               })
           ) : (
-            <p className="your-wallet-is-empty">Your wallet is empty</p>
+            <p className="your-wallet-is-empty">{isCn ? '您的钱包是空的' : 'Your wallet is empty'}</p>
           )
         ) : (
           <div className="nft-loader-container">

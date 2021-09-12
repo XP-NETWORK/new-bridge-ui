@@ -16,7 +16,7 @@ function App() {
           <Route exact path={'/'} component={TransferNFT} />
           <Route
             exact
-            path={'/transfer-tokens'}
+            path={`/transfer-tokens`}
             component={TransferLiquidity}
           />
         </Switch>
