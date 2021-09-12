@@ -92,4 +92,5 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[4], Web3Accounts],
   [chains[5], Web3Accounts],
   [chains[6], Web3Accounts],
+  [chains[7], Web3Accounts],
 ]);

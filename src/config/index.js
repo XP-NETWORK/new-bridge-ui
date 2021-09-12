@@ -6,9 +6,10 @@ export const chains = [
   "Ropsten", // 4
   "Avalanche", // 5
   "Polygon", // 6
-  "Cardano", // 7
-  "Solana", // 8
-  "Algorand", // 9
+  "Fantom", // 7
+  "Cardano", // 8
+  "Solana", // 9
+  "Algorand", // 10
 ];
 
 export const coins = [
@@ -18,7 +19,8 @@ export const coins = [
   "HT", // 3
   "ETH", // 4
   "AVAX", // 5
-  "MATIC",
+  "MATIC", // 6
+  "FTM", //7
 ];
 
 export const exchangeRates = {
@@ -28,6 +30,7 @@ export const exchangeRates = {
   HT: 14.1,
   ETH: 3033.8,
   MATIC: 420.1,
+  FTM: 69.5,
 };
 
 export const ChainConfig = {
@@ -43,6 +46,7 @@ export const ChainConfig = {
     Ropsten: process.env.REACT_APP_ROP_MINTER,
     Avalanche: process.env.REACT_APP_AVA_MINTER,
     Polygon: process.env.REACT_APP_POLY_MINTER,
+    Fantom: process.env.REACT_APP_FTM_MINTER,
   },
   web3_erc1155: {
     HECO: process.env.REACT_APP_HECO_ERC1155,
@@ -50,6 +54,7 @@ export const ChainConfig = {
     Ropsten: process.env.REACT_APP_ROP_ERC1155,
     Avalanche: process.env.REACT_APP_AVA_ERC1155,
     Polygon: process.env.REACT_APP_POLY_ERC1155,
+    Fantom: process.env.REACT_APP_FTM_ERC1155,
   },
   web3_predefined: {
     HECO: process.env.REACT_APP_HECO_PREM,
@@ -57,6 +62,7 @@ export const ChainConfig = {
     Ropsten: process.env.REACT_APP_ROP_PREM,
     Avalanche: process.env.REACT_APP_AVA_PREM,
     Polygon: process.env.REACT_APP_POLY_PREM,
+    Fantom: process.env.REACT_APP_FTM_PREM,
   },
 };
 
@@ -70,4 +76,5 @@ export const ExplorerPrefix = {
   Ropsten: process.env.REACT_APP_ROP_EXPLORER,
   Avalanche: process.env.REACT_APP_AVA_EXPLORER,
   Polygon: process.env.REACT_APP_POLY_EXPLORER,
+  Fantom: process.env.REACT_APP_FTM_EXPLORER,
 };
