@@ -46,7 +46,7 @@ const TransferNFTSwitcher = ({
 }) => {
 
     const tranBridge = chains.map(item => {
-        const dis =   item === chains[7] || item === chains[8] ||  item === chains[9] ||  item === chains[10] ||  item === chains[11] ||  item === chains[12]
+        const dis =   item === chains[7] || item === chains[8] ||  item === chains[9]
         return {
             key: item,
             text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
@@ -56,7 +56,7 @@ const TransferNFTSwitcher = ({
         }
     });
     const toBridge = chains.map(item => {
-        const dis =    item === chains[7] || item === chains[8] ||  item === chains[9] ||  item === chains[10] ||  item === chains[11] ||  item === chains[12]
+        const dis =    item === chains[7] || item === chains[8]||  item === chains[9]
         return {
             key: item,
             text: dis ? item + ' - Coming soon' : item === 'Ropsten' ? 'Ethereum' : item,
