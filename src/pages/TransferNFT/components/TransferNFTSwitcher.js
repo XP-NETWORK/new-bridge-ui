@@ -24,6 +24,8 @@ import {
 import { mapChainToAvatar } from '../../../mappers'
 import { chains } from '../../../config'
 
+const checkDisabled = (item) => item === chains[8] || item === chains[9] || item === chains[10] || item === chains[11] || item === chains[12]
+
 const TransferNFTSwitcher = ({
   fromChain,
   toChain,
@@ -42,7 +44,7 @@ const TransferNFTSwitcher = ({
   selectToAccount,
 }) => {
   const tranBridge = chains.map((item) => {
-    const dis = item === chains[8] || item === chains[9] || item === chains[10]
+    const dis = checkDisabled(item);
     return {
       key: item,
       text: dis
@@ -56,7 +58,7 @@ const TransferNFTSwitcher = ({
     }
   })
   const toBridge = chains.map((item) => {
-    const dis = item === chains[8] || item === chains[9] || item === chains[10]
+    const dis = checkDisabled(item)
     return {
       key: item,
       text: dis

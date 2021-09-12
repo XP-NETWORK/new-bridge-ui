@@ -10,6 +10,8 @@ import Solana from '../assets/images/Solana.svg'
 import Avalanche from '../assets/images/avalanche.svg'
 import Algorand from '../assets/images/Algarand.svg'
 import Fantom from '../assets/images/Fantom.svg'
+import Tron from "../assets/images/Tron.jpg"
+import Diem from "../assets/images/Diem.jpg"
 // Blockchain related
 import { chains, coins } from '../config'
 
@@ -39,15 +41,21 @@ export const mapChainToAvatar = (chain) => {
     case chains[7]: {
       return Fantom
     }
+	case chains[8]: {
+	  return Tron  
+	}
     case chains[9]: {
-      return Solana
-    }
-    case chains[8]: {
       return Cardano
     }
     case chains[10]: {
+      return Solana
+    }
+    case chains[11]: {
       return Algorand
     }
+	case chains[12]: {
+	  return Diem
+	}
     default: {
       return xpNetIco
     }

@@ -7,9 +7,11 @@ export const chains = [
   'Avalanche', // 5
   'Polygon', // 6
   'Fantom', // 7
-  'Cardano', // 8
-  'Solana', // 9
-  'Algorand', // 10
+  "Tron", // 8
+  'Cardano', // 9
+  'Solana', // 10
+  'Algorand', // 11
+  "Diem", // 12
 ]
 
 export const coins = [
