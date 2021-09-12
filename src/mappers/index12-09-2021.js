@@ -9,9 +9,6 @@ import Polygon from '../assets/images/polygon.svg';
 import Solana from '../assets/images/Solana.svg';
 import Avalanche from '../assets/images/avalanche.svg';
 import Algorand from '../assets/images/Algarand.svg';
-import Diem from '../assets/images/Diem.jpg';
-import Fantom from '../assets/images/Fantom.jpg';
-import Tron from '../assets/images/Tron.jpg';
 // Blockchain related
 import {chains, coins} from '../config';
 
@@ -47,19 +44,9 @@ export const mapChainToAvatar = (chain) => {
       case chains[9]:{
         return Algorand;
       }
-	  case chains[10]:{
-        return Diem;
-      }
-      case chains[11]:{
-        return Fantom;
-      }
-      case chains[12]:{
-        return Tron;
-      }
       default:{
         return xpNetIco;
       }
-	  
     }
   }
   

@@ -9,9 +9,6 @@ export const chains = [
   "Cardano", // 7
   "Solana", // 8
   "Algorand", // 9
-  "Diem", // 9
-  "Fantom", // 9
-  "Tron", // 9
 ];
 
 export const coins = [
