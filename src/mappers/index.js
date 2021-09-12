@@ -1,78 +1,78 @@
 // Blockchain Avatars
-import xpNetIco from "../assets/images/XpNet.svg";
-import enrollIco from "../assets/images/enroll.svg";
-import binance from "../assets/images/binance.svg";
-import etherium from "../assets/images/Etherium.svg";
-import Heco from "../assets/images/HECO.svg";
-import Cardano from "../assets/images/cardano.svg";
-import Polygon from "../assets/images/polygon.svg";
-import Solana from "../assets/images/Solana.svg";
-import Avalanche from "../assets/images/avalanche.svg";
-import Algorand from "../assets/images/Algarand.svg";
-import Fantom from "../assets/images/Fantom.svg";
+import xpNetIco from '../assets/images/XpNet.svg'
+import enrollIco from '../assets/images/enroll.svg'
+import binance from '../assets/images/binance.svg'
+import etherium from '../assets/images/Etherium.svg'
+import Heco from '../assets/images/HECO.svg'
+import Cardano from '../assets/images/cardano.svg'
+import Polygon from '../assets/images/polygon.svg'
+import Solana from '../assets/images/Solana.svg'
+import Avalanche from '../assets/images/avalanche.svg'
+import Algorand from '../assets/images/Algarand.svg'
+import Fantom from '../assets/images/Fantom.svg'
 // Blockchain related
-import { chains, coins } from "../config";
+import { chains, coins } from '../config'
 
 export const mapChainToAvatar = (chain) => {
   switch (chain) {
     case chains[0]: {
-      return xpNetIco;
+      return xpNetIco
     }
     case chains[1]: {
-      return binance;
+      return binance
     }
     case chains[2]: {
-      return enrollIco;
+      return enrollIco
     }
     case chains[3]: {
-      return Heco;
+      return Heco
     }
     case chains[4]: {
-      return etherium;
+      return etherium
     }
     case chains[5]: {
-      return Avalanche;
+      return Avalanche
     }
     case chains[6]: {
-      return Polygon;
+      return Polygon
     }
     case chains[7]: {
-      return Fantom;
+      return Fantom
     }
     case chains[9]: {
-      return Solana;
+      return Solana
     }
     case chains[8]: {
-      return Cardano;
+      return Cardano
     }
     case chains[10]: {
-      return Algorand;
+      return Algorand
     }
     default: {
-      return xpNetIco;
+      return xpNetIco
     }
   }
-};
+}
 
 export const mapCoinToAvatar = (coin) => {
   switch (coin) {
     case coins[0]: {
-      return xpNetIco;
+      return xpNetIco
     }
     case coins[1]: {
-      return binance;
+      return binance
     }
     case coins[2]: {
-      return enrollIco;
+      return enrollIco
     }
     case coins[3]: {
-      return Heco;
+      return Heco
     }
     case coins[4]: {
-      return etherium;
+      return etherium
     }
     default: {
-      return xpNetIco;
+      return xpNetIco
     }
   }
-};
+}

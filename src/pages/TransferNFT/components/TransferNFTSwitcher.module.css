@@ -1,39 +1,38 @@
 .switchModeBtn {
-    margin: 0 10px;
-    flex: 0 0 56px;
-    max-width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    outline: none;
-    box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15);
+  margin: 0 10px;
+  flex: 0 0 56px;
+  max-width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  box-shadow: 0 2px 14px rgba(34, 23, 79, 0.15);
 }
 
 @media (min-width: 320px) and (max-width: 991.98px) {
-    .switchModeBtn {
-        margin: 1.25rem 0;
-        height: 50px;
-        width: 50px;
-        position: absolute;
-        top: 41%;
-        left: 50%;
-        transform: translateX(-50%) rotate(90deg);
-    }
+  .switchModeBtn {
+    margin: 1.25rem 0;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 41%;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
 
-    .switcherWrap {
-        flex-wrap: wrap !important;
-        flex-direction: column;
-        position: relative;
-    }
-
+  .switcherWrap {
+    flex-wrap: wrap !important;
+    flex-direction: column;
+    position: relative;
+  }
 }
 
 @media (min-width: 991px) and (max-width: 1400px) {
-    .switchModeBtn {
-        margin: 0 10px!important;
-    }
+  .switchModeBtn {
+    margin: 0 10px !important;
+  }
 }

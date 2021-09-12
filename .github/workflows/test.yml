@@ -26,7 +26,7 @@ jobs:
         env:
           CI: false
         run: yarn build-test
-      
+
       - name: push
         uses: appleboy/scp-action@master
         with:
@@ -34,5 +34,5 @@ jobs:
           username: ${{ secrets.TEST_USERNAME }}
           key: ${{ secrets.TEST_KEY }}
           rm: true
-          source: "build"
+          source: 'build'
           target: ${{ secrets.TEST_UI_FOLDER }}

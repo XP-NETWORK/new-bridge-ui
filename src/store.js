@@ -1,17 +1,14 @@
 // External Imports
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 // Internal imports
-import {selectReducer} from './reducers';
+import { selectReducer } from './reducers'
 
 const reducers = {
-    selectReducer,
+  selectReducer,
+}
 
-};
+const rootReducer = combineReducers(reducers)
 
-const rootReducer = combineReducers(reducers);
-
-export const configureStore = () => createStore(
-    rootReducer,
-    applyMiddleware(thunk)
-);
+export const configureStore = () =>
+  createStore(rootReducer, applyMiddleware(thunk))

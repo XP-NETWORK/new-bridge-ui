@@ -23,7 +23,7 @@ jobs:
         env:
           CI: false
         run: yarn build-prod
-      
+
       - name: push
         uses: appleboy/scp-action@master
         with:
@@ -31,5 +31,5 @@ jobs:
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_KEY }}
           rm: true
-          source: "build"
+          source: 'build'
           target: ${{ secrets.PROD_UI_FOLDER }}
