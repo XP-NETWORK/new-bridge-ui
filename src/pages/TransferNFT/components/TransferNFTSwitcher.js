@@ -84,7 +84,7 @@ const TransferNFTSwitcher = ({
     }
   })
 
-  const targetAccounts = toAccountS.map((item) => {
+  const targetAccounts = toAccountS.map(item => {
     return {
       key: item,
       text: item,
@@ -93,7 +93,7 @@ const TransferNFTSwitcher = ({
     }
   })
 
-  const switchHandler = (e) => {
+  const switchHandler = e => {
     console.log(e)
     e.preventDefault()
     if (!loader && !nftLoader) {
@@ -105,13 +105,13 @@ const TransferNFTSwitcher = ({
     }
   }
 
-  const getVal = (e) => {
+  const getVal = e => {
     const v = e.target.innerText.replace(/(?:\r\n|\r|\n)/g, '')
     if (v === 'Ethereum') return 'Ropsten'
     else return v
   }
 
-  const handleChangeFrom = (e) => {
+  const handleChangeFrom = e => {
     closePopup()
     e.preventDefault()
     if (toChain === getVal(e)) {
@@ -120,7 +120,7 @@ const TransferNFTSwitcher = ({
     } else selectFromChain(getVal(e))
   }
 
-  const handleChangeTo = (e) => {
+  const handleChangeTo = e => {
     closePopup()
     e.preventDefault()
     if (fromChain === getVal(e)) {
@@ -129,26 +129,26 @@ const TransferNFTSwitcher = ({
     } else selectToChain(getVal(e))
   }
 
-  const handleChangeFromAcct = (e) => {
+  const handleChangeFromAcct = e => {
     closePopup()
     e.preventDefault()
     selectFromAccount(getVal(e))
   }
 
-  const handleChangeToAcct = (e) => {
+  const handleChangeToAcct = e => {
     closePopup()
     e.preventDefault()
     setNft(undefined)
     selectToAccount(getVal(e))
   }
 
-  const addIdToSelect = (e) => {
+  const addIdToSelect = e => {
     setTimeout(() => {
       const c = Array.prototype.slice.call(
         document.getElementsByClassName('visible menu'),
         0
       )
-      c.forEach((n) => {
+      c.forEach(n => {
         n.setAttribute('id', 'id-of-selctor')
       })
     }, 1)
@@ -166,7 +166,7 @@ const TransferNFTSwitcher = ({
               fluid
               selection
               options={tranBridge}
-              onChange={(e) => handleChangeFrom(e)}
+              onChange={e => handleChangeFrom(e)}
               value={fromChain}
               onOpen={addIdToSelect}
               disabled={loader || nftLoader}
@@ -179,7 +179,7 @@ const TransferNFTSwitcher = ({
               fluid
               selection
               options={sourceAccounts}
-              onChange={(e) => handleChangeFromAcct(e)}
+              onChange={e => handleChangeFromAcct(e)}
               value={fromAccount}
               onOpen={addIdToSelect}
               disabled={loader || nftLoader}
@@ -209,7 +209,7 @@ const TransferNFTSwitcher = ({
               options={toBridge}
               disabled={loader || nftLoader}
               onOpen={addIdToSelect}
-              onChange={(e) => handleChangeTo(e)}
+              onChange={e => handleChangeTo(e)}
               value={toChain}
             />
           </SelectItem>
@@ -222,7 +222,7 @@ const TransferNFTSwitcher = ({
               options={targetAccounts}
               disabled={loader || nftLoader}
               onOpen={addIdToSelect}
-              onChange={(e) => handleChangeToAcct(e)}
+              onChange={e => handleChangeToAcct(e)}
               value={toAccount}
             />
           </SelectItem>
@@ -232,7 +232,7 @@ const TransferNFTSwitcher = ({
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   fromChain: state.selectReducer.fromChain,
   toChain: state.selectReducer.toChain,
   loader: state.selectReducer.loader,
@@ -245,14 +245,14 @@ const mapStateToProps = (state) => ({
   toAccountS: state.selectReducer.toAccountS,
 })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onSwapChainsPressed: () => dispatch(swapChains()),
 
-  selectFromChain: (value) => dispatch(selectFromChain(value)),
-  selectToChain: (value) => dispatch(selectToChain(value)),
-  selectFromAccount: (value) => dispatch(selectFromAccount(value)),
-  selectToAccount: (value) => dispatch(selectToAccount(value)),
-  closePopup: (e) => dispatch(setModalMessage()),
+  selectFromChain: value => dispatch(selectFromChain(value)),
+  selectToChain: value => dispatch(selectToChain(value)),
+  selectFromAccount: value => dispatch(selectFromAccount(value)),
+  selectToAccount: value => dispatch(selectToAccount(value)),
+  closePopup: e => dispatch(setModalMessage()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransferNFTSwitcher)

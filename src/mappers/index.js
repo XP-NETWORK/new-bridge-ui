@@ -15,7 +15,7 @@ import Diem from "../assets/images/diem.svg"
 // Blockchain related
 import { chains, coins } from '../config'
 
-export const mapChainToAvatar = (chain) => {
+export const mapChainToAvatar = chain => {
   switch (chain) {
     case chains[0]: {
       return xpNetIco
@@ -41,6 +41,7 @@ export const mapChainToAvatar = (chain) => {
     case chains[7]: {
       return Fantom
     }
+<<<<<<< HEAD
 	case chains[8]: {
 	  return Tron  
 	}
@@ -50,6 +51,17 @@ export const mapChainToAvatar = (chain) => {
     case chains[10]: {
       return Solana
     }
+=======
+    case chains[8]: {
+      return Tron
+    }
+    case chains[10]: {
+      return Solana
+    }
+    case chains[9]: {
+      return Cardano
+    }
+>>>>>>> 5bc9f89 (feat(chains): Add Tron)
     case chains[11]: {
       return Algorand
     }
@@ -62,7 +74,7 @@ export const mapChainToAvatar = (chain) => {
   }
 }
 
-export const mapCoinToAvatar = (coin) => {
+export const mapCoinToAvatar = coin => {
   switch (coin) {
     case coins[0]: {
       return xpNetIco

@@ -22,7 +22,8 @@ export const coins = [
   'ETH', // 4
   'AVAX', // 5
   'MATIC', // 6
-  'FTM', //7
+  'FTM', // 7
+  'TRON', // 8
 ]
 
 export const exchangeRates = {
@@ -33,6 +34,7 @@ export const exchangeRates = {
   ETH: 3033.8,
   MATIC: 420.1,
   FTM: 69.5,
+  TRX: 45.6,
 }
 
 export const ChainConfig = {
@@ -49,6 +51,7 @@ export const ChainConfig = {
     Avalanche: process.env.REACT_APP_AVA_MINTER,
     Polygon: process.env.REACT_APP_POLY_MINTER,
     Fantom: process.env.REACT_APP_FTM_MINTER,
+    Tron: process.env.REACT_APP_TRON_MINTER,
   },
   web3_erc1155: {
     HECO: process.env.REACT_APP_HECO_ERC1155,
@@ -57,6 +60,7 @@ export const ChainConfig = {
     Avalanche: process.env.REACT_APP_AVA_ERC1155,
     Polygon: process.env.REACT_APP_POLY_ERC1155,
     Fantom: process.env.REACT_APP_FTM_ERC1155,
+    Tron: process.env.REACT_APP_TRON_ERC1155,
   },
   web3_predefined: {
     HECO: process.env.REACT_APP_HECO_PREM,
@@ -65,6 +69,7 @@ export const ChainConfig = {
     Avalanche: process.env.REACT_APP_AVA_PREM,
     Polygon: process.env.REACT_APP_POLY_PREM,
     Fantom: process.env.REACT_APP_FTM_PREM,
+    Tron: process.env.REACT_APP_Tron_PREM,
   },
 }
 
