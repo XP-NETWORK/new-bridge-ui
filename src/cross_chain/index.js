@@ -194,13 +194,14 @@ export function Web3Helper(chain) {
         CHAIN_INFO[chain].rpcUrl
       )
       await web3Provider.ready
+
+	  web3 = await web3HelperFactory(
+		web3Provider,
+		minter_addr,
+		new ethers.utils.Interface(abi),
+		ChainConfig.web3_erc1155[chain]
+	  )
     }
-    web3 = await web3HelperFactory(
-      web3Provider,
-      minter_addr,
-      new ethers.utils.Interface(abi),
-      ChainConfig.web3_erc1155[chain]
-    )
   }
 
   return {
