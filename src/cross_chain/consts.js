@@ -46,6 +46,9 @@ export const CHAIN_INFO = {
     rpcUrl: 'https://rpc.testnet.fantom.network/',
     decimals: 1e18,
   },
+  Tron: {
+    rpcUrl: 'https://nile.trongrid.io/',
+  },
 }
 
 export const CHAIN_BY_NONCE = Object.fromEntries(

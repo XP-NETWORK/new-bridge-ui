@@ -13,8 +13,8 @@ import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
 import { abi as ERC1155_abi } from 'testsuite-ts/dist/fakeERC1155.json'
 
-const fromHexString = (hexString) =>
-  new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)))
+const fromHexString = hexString =>
+  new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)))
 
 const decoder = new TextDecoder()
 
@@ -219,7 +219,7 @@ export function Web3Helper(chain) {
     },
     async getArgsFromErcTransfer(receipt, target_addr) {
       await requireWeb3()
-      const log = receipt.logs.find((log) => log.address === target_addr)
+      const log = receipt.logs.find(log => log.address === target_addr)
       if (log === undefined) {
         throw Error("couldn't extract token id")
       }
@@ -254,4 +254,5 @@ export const ChainFactory = {
   Avalanche: Web3Helper('Avalanche'),
   Polygon: Web3Helper('Polygon'),
   Fantom: Web3Helper('Fantom'),
+  Tron: Web3Helper('Tron'),
 }
