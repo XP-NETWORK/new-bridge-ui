@@ -10,8 +10,8 @@ import Solana from '../assets/images/Solana.svg'
 import Avalanche from '../assets/images/avalanche.svg'
 import Algorand from '../assets/images/Algarand.svg'
 import Fantom from '../assets/images/Fantom.svg'
-import Tron from "../assets/images/Tron.jpg"
-import Diem from "../assets/images/Diem.jpg"
+import Tron from "../assets/images/tron 1.svg"
+import Diem from "../assets/images/diem.svg"
 // Blockchain related
 import { chains, coins } from '../config'
 
