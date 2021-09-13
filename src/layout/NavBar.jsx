@@ -9,7 +9,6 @@ import { Link, NavLink } from 'react-router-dom'
 import Classes from './NavBar.module.css'
 import { Dropdown } from 'semantic-ui-react'
 import XpModal from '../UIElemnts/XpModal'
-
 import Choose from '../assets/images/wallet/choose.svg'
 import XPWallet from '../assets/images/wallet/xpwallet.svg'
 import WalletConnect from '../assets/images/wallet/walletconnect.svg'
@@ -25,9 +24,8 @@ const NavBar = () => {
   const windowUrl = window.location.search;
   const params = new URLSearchParams(windowUrl);
   const [isCn,setIsCn] = useState(params.get("cn"))
-  const cn = new URLSearchParams(window.location.search).get('cn') === 'true'
   const wallets = [
-    { text: cn ? 'XP.network演示钱包' : 'Demo XP.network wallet', image: XPWallet },
+    { text: isCn ? 'XP.network演示钱包' : 'Demo XP.network wallet', image: XPWallet },
     { text: 'Ledger', image: Ledger, disabled: true },
     { text: 'MetaMask', image: MetaMask, disabled: true },
     { text: 'Trezor', image: Trezor, disabled: true },
@@ -69,12 +67,12 @@ const NavBar = () => {
           <Nav
             className={`${Classes.tabNav} d-none d-md-block center-of-navbar`}
           >
-            <NavLink exact={true} to={`/${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
+            <NavLink exact={true} to={`/${isCn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
               
               {isCn ? '转移NFT ' : 'Transfer NFTs'}
             </NavLink>
             <NavLink
-              to={`/transfer-tokens${cn ? '?cn=true' : ''}`}
+              to={`/transfer-tokens${isCn ? '?cn=true' : ''}`}
               className="tokens-tranfer-s"
               activeClassName={`${Classes.selected}`}
             >
@@ -129,12 +127,13 @@ const NavBar = () => {
         <Nav
           className={`${Classes.tabNav} ${Classes.resTabNav} d-lg-none mt-3 mobile-tab`}
         >
-          <NavLink exact={true} to={`/${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
-            Transfer NFT
+          <NavLink exact={true} to={`/${isCn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
+            {isCn ? '转移NFT' : 'Transfer NFT'}
             
           </NavLink>
-          <NavLink to={`/transfer-tokens${cn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
-            Transfer Tokens
+          <NavLink to={`/transfer-tokens${isCn ? '?cn=true' : ''}`} activeClassName={Classes.selected}>
+            {isCn ? "代币转移" : 'Transfer Tokens'}
+            
             
           </NavLink>
         </Nav>

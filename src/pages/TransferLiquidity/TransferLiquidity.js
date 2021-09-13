@@ -222,7 +222,7 @@ const TransferLiquidity = ({
               </SelectItem>
               <SelectItem label={isCn ? '数量' : 'Amount'}>
                 <Dropdown
-                  placeholder="Select token"
+                  placeholder={isCn ? '选择代币' : 'Select token'}
                   fluid
                   selection
                   options={tokenBalances}
