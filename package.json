@@ -32,7 +32,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
-    "testsuite-ts": "git+https://github.com/xp-network/bridge-ui-logics#master",
+    "testsuite-ts": "git+https://github.com/xp-network/bridge-ui-logics#tron",
     "validator": "git+https://github.com/xp-network/migration-validator#master",
     "web-vitals": "^1.1.2"
   },
