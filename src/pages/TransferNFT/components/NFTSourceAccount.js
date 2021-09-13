@@ -103,7 +103,7 @@ const NFTSourceAccount = ({
                         className={Styles.infoBtn}
                         onClick={() => setShow(index)}
                       >
-                        <img src={IIcon} />{' '}
+                        <img src={IIcon} style={{"width":"20px","height":"20px"}}/>{' '}
                       </button>
                       {!nft.isDisabled && toggleCheckMark(index) && (
                         <div
