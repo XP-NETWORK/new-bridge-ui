@@ -398,6 +398,7 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
       }
       break
     }
+    case 'Cronos':
     case 'Avalanche':
     case 'Polygon':
     case 'Fantom':
