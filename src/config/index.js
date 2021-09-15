@@ -8,9 +8,10 @@ export const chains = [
   'Polygon', // 6
   'Fantom', // 7
   'Tron', // 8
-  'Cardano', // 9
-  'Solana', // 10
-  'Algorand', // 11
+  'Cronos', // 9
+  'Cardano', // 10
+  'Solana', // 11
+  'Algorand', // 12
 ]
 
 export const coins = [
@@ -23,6 +24,7 @@ export const coins = [
   'MATIC', // 6
   'FTM', // 7
   'TRX', // 8
+  'CRO', // 9
 ]
 
 export const exchangeRates = {
@@ -34,6 +36,7 @@ export const exchangeRates = {
   MATIC: 420.1,
   FTM: 69.5,
   TRX: 45.6,
+  CRX: 56.9,
 }
 
 export const ChainConfig = {
@@ -52,6 +55,7 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_MINTER,
     Fantom: process.env.REACT_APP_FTM_MINTER,
     Tron: process.env.REACT_APP_TRON_MINTER,
+    Cronos: process.env.REACT_APP_CRONOS_MINTER,
   },
   web3_erc1155: {
     HECO: process.env.REACT_APP_HECO_ERC1155,
@@ -61,6 +65,7 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_ERC1155,
     Fantom: process.env.REACT_APP_FTM_ERC1155,
     Tron: process.env.REACT_APP_TRON_ERC1155,
+    Cronos: process.env.REACT_APP_CRONOS_ERC1155,
   },
   web3_predefined: {
     HECO: process.env.REACT_APP_HECO_PREM,
@@ -70,6 +75,7 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_PREM,
     Fantom: process.env.REACT_APP_FTM_PREM,
     Tron: process.env.REACT_APP_TRON_PREM,
+    Cronos: process.env.REACT_APP_CRONOS_PREM,
   },
 }
 
@@ -84,5 +90,5 @@ export const ExplorerPrefix = {
   Avalanche: process.env.REACT_APP_AVA_EXPLORER,
   Polygon: process.env.REACT_APP_POLY_EXPLORER,
   Fantom: process.env.REACT_APP_FTM_EXPLORER,
-  Tron: process.env.REACT_APP_TRON_EXPLORER
+  Tron: process.env.REACT_APP_TRON_EXPLORER,
 }

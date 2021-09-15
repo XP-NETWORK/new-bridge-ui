@@ -11,6 +11,7 @@ import Avalanche from '../assets/images/avalanche.svg'
 import Algorand from '../assets/images/Algarand.svg'
 import Fantom from '../assets/images/Fantom.svg'
 import Tron from '../assets/images/Tron.svg'
+import Cronos from '../assets/images/Cronos.svg'
 // Blockchain related
 import { chains, coins } from '../config'
 
@@ -43,13 +44,16 @@ export const mapChainToAvatar = chain => {
     case chains[8]: {
       return Tron
     }
-    case chains[10]: {
-      return Solana
-    }
     case chains[9]: {
-      return Cardano
+      return Cronos
     }
     case chains[11]: {
+      return Solana
+    }
+    case chains[10]: {
+      return Cardano
+    }
+    case chains[12]: {
       return Algorand
     }
     default: {

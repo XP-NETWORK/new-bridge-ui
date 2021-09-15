@@ -48,9 +48,16 @@ export const CHAIN_INFO = {
   },
   Tron: {
     nonce: 0x9,
-    decimals: 1E6,
+    decimals: 1e6,
     native: coins[8],
     rpcUrl: 'https://api.shasta.trongrid.io/',
+  },
+  Cronos: {
+    nonce: 10,
+    chainId: 338,
+    rpcUrl: 'https://cronos-testnet.crypto.org:8545',
+    native: coins[9],
+    decimals: 1e18,
   },
 }
 

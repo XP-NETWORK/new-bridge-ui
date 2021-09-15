@@ -42,7 +42,8 @@ const TransferNFTSwitcher = ({
   selectToAccount,
 }) => {
   const tranBridge = chains.map(item => {
-    const dis = item === chains[9] || item === chains[10] || item === chains[11]
+    const dis =
+      item === chains[10] || item === chains[11] || item === chains[12]
     return {
       key: item,
       text: dis
@@ -56,7 +57,8 @@ const TransferNFTSwitcher = ({
     }
   })
   const toBridge = chains.map(item => {
-    const dis = item === chains[9] || item === chains[10] || item === chains[11]
+    const dis =
+      item === chains[10] || item === chains[11] || item === chains[12]
     return {
       key: item,
       text: dis
