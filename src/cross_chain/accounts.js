@@ -84,6 +84,14 @@ export const Web3Accounts = {
   },
 }
 
+export const TronAccs = {
+  "ACC1": {
+      name: "ACC1",
+      account: "TJuG3kvmGBDxGyUPBbvKePUjbopLurtqSo",
+      key: "991EE549C12DA5EC5AF246FB0733A334CB918D3A28D91DC4FEA19BAB7D3FFA8A"
+  }
+}
+
 export const PredefinedAccounts = Object.fromEntries([
   [chains[0], NewParachainAccounts],
   [chains[1], Web3Accounts],
@@ -93,5 +101,5 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[5], Web3Accounts],
   [chains[6], Web3Accounts],
   [chains[7], Web3Accounts],
-  [chains[8], Web3Accounts],
+  [chains[8], TronAccs],
 ])

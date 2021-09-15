@@ -41,7 +41,6 @@ export const mapChainToAvatar = chain => {
     case chains[7]: {
       return Fantom
     }
-<<<<<<< HEAD
 	case chains[8]: {
 	  return Tron  
 	}
@@ -51,17 +50,6 @@ export const mapChainToAvatar = chain => {
     case chains[10]: {
       return Solana
     }
-=======
-    case chains[8]: {
-      return Tron
-    }
-    case chains[10]: {
-      return Solana
-    }
-    case chains[9]: {
-      return Cardano
-    }
->>>>>>> 5bc9f89 (feat(chains): Add Tron)
     case chains[11]: {
       return Algorand
     }

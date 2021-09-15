@@ -23,7 +23,7 @@ export const coins = [
   'AVAX', // 5
   'MATIC', // 6
   'FTM', // 7
-  'TRON', // 8
+  'TRX', // 8
 ]
 
 export const exchangeRates = {
@@ -44,6 +44,7 @@ export const ChainConfig = {
   elrond_esdt: process.env.REACT_APP_ELRD_ESDT,
   elrond_esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
   validator_txn_socket: process.env.REACT_APP_VALIDATOR_SOCK,
+  tron_event_rest: process.env.REACT_APP_TRON_EVENT_REST,
   web3_minters: {
     HECO: process.env.REACT_APP_HECO_MINTER,
     BSC: process.env.REACT_APP_BSC_MINTER,
@@ -69,7 +70,7 @@ export const ChainConfig = {
     Avalanche: process.env.REACT_APP_AVA_PREM,
     Polygon: process.env.REACT_APP_POLY_PREM,
     Fantom: process.env.REACT_APP_FTM_PREM,
-    Tron: process.env.REACT_APP_Tron_PREM,
+    Tron: process.env.REACT_APP_TRON_PREM,
   },
 }
 
@@ -84,4 +85,5 @@ export const ExplorerPrefix = {
   Avalanche: process.env.REACT_APP_AVA_EXPLORER,
   Polygon: process.env.REACT_APP_POLY_EXPLORER,
   Fantom: process.env.REACT_APP_FTM_EXPLORER,
+  Tron: process.env.REACT_APP_TRON_EXPLORER
 }

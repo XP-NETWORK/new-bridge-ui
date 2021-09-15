@@ -47,7 +47,10 @@ export const CHAIN_INFO = {
     decimals: 1e18,
   },
   Tron: {
-    rpcUrl: 'https://nile.trongrid.io/',
+    nonce: 0x9,
+    decimals: 1E6,
+    native: coins[8],
+    rpcUrl: 'https://api.shasta.trongrid.io/',
   },
 }
 
