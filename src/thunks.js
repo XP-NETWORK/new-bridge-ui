@@ -416,8 +416,10 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
 
   for (const [ident, data] of owned) {
     let res
+    console.log(ident);
     try {
       res = await idGetter(ident, data)
+      console.log(res);
     } catch (e) {
       console.log(e)
       continue

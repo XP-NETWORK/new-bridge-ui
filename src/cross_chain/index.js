@@ -3,6 +3,7 @@ import {
   elrondHelperFactory,
   polkadotPalletHelperFactory,
   web3HelperFactory,
+  tronHelperFactory,
   txnSocketHelper,
 } from 'testsuite-ts'
 import { ChainConfig } from '../config'
@@ -11,12 +12,8 @@ import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers'
 import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
-import { abi as ERC1155_abi } from 'testsuite-ts/dist/fakeERC1155.json'
-
-const fromHexString = hexString =>
-  new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)))
-
-const decoder = new TextDecoder()
+import TronWeb from "tronweb";
+import { PredefinedAccounts } from './accounts'
 
 /**
  * Socket for tracking cross chain actions
@@ -69,27 +66,6 @@ export function PolkadotHelper() {
     }
   }
 
-  function tryDecodeWrappedPolkadotNft(nftDat /* Buffer */) {
-    /// TokenLen(4 by), TokenIdent(TokenLen by), Nonce(8 by)
-    /// BinaryCodec is broken for browsers. Decode manually :|
-    if (nftDat.length < 12) {
-      return undefined
-    }
-
-    const tokenLen = new Uint32Array(nftDat.slice(0, 4).reverse())[0]
-    if (nftDat.length !== 12 + tokenLen) {
-      return undefined
-    }
-    const token = decoder.decode(nftDat.slice(4, 4 + tokenLen))
-    // TODO: Consider LO
-    // tfw js can't convert be bytes to u64
-    const nonce = new Uint32Array(
-      nftDat.slice(4 + tokenLen, 12 + tokenLen).reverse()
-    )[0].toString(16)
-
-    return { token, nonce }
-  }
-
   return {
     ident: 'XP.network',
     /**
@@ -99,22 +75,6 @@ export function PolkadotHelper() {
       await requirePolka()
 
       return polka
-    },
-    tryDecodeWrappedPolkadotNft,
-    /**
-     * Whether the given NFT is originally from elrond
-     *
-     * @param {address} owner Owner of this nft
-     * @param {string} ident  Nft identifier
-     * @returns
-     */
-    async isElrondNft(owner, ident) {
-      await requirePolka()
-
-      const nfts = polka.listNft(owner)
-      const nftDat = fromHexString(nfts.get(ident).replace('0x', ''))
-
-      return tryDecodeWrappedPolkadotNft(nftDat) !== undefined
     },
     /**
      * Create keypair from uri
@@ -186,7 +146,6 @@ export function Web3Helper(chain) {
   let web3 = undefined
   let web3Provider = undefined
   const minter_addr = ChainConfig.web3_minters[chain]
-  const erc1155_abi = new ethers.utils.Interface(ERC1155_abi)
 
   async function requireWeb3() {
     if (!web3) {
@@ -214,21 +173,6 @@ export function Web3Helper(chain) {
 
       return web3
     },
-    async getReceiptFromHash(tx_hash) {
-      await requireWeb3()
-      return await web3Provider.waitForTransaction(tx_hash)
-    },
-    async getArgsFromErcTransfer(receipt, target_addr) {
-      await requireWeb3()
-      const log = receipt.logs.find(log => log.address === target_addr)
-      if (log === undefined) {
-        throw Error("couldn't extract token id")
-      }
-
-      const evdat = erc1155_abi.parseLog(log)
-
-      return evdat.args
-    },
     /**
      * Create ethers Wallet object from private key
      *
@@ -244,6 +188,45 @@ export function Web3Helper(chain) {
 }
 
 /**
+ * Wrapper over TronHelper from testsuite-ts
+ */
+export function TronHelper() {
+  let tronWeb = undefined;
+  let tronWebp = undefined;
+
+  async function requireTron() {
+      if (tronWeb === undefined) {
+          tronWebp = new TronWeb({
+              fullHost: CHAIN_INFO["Tron"].rpcUrl,
+              privateKey: PredefinedAccounts["Tron"]["ACC1"].key
+          })
+          tronWeb = await tronHelperFactory(tronWebp, ChainConfig.tron_event_rest, ChainConfig.web3_erc1155["Tron"], ChainConfig.web3_minters["Tron"], abi);
+      }
+  }
+
+  return {
+      ident: "Tron",
+      /**
+       * 
+       * @returns Inner TronHelper from testsuite-ts
+       */
+      async inner() {
+          await requireTron();
+
+          return tronWeb;
+      },
+      /**
+       * Placeholder for signerFromPk
+       * tron uses raw strings for private keys
+       * 
+       * @param {string} pk private key
+       * @returns private key
+       */
+      signerFromPk: (pk) => Promise.resolve(pk)
+  }
+}
+
+/**
  * Factories for Chains by Chain Name
  */
 export const ChainFactory = {
@@ -255,5 +238,5 @@ export const ChainFactory = {
   Avalanche: Web3Helper('Avalanche'),
   Polygon: Web3Helper('Polygon'),
   Fantom: Web3Helper('Fantom'),
-  Tron: Web3Helper('Tron'),
+  Tron: TronHelper(),
 }
