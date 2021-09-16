@@ -85,10 +85,20 @@ export const Web3Accounts = {
 }
 
 export const TronAccs = {
-  "ACC1": {
-      name: "ACC1",
-      account: "TJuG3kvmGBDxGyUPBbvKePUjbopLurtqSo",
-      key: "991EE549C12DA5EC5AF246FB0733A334CB918D3A28D91DC4FEA19BAB7D3FFA8A"
+  ACC1: {
+    name: 'ACC1',
+    account: 'TJuG3kvmGBDxGyUPBbvKePUjbopLurtqSo',
+    key: '991EE549C12DA5EC5AF246FB0733A334CB918D3A28D91DC4FEA19BAB7D3FFA8A',
+  },
+  ACC2: {
+    name: 'ACC2',
+    account: 'TN9bHXEWditocT4Au15mgm7JM56XBnRCvm',
+    key: 'f34cd09de7cd40e0cbaa8c36a85e8964b66e0db1ccc795b8c38773b834fca2b4',
+  },
+  ACC3: {
+    name: 'ACC3',
+    account: 'TRHLhivxVogGhtxKn6sC8UF2Fr3WBdaT8N',
+    key: '98f6e6bf29e10e69871ed9e9271b8af704bbbd7ff86f2b2952ebdac1a5dc1cb8'
   }
 }
 
