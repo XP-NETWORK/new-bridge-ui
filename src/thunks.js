@@ -10,6 +10,7 @@ import {
   NewElrondAccounts,
   PredefinedAccounts,
   Web3Accounts,
+  TronAccs
 } from './cross_chain/accounts'
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain'
 import { remoteNFTMeta } from './singletons'
@@ -135,6 +136,8 @@ export const returnWrappedTokens = (
         n => NewElrondAccounts[n].key === signer_
       )[0]
     }
+
+  
     const result = callFromInnerSigned(
       chain,
       'unfreezeWrapped',
@@ -178,6 +181,7 @@ export const sendNFTNative = (
   nft
 ) => async dispatch => {
   try {
+    console.log(chain, sender_)
     let user = Object.keys(NewElrondAccounts).filter(
       n => NewElrondAccounts[n].key === sender_
     )[0]
@@ -192,6 +196,9 @@ export const sendNFTNative = (
       user = Object.keys(Web3Accounts).filter(
         n => Web3Accounts[n].key === sender_
       )[0]
+    if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
+      n => NewElrondAccounts[n].key === sender_
+    )[0]
     let err
     const data = await callFromInnerSigned(
       chain,
@@ -253,7 +260,9 @@ export const sendNFTForeign = (
       user = Object.keys(Web3Accounts).filter(
         n => Web3Accounts[n].key === sender_
       )[0]
-
+      if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
+        n => NewElrondAccounts[n].key === sender_
+      )[0]
     const helper = ChainFactory[chain]
     const inner = await helper.inner()
     const sender = await helper.signerFromPk(sender_)
