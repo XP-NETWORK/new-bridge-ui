@@ -349,9 +349,15 @@ const getOwnedNative = async (chain_helper, owner, dbList) => {
 
 export const listNFTNativeChains = async (chain, owner, dbList) => {
   const resM = Object.fromEntries(dbList.map(obj => [obj.id, obj]))
+  let arrayNfts = [];
   const final = []
   const helper = ChainFactory[chain]
-  let owned = await getOwnedNative(helper, owner, dbList)
+  dbList.forEach(data => {
+    if(data.data.includes(chain)){
+      arrayNfts.push(data)
+    }
+  })
+  let owned = await getOwnedNative(helper, owner, arrayNfts)
   let idGetter
   switch (chain) {
     case 'XP.network': {
@@ -416,12 +422,9 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
 
   for (const [ident, data] of owned) {
     let res
-    console.log(ident);
     try {
       res = await idGetter(ident, data)
-      console.log(res);
     } catch (e) {
-      console.log(e)
       continue
     }
     const { id, isWrapped, hash, originChain } = res
@@ -449,7 +452,7 @@ export const listNFTs = (chain, owner) => async dispatch => {
     dispatch(nftLoader(true))
     const dbList = await remoteNFTMeta.getAll()
     const nfts = await listNFTNativeChains(chain, owner, dbList)
-    dispatch(listNft(nfts))
+    if(nfts) dispatch(listNft(nfts));
   } catch (error) {
     console.error(error)
     dispatch(listNft([]))
