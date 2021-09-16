@@ -182,6 +182,7 @@ export const sendNFTNative = (
 ) => async dispatch => {
   try {
     console.log(chain, sender_)
+    console.log(Object.keys(TronAccs))
     let user = Object.keys(NewElrondAccounts).filter(
       n => NewElrondAccounts[n].key === sender_
     )[0]
@@ -197,7 +198,7 @@ export const sendNFTNative = (
         n => Web3Accounts[n].key === sender_
       )[0]
     if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
-      n => NewElrondAccounts[n].key === sender_
+      n => TronAccs[n].key === sender_
     )[0]
     let err
     const data = await callFromInnerSigned(
@@ -261,7 +262,7 @@ export const sendNFTForeign = (
         n => Web3Accounts[n].key === sender_
       )[0]
       if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
-        n => NewElrondAccounts[n].key === sender_
+        n => TronAccs[n].key === sender_
       )[0]
     const helper = ChainFactory[chain]
     const inner = await helper.inner()
