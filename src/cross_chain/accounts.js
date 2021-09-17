@@ -103,13 +103,13 @@ export const TronAccs = {
 }
 
 export const PredefinedAccounts = Object.fromEntries([
-  [chains[0], NewParachainAccounts],
-  [chains[1], Web3Accounts],
-  [chains[2], NewElrondAccounts],
+  [chains[12], NewParachainAccounts],
+  [chains[0], Web3Accounts],
+  [chains[1], NewElrondAccounts],
+  [chains[2], Web3Accounts],
   [chains[3], Web3Accounts],
   [chains[4], Web3Accounts],
   [chains[5], Web3Accounts],
   [chains[6], Web3Accounts],
-  [chains[7], Web3Accounts],
-  [chains[8], TronAccs],
+  [chains[7], TronAccs],
 ])
