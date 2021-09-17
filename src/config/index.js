@@ -1,5 +1,5 @@
 export const chains = [
-  
+  'XP.network', // 0
   'BSC', // 1
   'Elrond', // 2
   'HECO', // 3
@@ -12,11 +12,10 @@ export const chains = [
   'Solana', // 10
   'Algorand', // 11
   "Diem", // 12
-  'XP.network', // 0
 ]
 
 export const coins = [
-  
+  'XPNET', // 0
   'BNB', // 1
   'eGLD', // 2
   'HT', // 3
@@ -25,7 +24,6 @@ export const coins = [
   'MATIC', // 6
   'FTM', // 7
   'TRX', // 8
-  'XPNET', // 0
 ]
 
 export const exchangeRates = {

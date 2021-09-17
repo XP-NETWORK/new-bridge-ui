@@ -17,46 +17,45 @@ import { chains, coins } from '../config'
 
 export const mapChainToAvatar = chain => {
   switch (chain) {
-    
     case chains[0]: {
-      return binance
+      return xpNetIco
     }
     case chains[1]: {
-      return enrollIco
+      return binance
     }
     case chains[2]: {
-      return Heco
+      return enrollIco
     }
     case chains[3]: {
-      return etherium
+      return Heco
     }
     case chains[4]: {
-      return Avalanche
+      return etherium
     }
     case chains[5]: {
-      return Polygon
+      return Avalanche
     }
     case chains[6]: {
+      return Polygon
+    }
+    case chains[7]: {
       return Fantom
     }
-	case chains[7]: {
+	case chains[8]: {
 	  return Tron  
 	}
-    case chains[8]: {
+    case chains[9]: {
       return Cardano
     }
-    case chains[9]: {
+    case chains[10]: {
       return Solana
     }
-    case chains[10]: {
+    case chains[11]: {
       return Algorand
     }
-	case chains[11]: {
+	case chains[12]: {
 	  return Diem
 	}
-  case chains[12]: {
-    return xpNetIco
-  }
     default: {
       return xpNetIco
     }
