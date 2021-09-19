@@ -12,7 +12,7 @@ import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers'
 import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
-import TronWeb from "tronweb";
+import TronWeb from 'tronweb'
 import { PredefinedAccounts } from './accounts'
 
 /**
@@ -154,12 +154,12 @@ export function Web3Helper(chain) {
       )
       await web3Provider.ready
 
-	  web3 = await web3HelperFactory(
-		web3Provider,
-		minter_addr,
-		new ethers.utils.Interface(abi),
-		ChainConfig.web3_erc1155[chain]
-	  )
+      web3 = await web3HelperFactory(
+        web3Provider,
+        minter_addr,
+        new ethers.utils.Interface(abi),
+        ChainConfig.web3_erc1155[chain]
+      )
     }
   }
 
@@ -191,38 +191,44 @@ export function Web3Helper(chain) {
  * Wrapper over TronHelper from testsuite-ts
  */
 export function TronHelper() {
-  let tronWeb = undefined;
-  let tronWebp = undefined;
+  let tronWeb = undefined
+  let tronWebp = undefined
 
   async function requireTron() {
-      if (tronWeb === undefined) {
-          tronWebp = new TronWeb({
-              fullHost: CHAIN_INFO["Tron"].rpcUrl,
-              privateKey: PredefinedAccounts["Tron"]["ACC1"].key
-          })
-          tronWeb = await tronHelperFactory(tronWebp, ChainConfig.tron_event_rest, ChainConfig.web3_erc1155["Tron"], ChainConfig.web3_minters["Tron"], abi);
-      }
+    if (tronWeb === undefined) {
+      tronWebp = new TronWeb({
+        fullHost: CHAIN_INFO['Tron'].rpcUrl,
+        privateKey: PredefinedAccounts['Tron']['ACC1'].key,
+      })
+      tronWeb = await tronHelperFactory(
+        tronWebp,
+        ChainConfig.tron_event_rest,
+        ChainConfig.web3_erc1155['Tron'],
+        ChainConfig.web3_minters['Tron'],
+        abi
+      )
+    }
   }
 
   return {
-      ident: "Tron",
-      /**
-       * 
-       * @returns Inner TronHelper from testsuite-ts
-       */
-      async inner() {
-          await requireTron();
+    ident: 'Tron',
+    /**
+     *
+     * @returns Inner TronHelper from testsuite-ts
+     */
+    async inner() {
+      await requireTron()
 
-          return tronWeb;
-      },
-      /**
-       * Placeholder for signerFromPk
-       * tron uses raw strings for private keys
-       * 
-       * @param {string} pk private key
-       * @returns private key
-       */
-      signerFromPk: (pk) => Promise.resolve(pk)
+      return tronWeb
+    },
+    /**
+     * Placeholder for signerFromPk
+     * tron uses raw strings for private keys
+     *
+     * @param {string} pk private key
+     * @returns private key
+     */
+    signerFromPk: pk => Promise.resolve(pk),
   }
 }
 
@@ -239,4 +245,5 @@ export const ChainFactory = {
   Polygon: Web3Helper('Polygon'),
   Fantom: Web3Helper('Fantom'),
   Tron: TronHelper(),
+  EthereumClassic: Web3Helper('EthereumClassic'),
 }

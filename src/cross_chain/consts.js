@@ -48,9 +48,16 @@ export const CHAIN_INFO = {
   },
   Tron: {
     nonce: 0x9,
-    decimals: 1E6,
+    decimals: 1e6,
     native: coins[8],
     rpcUrl: 'https://api.shasta.trongrid.io/',
+  },
+  EthereumClassic: {
+    nonce: 10,
+    native: coins[9],
+    decimals: 1e18,
+    rpcUrl: 'https://www.ethercluster.com/mordor',
+    chainId: 63,
   },
 }
 

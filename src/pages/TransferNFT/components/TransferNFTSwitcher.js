@@ -1,5 +1,5 @@
 // External Imports
-import React, { Fragment,useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Image } from 'react-bootstrap'
@@ -24,7 +24,11 @@ import {
 import { mapChainToAvatar } from '../../../mappers'
 import { chains } from '../../../config'
 
-const checkDisabled = (item) => item === chains[9] || item === chains[10] || item === chains[11] || item === chains[12]
+const checkDisabled = item =>
+  item === chains[10] ||
+  item === chains[11] ||
+  item === chains[12] ||
+  item === chains[13]
 
 const TransferNFTSwitcher = ({
   fromChain,
@@ -43,8 +47,8 @@ const TransferNFTSwitcher = ({
   selectFromAccount,
   selectToAccount,
 }) => {
-  const tranBridge = chains.map((item) => {
-    const dis = checkDisabled(item);
+  const tranBridge = chains.map(item => {
+    const dis = checkDisabled(item)
     return {
       key: item,
       text: dis
@@ -57,7 +61,7 @@ const TransferNFTSwitcher = ({
       image: { avatar: true, src: mapChainToAvatar(item) },
     }
   })
-  const toBridge = chains.map((item) => {
+  const toBridge = chains.map(item => {
     const dis = checkDisabled(item)
     return {
       key: item,
@@ -71,10 +75,10 @@ const TransferNFTSwitcher = ({
       image: { avatar: true, src: mapChainToAvatar(item) },
     }
   })
-  const windowUrl = window.location.search;
-  const params = new URLSearchParams(windowUrl);
-  const [isCn,setIsCn] = useState(params.get("cn"))
-  const sourceAccounts = fromAccountS.map((item) => {
+  const windowUrl = window.location.search
+  const params = new URLSearchParams(windowUrl)
+  const [isCn, setIsCn] = useState(params.get('cn'))
+  const sourceAccounts = fromAccountS.map(item => {
     return {
       key: item,
       text: item,
@@ -160,7 +164,7 @@ const TransferNFTSwitcher = ({
         className={`${Classes.switcherWrap} d-flex align-items-center justify-content-center`}
       >
         <CardWrap>
-          <SelectItem label={isCn ?  '自': 'From'}>
+          <SelectItem label={isCn ? '自' : 'From'}>
             <Dropdown
               placeholder="Select option"
               fluid
@@ -173,7 +177,10 @@ const TransferNFTSwitcher = ({
             />
           </SelectItem>
 
-          <SelectItem className="second-title" label={isCn ? '源帐户': 'Source Account'}>
+          <SelectItem
+            className="second-title"
+            label={isCn ? '源帐户' : 'Source Account'}
+          >
             <Dropdown
               placeholder="Select option"
               fluid
@@ -213,7 +220,10 @@ const TransferNFTSwitcher = ({
               value={toChain}
             />
           </SelectItem>
-          <SelectItem className="second-title" label={isCn ? '目标账户': 'Target Account'}>
+          <SelectItem
+            className="second-title"
+            label={isCn ? '目标账户' : 'Target Account'}
+          >
             <Dropdown
               placeholder="Select option"
               fluid
