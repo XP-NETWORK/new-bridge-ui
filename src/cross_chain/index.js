@@ -14,6 +14,7 @@ import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
 import TronWeb from 'tronweb'
 import { PredefinedAccounts } from './accounts'
+import { CeloProvider, CeloWallet } from '@celo-tools/celo-ethers-wrapper'
 
 /**
  * Socket for tracking cross chain actions
@@ -137,19 +138,14 @@ export function ElrondHelper() {
   }
 }
 
-/**
- * Wrapper over Web3Helper from testsuite-ts
- *
- * @param {string} chain identifier of the web3 chain
- */
-export function Web3Helper(chain) {
+export function baseWeb3Helper(chain, provider_construct, signer_construct) {
   let web3 = undefined
   let web3Provider = undefined
   const minter_addr = ChainConfig.web3_minters[chain]
 
   async function requireWeb3() {
     if (!web3) {
-      web3Provider = ethers.providers.getDefaultProvider(
+      web3Provider = provider_construct(
         CHAIN_INFO[chain].rpcUrl
       )
       await web3Provider.ready
@@ -182,10 +178,24 @@ export function Web3Helper(chain) {
     async signerFromPk(pk) {
       await requireWeb3()
 
-      return new Wallet(pk, web3Provider)
+      return signer_construct(pk, web3Provider)
     },
   }
 }
+
+/**
+ * Wrapper over Web3Helper from testsuite-ts
+ *
+ * @param {string} chain identifier of the web3 chain
+ */
+export const Web3Helper = (chain) => baseWeb3Helper(chain, ethers.providers.getDefaultProvider, (pk, p) => new Wallet(pk, p));
+
+/**
+ * 
+ * Celo wrapper over Web3Helper from testsuite-ts
+ */
+
+export const CeloHelper = () => baseWeb3Helper("Celo", (uri) => new CeloProvider(uri), (pk, p) => new CeloWallet(pk, p));
 
 /**
  * Wrapper over TronHelper from testsuite-ts
@@ -246,5 +256,5 @@ export const ChainFactory = {
   Fantom: Web3Helper('Fantom'),
   Tron: TronHelper(),
   EthereumClassic: Web3Helper('EthereumClassic'),
-  Celo: Web3Helper('Celo'),
+  Celo: CeloHelper(),
 }
