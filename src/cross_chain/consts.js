@@ -59,6 +59,13 @@ export const CHAIN_INFO = {
     rpcUrl: 'https://www.ethercluster.com/mordor',
     chainId: 63,
   },
+  Celo: {
+    nonce: 0xc,
+    native: coins[10],
+    decimals: 1e18,
+    rpcUrl: 'https://alfajores-forno.celo-testnet.org',
+    chainId: 44787,
+  },
 }
 
 export const CHAIN_BY_NONCE = Object.fromEntries(

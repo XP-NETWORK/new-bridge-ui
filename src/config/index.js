@@ -9,10 +9,11 @@ export const chains = [
   'Fantom', // 7
   'Tron', // 8
   'EthereumClassic', // 9
-  'Cardano', // 10
-  'Solana', // 11
-  'Algorand', // 12
-  'Diem', // 13
+  'Celo', // 10
+  'Cardano', // 11
+  'Solana', // 12
+  'Algorand', // 13
+  'Diem', // 14
 ]
 
 export const coins = [
@@ -26,6 +27,7 @@ export const coins = [
   'FTM', // 7
   'TRX', // 8
   'ETC', // 9
+  'CELO',
 ]
 
 export const exchangeRates = {
@@ -38,6 +40,7 @@ export const exchangeRates = {
   FTM: 69.5,
   TRX: 45.6,
   ETC: 58.6,
+  CELO: 42.6,
 }
 
 export const ChainConfig = {
@@ -57,6 +60,7 @@ export const ChainConfig = {
     Fantom: process.env.REACT_APP_FTM_MINTER,
     Tron: process.env.REACT_APP_TRON_MINTER,
     EthereumClassic: process.env.REACT_APP_ETC_MINTER,
+    Celo: process.env.REACT_APP_CELO_MINTER,
   },
   web3_erc1155: {
     HECO: process.env.REACT_APP_HECO_ERC1155,
@@ -67,6 +71,7 @@ export const ChainConfig = {
     Fantom: process.env.REACT_APP_FTM_ERC1155,
     Tron: process.env.REACT_APP_TRON_ERC1155,
     EthereumClassic: process.env.REACT_APP_ETC_ERC1155,
+    Celo: process.env.REACT_APP_CELO_ERC1155,
   },
   web3_predefined: {
     HECO: process.env.REACT_APP_HECO_PREM,
@@ -77,6 +82,7 @@ export const ChainConfig = {
     Fantom: process.env.REACT_APP_FTM_PREM,
     Tron: process.env.REACT_APP_TRON_PREM,
     EthereumClassic: process.env.REACT_APP_ETC_PREM,
+    Celo: process.env.REACT_APP_CELO_PREM,
   },
 }
 
@@ -93,4 +99,5 @@ export const ExplorerPrefix = {
   Fantom: process.env.REACT_APP_FTM_EXPLORER,
   Tron: process.env.REACT_APP_TRON_EXPLORER,
   EthereumClassic: process.env.REACT_APP_ETC_EXPLORER,
+  Celo: process.env.REACT_APP_CELO_EXPLORER,
 }
