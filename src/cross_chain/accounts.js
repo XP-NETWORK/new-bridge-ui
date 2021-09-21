@@ -102,24 +102,6 @@ export const TronAccs = {
   },
 }
 
-export const HarmonyAccounts = {
-  ACC1 : {
-    name: 'ACC1',
-    account: 'one12zkwczxwwz4y7252kt69mrwdryp75ns5cymyca',
-    key: '0xbaedb25b3352638942e80aa3dbc2d54f2bab423849cce21a73c164f0c21103c8'
-  },
-  ACC2 : {
-    name: 'ACC2',
-    account: 'one1skvy2j9ace22mwpzfg9kpk32k732gs0ahmgt3s',
-    key: 'f34cd09de7cd40e0cbaa8c36a85e8964b66e0db1ccc795b8c38773b834fca2b4'
-  },
-  ACC3: {
-    name: 'ACC3',
-    account: 'one15lmu67dqsutu8lautgt3se63qma4gnuuutqant',
-    key: '98f6e6bf29e10e69871ed9e9271b8af704bbbd7ff86f2b2952ebdac1a5dc1cb8',
-  },
-}
-
 export const PredefinedAccounts = Object.fromEntries([
   [chains[0], NewParachainAccounts],
   [chains[1], Web3Accounts],
@@ -131,5 +113,5 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[7], Web3Accounts],
   [chains[8], TronAccs],
   [chains[9], Web3Accounts],
-  [chains[10], HarmonyAccounts]
+  [chains[10], Web3Accounts]
 ])
