@@ -256,4 +256,5 @@ export const ChainFactory = {
   Fantom: Web3Helper('Fantom'),
   Tron: TronHelper(),
   Celo: CeloHelper(),
+  Harmony: Web3Helper('Harmony'),
 }

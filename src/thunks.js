@@ -401,6 +401,7 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
     case 'Ropsten':
     case 'Tron':
     case 'Celo':
+    case 'Harmony':
     case 'BSC':
     case 'HECO': {
       idGetter = async (ident, data) => {

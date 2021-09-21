@@ -12,7 +12,7 @@ import Algorand from '../assets/images/Algarand.svg'
 import Fantom from '../assets/images/Fantom 1.svg'
 import Tron from '../assets/images/tron 1.svg'
 import Diem from '../assets/images/diem.svg'
-import ETC from '../assets/images/ETC.svg'
+import Harmony from "../assets/images/Harmony.svg"
 import Celo from '../assets/images/CELO.svg'
 // Blockchain related
 import { chains, coins } from '../config'
@@ -50,15 +50,18 @@ export const mapChainToAvatar = chain => {
       return Celo
     }
     case chains[10]: {
-      return Cardano
+      return Harmony
     }
     case chains[11]: {
-      return Solana
+      return Cardano
     }
     case chains[12]: {
-      return Algorand
+      return Solana
     }
     case chains[13]: {
+      return Algorand
+    }
+    case chains[14]: {
       return Diem
     }
     default: {
