@@ -113,5 +113,4 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[7], Web3Accounts],
   [chains[8], TronAccs],
   [chains[9], Web3Accounts],
-  [chains[10], Web3Accounts],
 ])

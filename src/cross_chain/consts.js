@@ -52,15 +52,8 @@ export const CHAIN_INFO = {
     native: coins[8],
     rpcUrl: 'https://api.shasta.trongrid.io/',
   },
-  EthereumClassic: {
-    nonce: 10,
-    native: coins[9],
-    decimals: 1e18,
-    rpcUrl: 'https://www.ethercluster.com/mordor',
-    chainId: 63,
-  },
   Celo: {
-    nonce: 0xc,
+    nonce: 0xb,
     native: coins[10],
     decimals: 1e18,
     rpcUrl: 'https://alfajores-forno.celo-testnet.org',

@@ -8,12 +8,11 @@ export const chains = [
   'Polygon', // 6
   'Fantom', // 7
   'Tron', // 8
-  'EthereumClassic', // 9
-  'Celo', // 10
-  'Cardano', // 11
-  'Solana', // 12
-  'Algorand', // 13
-  'Diem', // 14
+  'Celo', // 9
+  'Cardano', // 10
+  'Solana', // 11
+  'Algorand', // 12
+  'Diem', // 13
 ]
 
 export const coins = [
@@ -26,8 +25,7 @@ export const coins = [
   'MATIC', // 6
   'FTM', // 7
   'TRX', // 8
-  'ETC', // 9
-  'CELO',
+  'CELO', // 
 ]
 
 export const exchangeRates = {
@@ -39,7 +37,6 @@ export const exchangeRates = {
   MATIC: 420.1,
   FTM: 69.5,
   TRX: 45.6,
-  ETC: 58.6,
   CELO: 42.6,
 }
 

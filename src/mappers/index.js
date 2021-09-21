@@ -47,21 +47,18 @@ export const mapChainToAvatar = chain => {
       return Tron
     }
     case chains[9]: {
-      return ETC
-    }
-    case chains[10]: {
       return Celo
     }
-    case chains[11]: {
+    case chains[10]: {
       return Cardano
     }
-    case chains[12]: {
+    case chains[11]: {
       return Solana
     }
-    case chains[13]: {
+    case chains[12]: {
       return Algorand
     }
-    case chains[14]: {
+    case chains[13]: {
       return Diem
     }
     default: {

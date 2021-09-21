@@ -245,6 +245,5 @@ export const ChainFactory = {
   Polygon: Web3Helper('Polygon'),
   Fantom: Web3Helper('Fantom'),
   Tron: TronHelper(),
-  EthereumClassic: Web3Helper('EthereumClassic'),
   Celo: Web3Helper('Celo'),
 }
