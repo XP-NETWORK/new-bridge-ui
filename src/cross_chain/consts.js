@@ -53,7 +53,7 @@ export const CHAIN_INFO = {
     rpcUrl: 'https://api.shasta.trongrid.io/',
   },
   EthereumClassic: {
-    nonce: 0xb,
+    nonce: 10,
     native: coins[9],
     decimals: 1e18,
     rpcUrl: 'https://www.ethercluster.com/mordor',
