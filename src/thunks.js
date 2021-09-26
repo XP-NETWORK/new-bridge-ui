@@ -346,7 +346,7 @@ const getOwnedNative = async (chain_helper, owner, dbList) => {
       .map(async ({ data }) => {
         const attrs = data.split(',')
         const ident = {
-          contract_type: 'ERC1155',
+          contract_type: 'ERC721',
           contract: attrs[1],
           token: EthBN.from(attrs[3]),
         }
@@ -406,7 +406,7 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
     case 'BSC':
     case 'HECO': {
       idGetter = async (ident, data) => {
-        if (ident.contract === ChainConfig.web3_erc1155[chain]) {
+        if (ident.contract === ChainConfig.web3_erc721[chain]) {
           return await getWrappedNft(helper, ident.token, data)
         } else {
           return {

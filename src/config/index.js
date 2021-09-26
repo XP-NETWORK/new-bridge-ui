@@ -63,15 +63,15 @@ export const ChainConfig = {
     Fantom: process.env.REACT_APP_FTM_ERC1155,
     Tron: process.env.REACT_APP_TRON_ERC1155,
   },
-  web3_predefined: {
-    HECO: process.env.REACT_APP_HECO_PREM,
-    BSC: process.env.REACT_APP_BSC_PREM,
-    Ropsten: process.env.REACT_APP_ROP_PREM,
-    Avalanche: process.env.REACT_APP_AVA_PREM,
-    Polygon: process.env.REACT_APP_POLY_PREM,
-    Fantom: process.env.REACT_APP_FTM_PREM,
-    Tron: process.env.REACT_APP_TRON_PREM,
-  },
+  web3_erc721: {
+    HECO: process.env.REACT_APP_HECO_ERC721,
+    BSC: process.env.REACT_APP_BSC_ERC721,
+    Ropsten: process.env.REACT_APP_ROP_ERC721,
+    Avalanche: process.env.REACT_APP_AVA_ERC721,
+    Polygon: process.env.REACT_APP_POLY_ERC721,
+    Fantom: process.env.REACT_APP_FTM_ERC721,
+    Tron: process.env.REACT_APP_TRON_ERC721,
+  }
 }
 
 export const dbUrl = process.env.REACT_APP_DB
