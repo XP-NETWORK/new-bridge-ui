@@ -10,7 +10,7 @@ import {
   NewElrondAccounts,
   PredefinedAccounts,
   Web3Accounts,
-  TronAccs
+  TronAccs,
 } from './cross_chain/accounts'
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain'
 import { remoteNFTMeta } from './singletons'
@@ -137,7 +137,6 @@ export const returnWrappedTokens = (
       )[0]
     }
 
-  
     const result = callFromInnerSigned(
       chain,
       'unfreezeWrapped',
@@ -197,9 +196,8 @@ export const sendNFTNative = (
       user = Object.keys(Web3Accounts).filter(
         n => Web3Accounts[n].key === sender_
       )[0]
-    if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
-      n => TronAccs[n].key === sender_
-    )[0]
+    if (!PredefinedAccounts[chain][user])
+      user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
     let err
     const data = await callFromInnerSigned(
       chain,
@@ -261,9 +259,8 @@ export const sendNFTForeign = (
       user = Object.keys(Web3Accounts).filter(
         n => Web3Accounts[n].key === sender_
       )[0]
-      if(!PredefinedAccounts[chain][user] ) user = Object.keys(TronAccs).filter(
-        n => TronAccs[n].key === sender_
-      )[0]
+    if (!PredefinedAccounts[chain][user])
+      user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
     const helper = ChainFactory[chain]
     const inner = await helper.inner()
     const sender = await helper.signerFromPk(sender_)
@@ -403,6 +400,8 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
     case 'Fantom':
     case 'Ropsten':
     case 'Tron':
+    case 'Celo':
+    case 'Harmony':
     case 'BSC':
     case 'HECO': {
       idGetter = async (ident, data) => {
@@ -426,10 +425,10 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
 
   for (const [ident, data] of owned) {
     let res
-    console.log(ident);
+    console.log(ident)
     try {
       res = await idGetter(ident, data)
-      console.log(res);
+      console.log(res)
     } catch (e) {
       console.log(e)
       continue

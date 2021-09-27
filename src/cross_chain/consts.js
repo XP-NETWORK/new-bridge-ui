@@ -48,10 +48,24 @@ export const CHAIN_INFO = {
   },
   Tron: {
     nonce: 0x9,
-    decimals: 1E6,
+    decimals: 1e6,
     native: coins[8],
     rpcUrl: 'https://api.shasta.trongrid.io/',
   },
+  Celo: {
+    nonce: 0xb,
+    native: coins[9],
+    decimals: 1e18,
+    rpcUrl: 'https://alfajores-forno.celo-testnet.org',
+    chainId: 44787,
+  },
+  Harmony: {
+    nonce: 0xc,
+    native: coins[10],
+    decimals: 1e18,
+    rpcUrl: 'https://api.s0.b.hmny.io',
+    chainId: 1666700000,
+  }
 }
 
 export const CHAIN_BY_NONCE = Object.fromEntries(

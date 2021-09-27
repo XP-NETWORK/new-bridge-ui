@@ -7,11 +7,13 @@ export const chains = [
   'Avalanche', // 5
   'Polygon', // 6
   'Fantom', // 7
-  "Tron", // 8
-  'Cardano', // 9
-  'Solana', // 10
-  'Algorand', // 11
-  "Diem", // 12
+  'Tron', // 8
+  'Celo', // 9
+  'Harmony', // 10
+  'Cardano', // 11
+  'Solana', // 12
+  'Algorand', // 13
+  'Diem', // 14
 ]
 
 export const coins = [
@@ -24,6 +26,8 @@ export const coins = [
   'MATIC', // 6
   'FTM', // 7
   'TRX', // 8
+  'CELO', // 9
+  'ONE', //10
 ]
 
 export const exchangeRates = {
@@ -35,6 +39,8 @@ export const exchangeRates = {
   MATIC: 420.1,
   FTM: 69.5,
   TRX: 45.6,
+  CELO: 42.6,
+  ONE: 59.5,
 }
 
 export const ChainConfig = {
@@ -53,6 +59,8 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_MINTER,
     Fantom: process.env.REACT_APP_FTM_MINTER,
     Tron: process.env.REACT_APP_TRON_MINTER,
+    Celo: process.env.REACT_APP_CELO_MINTER,
+    Harmony: process.env.REACT_APP_HARMONY_MINTER,
   },
   web3_erc1155: {
     HECO: process.env.REACT_APP_HECO_ERC1155,
@@ -62,6 +70,8 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_ERC1155,
     Fantom: process.env.REACT_APP_FTM_ERC1155,
     Tron: process.env.REACT_APP_TRON_ERC1155,
+    Celo: process.env.REACT_APP_CELO_ERC1155,
+    Harmony: process.env.REACT_APP_HARMONY_ERC1155,
   },
   web3_erc721: {
     HECO: process.env.REACT_APP_HECO_ERC721,
@@ -71,6 +81,8 @@ export const ChainConfig = {
     Polygon: process.env.REACT_APP_POLY_ERC721,
     Fantom: process.env.REACT_APP_FTM_ERC721,
     Tron: process.env.REACT_APP_TRON_ERC721,
+    Celo: process.env.REACT_APP_CELO_ERC721,
+    Harmony: process.env.REACT_APP_HARMONY_ERC721,
   }
 }
 
@@ -85,5 +97,8 @@ export const ExplorerPrefix = {
   Avalanche: process.env.REACT_APP_AVA_EXPLORER,
   Polygon: process.env.REACT_APP_POLY_EXPLORER,
   Fantom: process.env.REACT_APP_FTM_EXPLORER,
-  Tron: process.env.REACT_APP_TRON_EXPLORER
+  Tron: process.env.REACT_APP_TRON_EXPLORER,
+  EthereumClassic: process.env.REACT_APP_ETC_EXPLORER,
+  Celo: process.env.REACT_APP_CELO_EXPLORER,
+  Harmony: process.env.REACT_APP_HARMONY_EXPLORER,
 }

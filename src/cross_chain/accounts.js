@@ -98,8 +98,8 @@ export const TronAccs = {
   ACC3: {
     name: 'ACC3',
     account: 'TRHLhivxVogGhtxKn6sC8UF2Fr3WBdaT8N',
-    key: '98f6e6bf29e10e69871ed9e9271b8af704bbbd7ff86f2b2952ebdac1a5dc1cb8'
-  }
+    key: '98f6e6bf29e10e69871ed9e9271b8af704bbbd7ff86f2b2952ebdac1a5dc1cb8',
+  },
 }
 
 export const PredefinedAccounts = Object.fromEntries([
@@ -112,4 +112,6 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[6], Web3Accounts],
   [chains[7], Web3Accounts],
   [chains[8], TronAccs],
+  [chains[9], Web3Accounts],
+  [chains[10], Web3Accounts]
 ])

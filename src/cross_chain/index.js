@@ -12,8 +12,9 @@ import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers'
 import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
-import TronWeb from "tronweb";
+import TronWeb from 'tronweb'
 import { PredefinedAccounts } from './accounts'
+import { CeloProvider, CeloWallet } from '@celo-tools/celo-ethers-wrapper'
 
 /**
  * Socket for tracking cross chain actions
@@ -137,29 +138,24 @@ export function ElrondHelper() {
   }
 }
 
-/**
- * Wrapper over Web3Helper from testsuite-ts
- *
- * @param {string} chain identifier of the web3 chain
- */
-export function Web3Helper(chain) {
+export function baseWeb3Helper(chain, provider_construct, signer_construct) {
   let web3 = undefined
   let web3Provider = undefined
   const minter_addr = ChainConfig.web3_minters[chain]
 
   async function requireWeb3() {
     if (!web3) {
-      web3Provider = ethers.providers.getDefaultProvider(
+      web3Provider = provider_construct(
         CHAIN_INFO[chain].rpcUrl
       )
       await web3Provider.ready
 
-	  web3 = await web3HelperFactory(
-		web3Provider,
-		minter_addr,
-		new ethers.utils.Interface(abi),
-		ChainConfig.web3_erc1155[chain]
-	  )
+      web3 = await web3HelperFactory(
+        web3Provider,
+        minter_addr,
+        new ethers.utils.Interface(abi),
+        ChainConfig.web3_erc1155[chain]
+      )
     }
   }
 
@@ -182,47 +178,67 @@ export function Web3Helper(chain) {
     async signerFromPk(pk) {
       await requireWeb3()
 
-      return new Wallet(pk, web3Provider)
+      return signer_construct(pk, web3Provider)
     },
   }
 }
 
 /**
+ * Wrapper over Web3Helper from testsuite-ts
+ *
+ * @param {string} chain identifier of the web3 chain
+ */
+export const Web3Helper = (chain) => baseWeb3Helper(chain, ethers.providers.getDefaultProvider, (pk, p) => new Wallet(pk, p));
+
+/**
+ * 
+ * Celo wrapper over Web3Helper from testsuite-ts
+ */
+
+export const CeloHelper = () => baseWeb3Helper("Celo", (uri) => new CeloProvider(uri), (pk, p) => new CeloWallet(pk, p));
+
+/**
  * Wrapper over TronHelper from testsuite-ts
  */
 export function TronHelper() {
-  let tronWeb = undefined;
-  let tronWebp = undefined;
+  let tronWeb = undefined
+  let tronWebp = undefined
 
   async function requireTron() {
-      if (tronWeb === undefined) {
-          tronWebp = new TronWeb({
-              fullHost: CHAIN_INFO["Tron"].rpcUrl,
-              privateKey: PredefinedAccounts["Tron"]["ACC1"].key
-          })
-          tronWeb = await tronHelperFactory(tronWebp, ChainConfig.tron_event_rest, ChainConfig.web3_erc1155["Tron"], ChainConfig.web3_minters["Tron"], abi);
-      }
+    if (tronWeb === undefined) {
+      tronWebp = new TronWeb({
+        fullHost: CHAIN_INFO['Tron'].rpcUrl,
+        privateKey: PredefinedAccounts['Tron']['ACC1'].key,
+      })
+      tronWeb = await tronHelperFactory(
+        tronWebp,
+        ChainConfig.tron_event_rest,
+        ChainConfig.web3_erc1155['Tron'],
+        ChainConfig.web3_minters['Tron'],
+        abi
+      )
+    }
   }
 
   return {
-      ident: "Tron",
-      /**
-       * 
-       * @returns Inner TronHelper from testsuite-ts
-       */
-      async inner() {
-          await requireTron();
+    ident: 'Tron',
+    /**
+     *
+     * @returns Inner TronHelper from testsuite-ts
+     */
+    async inner() {
+      await requireTron()
 
-          return tronWeb;
-      },
-      /**
-       * Placeholder for signerFromPk
-       * tron uses raw strings for private keys
-       * 
-       * @param {string} pk private key
-       * @returns private key
-       */
-      signerFromPk: (pk) => Promise.resolve(pk)
+      return tronWeb
+    },
+    /**
+     * Placeholder for signerFromPk
+     * tron uses raw strings for private keys
+     *
+     * @param {string} pk private key
+     * @returns private key
+     */
+    signerFromPk: pk => Promise.resolve(pk),
   }
 }
 
@@ -239,4 +255,6 @@ export const ChainFactory = {
   Polygon: Web3Helper('Polygon'),
   Fantom: Web3Helper('Fantom'),
   Tron: TronHelper(),
+  Celo: CeloHelper(),
+  Harmony: Web3Helper('Harmony'),
 }
