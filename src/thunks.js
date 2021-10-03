@@ -198,6 +198,17 @@ export const sendNFTNative = (
       )[0]
     if (!PredefinedAccounts[chain][user])
       user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
+
+    const target = ChainFactory[CHAIN_BY_NONCE[chain_nonce]]
+    const target_inner = await target.inner();
+
+    // TODO: Multiply by exchange rate
+    const estimate = await target_inner.estimateValidateUnfreezeNft(
+      ChainConfig.web3_validators,
+      to,
+      nft.hash
+    );
+
     let err
     const data = await callFromInnerSigned(
       chain,
@@ -205,7 +216,8 @@ export const sendNFTNative = (
       sender_,
       chain_nonce,
       to,
-      nft.hash
+      nft.hash,
+      estimate
     ).catch(er => {
       err = er
       if (PredefinedAccounts[chain] && PredefinedAccounts[chain][user])
@@ -261,10 +273,23 @@ export const sendNFTForeign = (
       )[0]
     if (!PredefinedAccounts[chain][user])
       user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
+
+    const target = ChainFactory[CHAIN_BY_NONCE[chain_nonce]]
+    const target_inner = await target.inner();
+
+    // TODO: Multiply by exchange rate
+    const estimate = await target_inner.estimateValidateUnfreezeNft(
+      ChainConfig.web3_validators,
+      to,
+      nft.id
+    );
+
     const helper = ChainFactory[chain]
+
     const inner = await helper.inner()
-    const sender = await helper.signerFromPk(sender_)
-    const [, aid] = await inner.unfreezeWrappedNft(sender, to, nft.hash)
+    const sender = await helper.signerFromPk(sender_);
+
+    const [, aid] = await inner.unfreezeWrappedNft(sender, to, nft.hash, estimate)
     let err
     const data = await txnSocket.waitTxHash(chain_nonce, aid).catch(er => {
       err = er
