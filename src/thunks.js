@@ -17,6 +17,8 @@ import { remoteExchangeRate, remoteNFTMeta } from './singletons'
 import { ChainConfig, ExplorerPrefix } from './config'
 import { CHAIN_BY_NONCE, CHAIN_INFO } from './cross_chain/consts'
 import { BigNumber as EthBN } from 'ethers'
+import BigNumber from 'bignumber.js'
+import { Base64 } from 'js-base64'
 
 const callFromInner = async (chain, func, ...args) => {
   const helper = ChainFactory[chain]
@@ -204,10 +206,15 @@ export const sendNFTNative = (
     const target_inner = await target.inner();
 
 
-    const estimate = await target_inner.estimateValidateUnfreezeNft(
+    const estimate = await target_inner.estimateValidateTransferNft(
       ChainConfig.web3_validators,
       to,
       nft.hash
+    );
+
+    const exRate = await remoteExchangeRate.getExchangeRate(
+      CHAIN_INFO[target_chain].currency,
+      CHAIN_INFO[chain].currency
     );
 
     const conv = estimate.times(
@@ -215,7 +222,7 @@ export const sendNFTNative = (
         CHAIN_INFO[target_chain].currency,
         CHAIN_INFO[chain].currency
       )
-    )
+    ).integerValue(BigNumber.ROUND_CEIL);
 
     let err
     const data = await callFromInnerSigned(
@@ -292,14 +299,14 @@ export const sendNFTForeign = (
     const estimate = await target_inner.estimateValidateUnfreezeNft(
       ChainConfig.web3_validators,
       to,
-      nft.id
+      nft.raw_data
     );
     const conv = estimate.times(
       await remoteExchangeRate.getExchangeRate(
         CHAIN_INFO[target_chain].currency,
         CHAIN_INFO[chain].currency
       )
-    )
+    ).integerValue(BigNumber.ROUND_CEIL);
 
     const sender = await helper.signerFromPk(sender_);
 
@@ -358,6 +365,7 @@ const getWrappedNft = async (source_chain_helper, identifier, nft_data) => {
 
   return {
     id: await foreign_inner.decodeUrlFromRaw(native_data.data),
+    raw_data: native_data.data,
     isWrapped: true,
     hash: identifier,
     originChain: CHAIN_BY_NONCE[native_data.chain_nonce],
@@ -472,13 +480,14 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
       console.log(e)
       continue
     }
-    const { id, isWrapped, hash, originChain } = res
+    const { id, isWrapped, hash, originChain, raw_data } = res
     if (resM[id] === undefined) {
       continue
     }
     resM[id].originChain = originChain
     resM[id].isWrapped = isWrapped
     resM[id].hash = hash
+    resM[id].raw_data = raw_data
 
     final.push(resM[id])
   }

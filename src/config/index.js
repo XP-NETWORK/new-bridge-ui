@@ -51,7 +51,7 @@ export const ChainConfig = {
   elrond_esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
   validator_txn_socket: process.env.REACT_APP_VALIDATOR_SOCK,
   tron_event_rest: process.env.REACT_APP_TRON_EVENT_REST,
-  web3_validators: ['0xa82bC0B7e50B769E715C45fF159f8EA5FEAd4194'],
+  web3_validators: ['0x0F7F9b1675174e5F62CE85D640A5c064BcdFf76c'],
   web3_minters: {
     HECO: process.env.REACT_APP_HECO_MINTER,
     BSC: process.env.REACT_APP_BSC_MINTER,
