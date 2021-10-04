@@ -15,7 +15,7 @@ import {
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain'
 import { remoteExchangeRate, remoteNFTMeta } from './singletons'
 import { ChainConfig, ExplorerPrefix } from './config'
-import { CHAIN_BY_NONCE } from './cross_chain/consts'
+import { CHAIN_BY_NONCE, CHAIN_INFO } from './cross_chain/consts'
 import { BigNumber as EthBN } from 'ethers'
 
 const callFromInner = async (chain, func, ...args) => {
