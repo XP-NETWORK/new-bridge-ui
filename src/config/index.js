@@ -88,6 +88,7 @@ export const ChainConfig = {
 }
 
 export const dbUrl = process.env.REACT_APP_DB
+export const exchangeUrl = process.env.REACT_APP_EXCHANGE_REST
 
 export const ExplorerPrefix = {
   'XP.network': process.env.REACT_APP_XP_EXPLORER,

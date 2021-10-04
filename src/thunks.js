@@ -13,7 +13,7 @@ import {
   TronAccs,
 } from './cross_chain/accounts'
 import { balanceAllTokens, ChainFactory, txnSocket } from './cross_chain'
-import { remoteNFTMeta } from './singletons'
+import { remoteExchangeRate, remoteNFTMeta } from './singletons'
 import { ChainConfig, ExplorerPrefix } from './config'
 import { CHAIN_BY_NONCE } from './cross_chain/consts'
 import { BigNumber as EthBN } from 'ethers'
@@ -199,15 +199,23 @@ export const sendNFTNative = (
     if (!PredefinedAccounts[chain][user])
       user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
 
-    const target = ChainFactory[CHAIN_BY_NONCE[chain_nonce]]
+    const target_chain = CHAIN_BY_NONCE[chain_nonce];
+    const target = ChainFactory[target_chain]
     const target_inner = await target.inner();
 
-    // TODO: Multiply by exchange rate
+
     const estimate = await target_inner.estimateValidateUnfreezeNft(
       ChainConfig.web3_validators,
       to,
       nft.hash
     );
+
+    const conv = estimate.times(
+      await remoteExchangeRate.getExchangeRate(
+        CHAIN_INFO[target_chain].currency,
+        CHAIN_INFO[chain].currency
+      )
+    )
 
     let err
     const data = await callFromInnerSigned(
@@ -217,7 +225,7 @@ export const sendNFTNative = (
       chain_nonce,
       to,
       nft.hash,
-      estimate
+      conv
     ).catch(er => {
       err = er
       if (PredefinedAccounts[chain] && PredefinedAccounts[chain][user])
@@ -274,22 +282,28 @@ export const sendNFTForeign = (
     if (!PredefinedAccounts[chain][user])
       user = Object.keys(TronAccs).filter(n => TronAccs[n].key === sender_)[0]
 
-    const target = ChainFactory[CHAIN_BY_NONCE[chain_nonce]]
+    const helper = ChainFactory[chain]
+    const inner = await helper.inner()
+
+    const target_chain = CHAIN_BY_NONCE[chain_nonce];
+    const target = ChainFactory[target_chain]
     const target_inner = await target.inner();
 
-    // TODO: Multiply by exchange rate
     const estimate = await target_inner.estimateValidateUnfreezeNft(
       ChainConfig.web3_validators,
       to,
       nft.id
     );
+    const conv = estimate.times(
+      await remoteExchangeRate.getExchangeRate(
+        CHAIN_INFO[target_chain].currency,
+        CHAIN_INFO[chain].currency
+      )
+    )
 
-    const helper = ChainFactory[chain]
-
-    const inner = await helper.inner()
     const sender = await helper.signerFromPk(sender_);
 
-    const [, aid] = await inner.unfreezeWrappedNft(sender, to, nft.hash, estimate)
+    const [, aid] = await inner.unfreezeWrappedNft(sender, to, nft.hash, conv)
     let err
     const data = await txnSocket.waitTxHash(chain_nonce, aid).catch(er => {
       err = er
