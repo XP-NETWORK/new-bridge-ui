@@ -18,7 +18,7 @@ import { ChainConfig, ExplorerPrefix } from './config'
 import { CHAIN_BY_NONCE, CHAIN_INFO } from './cross_chain/consts'
 import { BigNumber as EthBN } from 'ethers'
 import BigNumber from 'bignumber.js'
-import { Base64 } from 'js-base64'
+
 
 const callFromInner = async (chain, func, ...args) => {
   const helper = ChainFactory[chain]
@@ -210,11 +210,6 @@ export const sendNFTNative = (
       ChainConfig.web3_validators,
       to,
       nft.hash
-    );
-
-    const exRate = await remoteExchangeRate.getExchangeRate(
-      CHAIN_INFO[target_chain].currency,
-      CHAIN_INFO[chain].currency
     );
 
     const conv = estimate.times(
