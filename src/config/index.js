@@ -1,33 +1,30 @@
 export const chains = [
-  'XP.network', // 0
-  'BSC', // 1
-  'Elrond', // 2
-  'HECO', // 3
-  'Ropsten', // 4
-  'Avalanche', // 5
-  'Polygon', // 6
-  'Fantom', // 7
-  "Tron", // 8
-  'Cardano', // 9
-  'Solana', // 10
-  'Algorand', // 11
-  "Diem", // 12
+  'BSC', // 0
+  'Elrond', // 1
+  'HECO', // 2
+  'Ropsten', // 3
+  'Avalanche', // 4
+  'Polygon', // 5
+  'Fantom', // 6
+  "Tron", // 7
+  'Cardano', // 8
+  'Solana', // 9
+  'Algorand', // 10
+  "Diem", // 11
 ]
 
 export const coins = [
-  'XPNET', // 0
-  'BNB', // 1
-  'eGLD', // 2
-  'HT', // 3
-  'ETH', // 4
-  'AVAX', // 5
-  'MATIC', // 6
-  'FTM', // 7
-  'TRX', // 8
+  'BNB', // 0
+  'eGLD', // 1
+  'HT', // 2
+  'ETH', // 3
+  'AVAX', // 4
+  'MATIC', // 5
+  'FTM', // 6
+  'TRX', // 7
 ]
 
 export const exchangeRates = {
-  XPNET: 0.75,
   BNB: 402.9,
   eGLD: 146.55,
   HT: 14.1,
