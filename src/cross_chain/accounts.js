@@ -84,25 +84,12 @@ export const Web3Accounts = {
   },
 }
 
-export const Web3AccountsCut = {
+export const TronAccs = {
   ACC1: {
     name: 'ACC1',
-    account: '0x50aCEC08ce70aa4f2a8ab2F45d8dCd1903ea4E14',
-    key: '0xbaedb25b3352638942e80aa3dbc2d54f2bab423849cce21a73c164f0c21103c8',
+    account: 'TJuG3kvmGBDxGyUPBbvKePUjbopLurtqSo',
+    key: '991EE549C12DA5EC5AF246FB0733A334CB918D3A28D91DC4FEA19BAB7D3FFA8A',
   },
-  ACC3: {
-    name: 'ACC3',
-    account: '0x5002258315873AdCbdEF25a8E71C715A4f701dF5',
-    key: '0x03b1091c3158ec4a38185fb65a8f2159650396aa6efd3dec5b0fddd44375a0b1',
-  },
-}
-
-export const TronAccs = {
-  // ACC1: {
-  //   name: 'ACC1',
-  //   account: 'TJuG3kvmGBDxGyUPBbvKePUjbopLurtqSo',
-  //   key: '991EE549C12DA5EC5AF246FB0733A334CB918D3A28D91DC4FEA19BAB7D3FFA8A',
-  // },
   ACC2: {
     name: 'ACC2',
     account: 'TN9bHXEWditocT4Au15mgm7JM56XBnRCvm',
@@ -120,8 +107,8 @@ export const PredefinedAccounts = Object.fromEntries([
   [chains[1], NewElrondAccounts],
   [chains[2], Web3Accounts],
   [chains[3], Web3Accounts],
-  [chains[4], Web3AccountsCut],
+  [chains[4], Web3Accounts],
   [chains[5], Web3Accounts],
-  [chains[6], Web3AccountsCut],
+  [chains[6], Web3Accounts],
   [chains[7], TronAccs],
 ])
