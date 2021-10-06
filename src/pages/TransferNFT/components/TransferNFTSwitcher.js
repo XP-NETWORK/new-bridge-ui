@@ -24,7 +24,7 @@ import {
 import { mapChainToAvatar } from '../../../mappers'
 import { chains } from '../../../config'
 
-const checkDisabled = (item) => item === chains[6] || item === chains[8] || item === chains[9] || item === chains[10] || item === chains[11] || item === chains[12]
+const checkDisabled = (item) => item === chains[8] || item === chains[9] || item === chains[10] || item === chains[11] || item === chains[12]
 
 const TransferNFTSwitcher = ({
   fromChain,
