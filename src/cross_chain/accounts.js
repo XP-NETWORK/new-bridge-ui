@@ -19,24 +19,24 @@ export const NewElrondAccounts = {
   //       ZWRmOThkYzJiZWFlNjc3MzdlZWUyOTJjZjUxYzM4MGQ=
   //       -----END PRIVATE KEY for erd1fj9q2y5x9laqk3w0c5tu837ht8klnrwzh6hxwum7ac5jeagu8qxscsaw8r-----`,
   // },
-  // Carol: {
-  //   name: 'Carol',
-  //   account: 'erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q',
-  //   key: `-----BEGIN PRIVATE KEY for erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q-----
-  //       MTdiYmNmMDRlYmQ0ZGE3ZGI4MTBjOTY3ZDk1ZjUwNmEwZGMxOWQ1YmI0ZDU0MTVi
-  //       N2E4ODg2YTI1ZTFlZGI2ODk3YTViYTJmODgzMzIyYmRiN2QwOGJjNTY4MmEwOThm
-  //       OTc5N2Y4ODQxZjdmNjYyOTQ2NjM5NWRkMjQzNWE0NmY=
-  //       -----END PRIVATE KEY for erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q-----`,
-  // },
-  // Daniel: {
-  //   name: 'Daniel',
-  //   account: 'erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4',
-  //   key: `-----BEGIN PRIVATE KEY for erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4-----
-  //       ZmRjNGNhOWM2MzMxZjI3MDUzNDJlOTU1Zjk1ZGNkNjgxZDcxNDIwNjhiZTFhZjVi
-  //       MTI0MTExMGFmMGVkYTY4OWMyNWZlYmVhNzlhOWUxNDdkMzFjZWU5NWE2M2FmMDI0
-  //       MmRkZGQ5ODc0YzNlOTBlMzAyN2M4NzlhZWQ5YmE0N2Y=
-  //       -----END PRIVATE KEY for erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4-----`,
-  // },
+  Carol: {
+    name: 'Carol',
+    account: 'erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q',
+    key: `-----BEGIN PRIVATE KEY for erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q-----
+        MTdiYmNmMDRlYmQ0ZGE3ZGI4MTBjOTY3ZDk1ZjUwNmEwZGMxOWQ1YmI0ZDU0MTVi
+        N2E4ODg2YTI1ZTFlZGI2ODk3YTViYTJmODgzMzIyYmRiN2QwOGJjNTY4MmEwOThm
+        OTc5N2Y4ODQxZjdmNjYyOTQ2NjM5NWRkMjQzNWE0NmY=
+        -----END PRIVATE KEY for erd1j7jm5tugxv3tmd7s30zks2sf37te07yyralkv22xvw2a6fp453hsyvyd0q-----`,
+  },
+  Daniel: {
+    name: 'Daniel',
+    account: 'erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4',
+    key: `-----BEGIN PRIVATE KEY for erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4-----
+        ZmRjNGNhOWM2MzMxZjI3MDUzNDJlOTU1Zjk1ZGNkNjgxZDcxNDIwNjhiZTFhZjVi
+        MTI0MTExMGFmMGVkYTY4OWMyNWZlYmVhNzlhOWUxNDdkMzFjZWU5NWE2M2FmMDI0
+        MmRkZGQ5ODc0YzNlOTBlMzAyN2M4NzlhZWQ5YmE0N2Y=
+        -----END PRIVATE KEY for erd1cf07h6ne48s505cua626vwhsyskamkv8fslfpccz0jre4mvm53ls5dwyk4-----`,
+  },
   Eve: {
     name: 'Eve',
     account: 'erd1ld936834u3knmt8jx3xk2zjek7hk0ld0yfhg0ar3agxwck99c9kqd8lhlg',
