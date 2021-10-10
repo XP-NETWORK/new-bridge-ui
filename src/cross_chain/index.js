@@ -98,10 +98,12 @@ export function ElrondHelper() {
   async function requireElrd() {
     if (elrd === undefined) {
       elrd = await elrondHelperFactory(
-        ChainConfig.elrond_node,
-        ChainConfig.elrond_minter,
-        ChainConfig.elrond_esdt,
-        ChainConfig.elrond_esdt_nft
+        ChainConfig.elrond.node,
+        ChainConfig.elrond.minter,
+        ChainConfig.elrond.swap,
+        ChainConfig.elrond.esdt,
+        ChainConfig.elrond.esdt_nft,
+        ChainConfig.elrond.esdt_swap
       )
     }
   }
@@ -124,7 +126,7 @@ export function ElrondHelper() {
      * @returns bool
      */
     async isWrappedNft(_owner, ident) {
-      return ident === ChainConfig.elrond_esdt_nft
+      return ident === ChainConfig.elrond.esdt_nft
     },
     /**
      * Create elrond user signer from pem

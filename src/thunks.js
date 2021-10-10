@@ -212,12 +212,23 @@ export const sendNFTNative = (
       nft.hash
     );
 
+    console.log(`estimate`, estimate.toString());
+
+    const exrate = await remoteExchangeRate.getExchangeRate(
+      CHAIN_INFO[target_chain].currency,
+      CHAIN_INFO[chain].currency
+    )
+
+    console.log(`exrate`, exrate.toString())
+
     const conv = estimate.times(
       await remoteExchangeRate.getExchangeRate(
         CHAIN_INFO[target_chain].currency,
         CHAIN_INFO[chain].currency
       )
     ).integerValue(BigNumber.ROUND_CEIL);
+
+    console.log("value is", conv.toString());
 
     let err
     const data = await callFromInnerSigned(

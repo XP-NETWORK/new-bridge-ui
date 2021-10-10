@@ -45,12 +45,16 @@ export const exchangeRates = {
 
 export const ChainConfig = {
   xpnode: process.env.REACT_APP_XP_NODE,
-  elrond_node: process.env.REACT_APP_ELRD_NODE,
-  elrond_minter: process.env.REACT_APP_ELRD_MINTER,
-  elrond_esdt: process.env.REACT_APP_ELRD_ESDT,
-  elrond_esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
   validator_txn_socket: process.env.REACT_APP_VALIDATOR_SOCK,
   tron_event_rest: process.env.REACT_APP_TRON_EVENT_REST,
+  elrond: {
+    node: process.env.REACT_APP_ELRD_NODE,
+    minter: process.env.REACT_APP_ELRD_MINTER,
+    swap: process.env.REACT_APP_ELRD_SWAP,
+    esdt: process.env.REACT_APP_ELRD_ESDT,
+    esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
+    esdt_swap: process.env.REACT_APP_ELRD_ESDT_SWAP
+  },
   web3_validators: ['0x0F7F9b1675174e5F62CE85D640A5c064BcdFf76c'],
   web3_minters: {
     HECO: process.env.REACT_APP_HECO_MINTER,

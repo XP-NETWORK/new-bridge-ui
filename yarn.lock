@@ -1278,10 +1278,49 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
+"@elrondnetwork/erdjs@^8.0.1-alpha.5":
+  version "8.0.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/@elrondnetwork/erdjs/-/erdjs-8.0.1-alpha.5.tgz#5405960e273ce3fe6ff70923aaf93bb2d938bb94"
+  integrity sha512-Lfj4kt13jULWLrs4LZihnSCXGKxOcl1AY9UXN9PL2zkuqD+jOkt+DMPCdMyZqrTJATSIBtbR8oNpT8EJn9FGSQ==
+  dependencies:
+    "@babel/runtime" "7.11.2"
+    "@elrondnetwork/bls-wasm" "0.3.3"
+    "@elrondnetwork/hw-app-elrond" "0.3.2"
+    "@ledgerhq/hw-transport-u2f" "5.28.0"
+    "@ledgerhq/hw-transport-webusb" "5.28.0"
+    "@walletconnect/client" "1.6.5"
+    abort-controller "3.0.0"
+    axios "0.21.1"
+    bech32 "1.1.4"
+    bignumber.js "9.0.1"
+    bip39 "3.0.2"
+    blake2b "2.1.3"
+    ed25519-hd-key "1.1.2"
+    json-bigint "1.0.0"
+    json-duplicate-key-handle "1.0.0"
+    keccak "^3.0.1"
+    platform "1.3.6"
+    protobufjs "6.10.2"
+    qs "6.10.1"
+    scryptsy "2.1.0"
+    tweetnacl "1.0.3"
+    uuid "8.3.2"
+
 "@elrondnetwork/hw-app-elrond@0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@elrondnetwork/hw-app-elrond/-/hw-app-elrond-0.3.0.tgz#21b082aaa06293f54e5b1b8b87ed4457ff9bde00"
   integrity sha512-amDVVV4demxQdcvL8xEZNrPDDXve3d1sO3/1Tk5UglG2S2RTW3nnmC2UccKYUROEaQaH6YAyZwYhzyTKQilz4g==
+  dependencies:
+    "@ledgerhq/hw-transport" "^5.19.1"
+    "@ledgerhq/hw-transport-node-hid" "^5.19.1"
+    bip32-path "^0.4.2"
+    flow-copy-source "^2.0.9"
+    flow-typed "^3.2.1"
+
+"@elrondnetwork/hw-app-elrond@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@elrondnetwork/hw-app-elrond/-/hw-app-elrond-0.3.2.tgz#3c01cda58a58a63e7e3caf1b36ac8d5909550fb2"
+  integrity sha512-5TGnKuFQC6g4J9ipqEH5T71TEgGPDyU68lxdiF60qwQO5W0GaYvHKJiKe9rQdra5bCM04/4klMZDAg3BKqRoTw==
   dependencies:
     "@ledgerhq/hw-transport" "^5.19.1"
     "@ledgerhq/hw-transport-node-hid" "^5.19.1"
@@ -3139,6 +3178,17 @@
     "@walletconnect/window-metadata" "1.0.0"
     detect-browser "5.2.0"
 
+"@walletconnect/browser-utils@^1.6.6":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/browser-utils/-/browser-utils-1.6.6.tgz#a985b48c99c65a986a051d66a4910010a10a0c56"
+  integrity sha512-E29xSHU7Akd4jaPehWVGx7ct+SsUzZbxcGc0fz+Pw6/j4Gh5tlfYZ9XuVixuYI4WPdQ2CmOraj8RrVOu5vba4w==
+  dependencies:
+    "@walletconnect/safe-json" "1.0.0"
+    "@walletconnect/types" "^1.6.6"
+    "@walletconnect/window-getters" "1.0.0"
+    "@walletconnect/window-metadata" "1.0.0"
+    detect-browser "5.2.0"
+
 "@walletconnect/client@1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@walletconnect/client/-/client-1.4.1.tgz#c9c50df5afde23a35e23d96fe6d207c102e53850"
@@ -3149,6 +3199,16 @@
     "@walletconnect/types" "^1.4.1"
     "@walletconnect/utils" "^1.4.1"
 
+"@walletconnect/client@1.6.5":
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/@walletconnect/client/-/client-1.6.5.tgz#6616ae926abc7c87c48a2d3693f2eb697858e685"
+  integrity sha512-dRq1D3NEGwM2I3CpiwFsWy1rrdMKCMSfDUu3rCCXUE4zInx+pyq7IEFjYiSjtOEZzjRlUTqYwhjnYIezQZgh4w==
+  dependencies:
+    "@walletconnect/core" "^1.6.5"
+    "@walletconnect/iso-crypto" "^1.6.5"
+    "@walletconnect/types" "^1.6.5"
+    "@walletconnect/utils" "^1.6.5"
+
 "@walletconnect/core@^1.4.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-1.6.1.tgz#677a5924e0188654b44c2cffd59237e5b83b7e4d"
@@ -3157,6 +3217,15 @@
     "@walletconnect/socket-transport" "^1.6.1"
     "@walletconnect/types" "^1.6.1"
     "@walletconnect/utils" "^1.6.1"
+
+"@walletconnect/core@^1.6.5":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/core/-/core-1.6.6.tgz#0a35a9b0f91da8958bec27be801a510818f4e142"
+  integrity sha512-pSftIVPY6mYz2koZPBEYmeFeAjVf2MSnRHOM6+vx+iAsUEcfMZHkgeXX6GtM6Fjza+zSZu1qnmdgURVXpmKwtQ==
+  dependencies:
+    "@walletconnect/socket-transport" "^1.6.6"
+    "@walletconnect/types" "^1.6.6"
+    "@walletconnect/utils" "^1.6.6"
 
 "@walletconnect/crypto@^1.0.1":
   version "1.0.1"
@@ -3190,6 +3259,15 @@
     "@walletconnect/crypto" "^1.0.1"
     "@walletconnect/types" "^1.6.1"
     "@walletconnect/utils" "^1.6.1"
+
+"@walletconnect/iso-crypto@^1.6.5":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/iso-crypto/-/iso-crypto-1.6.6.tgz#19848bdcd54e9945961bab8a996cbca8a00d7cf1"
+  integrity sha512-wRYgKvd8K3A9FVLn2c0cDh4+9OUHkqibKtwQJTJsz+ibPGgd+n5j1/FjnzDDRGb9T1+TtlwYF3ZswKyys3diVQ==
+  dependencies:
+    "@walletconnect/crypto" "^1.0.1"
+    "@walletconnect/types" "^1.6.6"
+    "@walletconnect/utils" "^1.6.6"
 
 "@walletconnect/jsonrpc-types@^1.0.0":
   version "1.0.0"
@@ -3229,10 +3307,24 @@
     "@walletconnect/utils" "^1.6.1"
     ws "7.5.3"
 
+"@walletconnect/socket-transport@^1.6.6":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/socket-transport/-/socket-transport-1.6.6.tgz#b80974fe3e2a2f93ba1f6b40df5a0ea492b94086"
+  integrity sha512-mugCEoeKTx75ogb5ROg/+LA3yGTsuRNcrYgrApceo7WNU9Z4dG8l6ycMPqrrFcODcrasq3NmXVWUYDv/CvrzSw==
+  dependencies:
+    "@walletconnect/types" "^1.6.6"
+    "@walletconnect/utils" "^1.6.6"
+    ws "7.5.3"
+
 "@walletconnect/types@^1.4.1", "@walletconnect/types@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@walletconnect/types/-/types-1.6.1.tgz#f1044f2b122b7b3ca6ac12834e1b31d51c835d73"
   integrity sha512-seqL/ONP0iRNVEPbbl0NVCSWTPym4NiU2R/MPx9zK63dTH6lgR5Kp7QRfz+EWCoP6SCPr9vtyhQ0CMl3/qdCmw==
+
+"@walletconnect/types@^1.6.5", "@walletconnect/types@^1.6.6":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/types/-/types-1.6.6.tgz#8d644e2a390e494e40424c60272e91b4820bf0d4"
+  integrity sha512-op77cxexOmQQN36XB1sYouNTlBRV0Rup/2NYK8A1ffdwXa3a6HLHHdhBM7I/I9BVmRXoZ4+XoOnPKGGrYtlS3g==
 
 "@walletconnect/utils@^1.4.1", "@walletconnect/utils@^1.6.1":
   version "1.6.1"
@@ -3243,6 +3335,19 @@
     "@walletconnect/encoding" "^1.0.0"
     "@walletconnect/jsonrpc-utils" "^1.0.0"
     "@walletconnect/types" "^1.6.1"
+    bn.js "4.11.8"
+    js-sha3 "0.8.0"
+    query-string "6.13.5"
+
+"@walletconnect/utils@^1.6.5", "@walletconnect/utils@^1.6.6":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@walletconnect/utils/-/utils-1.6.6.tgz#e8e49a5f2c35e4a5f9153b09ad076655f38d8c96"
+  integrity sha512-s2X/cVXiMDSEoWV6i7HPMbP1obXlzP7KLMrBo9OMabiJKnQEh6HSZ39WLswB2PHnl8Hp1Sr4BdRvhM5kCcYWRw==
+  dependencies:
+    "@walletconnect/browser-utils" "^1.6.6"
+    "@walletconnect/encoding" "^1.0.0"
+    "@walletconnect/jsonrpc-utils" "^1.0.0"
+    "@walletconnect/types" "^1.6.6"
     bn.js "4.11.8"
     js-sha3 "0.8.0"
     query-string "6.13.5"
@@ -11301,6 +11406,13 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+qs@6.10.1:
+  version "6.10.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.1.tgz#4931482fa8d647a5aab799c5271d2133b981fb6a"
+  integrity sha512-M528Hph6wsSVOBiYUnGf+K/7w0hNshs/duGsNXPUCLH5XAqjEtiPGwNONLV0tBH8NoGb0mvD5JubnUTrujKDTg==
+  dependencies:
+    side-channel "^1.0.4"
+
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -13206,6 +13318,26 @@ test-exclude@^6.0.0:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
     minimatch "^3.0.4"
+
+"testsuite-ts@git+https://github.com/xp-network/bridge-ui-logics#bleeding-edge":
+  version "2.0.0"
+  resolved "git+https://github.com/xp-network/bridge-ui-logics#5283420efe8a73d1c61f3b99a32c7d948aaaefb2"
+  dependencies:
+    "@elrondnetwork/erdjs" "^8.0.1-alpha.5"
+    "@polkadot/api" "^5.2.1"
+    "@polkadot/api-contract" "^5.2.1"
+    "@polkadot/keyring" "^7.0.3"
+    "@polkadot/types" "^5.2.1"
+    "@polkadot/util" "^7.1.1"
+    "@polkadot/util-crypto" "^7.1.1"
+    axios "^0.21.1"
+    bignumber.js "^9.0.1"
+    ethers "^5.4.1"
+    js-base64 "^3.6.1"
+    socket.io-client "^4.1.3"
+    testsuite-ts "git+https://github.com/xp-network/bridge-ui-logics#web3-new"
+    tronweb "^4.0.0"
+    validator "git+https://github.com/xp-network/migration-validator#master"
 
 "testsuite-ts@git+https://github.com/xp-network/bridge-ui-logics#web3-new":
   version "1.0.0"
