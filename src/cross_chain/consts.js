@@ -71,7 +71,7 @@ export const CHAIN_INFO = {
     currency: SupportedCurrency.TRX
   },
   Celo: {
-    nonce: 0xb,
+    nonce: 0xa,
     native: coins[9],
     decimals: 1e18,
     rpcUrl: 'https://alfajores-forno.celo-testnet.org',
@@ -79,7 +79,7 @@ export const CHAIN_INFO = {
     currency: SupportedCurrency.CELO
   },
   Harmony: {
-    nonce: 0xc,
+    nonce: 0xb,
     native: coins[10],
     decimals: 1e18,
     rpcUrl: 'https://api.s0.b.hmny.io',
