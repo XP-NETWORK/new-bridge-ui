@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js"
+
 export const chains = [
   'XP.network', // 0
   'BSC', // 1
@@ -46,6 +48,7 @@ export const exchangeRates = {
 export const ChainConfig = {
   xpnode: process.env.REACT_APP_XP_NODE,
   validator_txn_socket: process.env.REACT_APP_VALIDATOR_SOCK,
+  validator_fee: parseFloat(process.env.REACT_APP_VALIDATOR_FEE) + 1,
   tron_event_rest: process.env.REACT_APP_TRON_EVENT_REST,
   elrond: {
     node: process.env.REACT_APP_ELRD_NODE,

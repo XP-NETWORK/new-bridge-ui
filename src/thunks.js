@@ -222,10 +222,7 @@ export const sendNFTNative = (
     console.log(`exrate`, exrate.toString())
 
     const conv = estimate.times(
-      await remoteExchangeRate.getExchangeRate(
-        CHAIN_INFO[target_chain].currency,
-        CHAIN_INFO[chain].currency
-      )
+      exrate * ChainConfig.validator_fee
     ).integerValue(BigNumber.ROUND_CEIL);
 
     console.log("value is", conv.toString());
@@ -481,7 +478,6 @@ export const listNFTNativeChains = async (chain, owner, dbList) => {
     console.log(ident)
     try {
       res = await idGetter(ident, data)
-      console.log(res)
     } catch (e) {
       console.log(e)
       continue
