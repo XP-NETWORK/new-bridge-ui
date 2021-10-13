@@ -2,12 +2,6 @@ import { SupportedCurrency } from 'crypto-exchange-rate/dist/model/domain'
 import { coins } from '../config'
 
 export const CHAIN_INFO = {
-  'XP.network': {
-    nonce: 1,
-    native: 'XPNET',
-    decimals: 1e12,
-    currency: SupportedCurrency.XPNET,
-  },
   Elrond: {
     nonce: 2,
     native: 'EGLD',

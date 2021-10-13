@@ -1,35 +1,31 @@
-import BigNumber from 'bignumber.js'
-
 export const chains = [
-  'XP.network', // 0
-  'BSC', // 1
-  'Elrond', // 2
-  'HECO', // 3
-  'Ropsten', // 4
-  'Avalanche', // 5
-  'Polygon', // 6
-  'Fantom', // 7
-  'Tron', // 8
-  'Celo', // 9
-  'Harmony', // 10
-  'Cardano', // 11
-  'Solana', // 12
-  'Algorand', // 13
-  'Diem', // 14
+  'BSC', // 0
+  'Elrond', // 1
+  'HECO', // 2
+  'Ropsten', // 3
+  'Avalanche', // 4
+  'Polygon', // 5
+  'Fantom', // 6
+  'Tron', // 7
+  'Celo', // 8
+  'Harmony', // 9
+  'Cardano', // 10
+  'Solana', // 11
+  'Algorand', // 12
+  'Diem', // 13
 ]
 
 export const coins = [
-  'XPNET', // 0
-  'BNB', // 1
-  'eGLD', // 2
-  'HT', // 3
-  'ETH', // 4
-  'AVAX', // 5
-  'MATIC', // 6
-  'FTM', // 7
-  'TRX', // 8
-  'CELO', // 9
-  'ONE', //10
+  'BNB', // 0
+  'eGLD', // 1
+  'HT', // 2
+  'ETH', // 3
+  'AVAX', // 4
+  'MATIC', // 5
+  'FTM', // 6
+  'TRX', // 7
+  'CELO', // 8
+  'ONE', // 9
 ]
 
 export const exchangeRates = {
@@ -98,7 +94,6 @@ export const dbUrl = process.env.REACT_APP_DB
 export const exchangeUrl = process.env.REACT_APP_EXCHANGE_REST
 
 export const ExplorerPrefix = {
-  'XP.network': process.env.REACT_APP_XP_EXPLORER,
   Elrond: process.env.REACT_APP_ELRD_EXPLORER,
   HECO: process.env.REACT_APP_HECO_EXPLORER,
   BSC: process.env.REACT_APP_BSC_EXPLORER,

@@ -48,24 +48,6 @@ export const NewElrondAccounts = {
   },
 }
 
-const NewParachainAccounts = {
-  Alice_Stash: {
-    name: 'Alice_Stash',
-    account: '5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY',
-    key: '//Alice//stash', // TODO: Cache it
-  },
-  Bob: {
-    name: 'Bob',
-    account: '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty',
-    key: '//Bob',
-  },
-  Bob_Stash: {
-    name: 'Bob_Stash',
-    account: '5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc',
-    key: '//Bob//stash',
-  },
-}
-
 export const Web3Accounts = {
   ACC1: {
     name: 'ACC1',
@@ -103,15 +85,14 @@ export const TronAccs = {
 }
 
 export const PredefinedAccounts = Object.fromEntries([
-  [chains[0], NewParachainAccounts],
-  [chains[1], Web3Accounts],
-  [chains[2], NewElrondAccounts],
+  [chains[0], Web3Accounts],
+  [chains[1], NewElrondAccounts],
+  [chains[2], Web3Accounts],
   [chains[3], Web3Accounts],
   [chains[4], Web3Accounts],
   [chains[5], Web3Accounts],
   [chains[6], Web3Accounts],
-  [chains[7], Web3Accounts],
-  [chains[8], TronAccs],
+  [chains[7], TronAccs],
+  [chains[8], Web3Accounts],
   [chains[9], Web3Accounts],
-  [chains[10], Web3Accounts],
 ])
