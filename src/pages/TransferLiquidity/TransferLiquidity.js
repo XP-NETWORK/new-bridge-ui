@@ -1,5 +1,5 @@
 // External Imports
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Dropdown } from 'semantic-ui-react'
 import { Col, Container, Row } from 'react-bootstrap'
@@ -66,9 +66,9 @@ const TransferLiquidity = ({
     }
   })
 
-  const windowUrl = window.location.search;
-  const params = new URLSearchParams(windowUrl);
-  const [isCn,setIsCn] = useState(params.get("cn"))
+  const windowUrl = window.location.search
+  const params = new URLSearchParams(windowUrl)
+  const [isCn, setIsCn] = useState(params.get('cn'))
 
   const toTranBridge = fromTranBridge
 
@@ -184,9 +184,10 @@ const TransferLiquidity = ({
     <Container disabled>
       <div className="title title--primary main-title">
         <h2>
-        {isCn ?  '跨链代币桥': 'Cross-Chain Tokens Bridge'}
-           -{' '}
-          <span style={{ color: '#F27603' }}>{isCn ? '即将推出': 'Coming Soon'}</span>
+          {isCn ? '跨链代币桥' : 'Cross-Chain Tokens Bridge'}-{' '}
+          <span style={{ color: '#F27603' }}>
+            {isCn ? '即将推出' : 'Coming Soon'}
+          </span>
         </h2>
       </div>
       <Row>
@@ -198,7 +199,7 @@ const TransferLiquidity = ({
             } align-items-center justify-content-center`}
           >
             <CardWrap>
-              <SelectItem label={isCn ?  '自': 'From'} disabled>
+              <SelectItem label={isCn ? '自' : 'From'} disabled>
                 <Dropdown
                   placeholder={'Select option'}
                   fluid
@@ -209,7 +210,7 @@ const TransferLiquidity = ({
                   disabled
                 />
               </SelectItem>
-              <SelectItem label={isCn ? '源帐户': 'Source Account'}>
+              <SelectItem label={isCn ? '源帐户' : 'Source Account'}>
                 <Dropdown
                   placeholder="Select option"
                   fluid
@@ -268,7 +269,7 @@ const TransferLiquidity = ({
                   disabled
                 />
               </SelectItem>
-              <SelectItem label={isCn ? '目标账户': 'Target Account'}>
+              <SelectItem label={isCn ? '目标账户' : 'Target Account'}>
                 <Dropdown
                   placeholder="Select option"
                   fluid

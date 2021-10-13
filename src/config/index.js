@@ -1,4 +1,4 @@
-import BigNumber from "bignumber.js"
+import BigNumber from 'bignumber.js'
 
 export const chains = [
   'XP.network', // 0
@@ -56,7 +56,7 @@ export const ChainConfig = {
     swap: process.env.REACT_APP_ELRD_SWAP,
     esdt: process.env.REACT_APP_ELRD_ESDT,
     esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
-    esdt_swap: process.env.REACT_APP_ELRD_ESDT_SWAP
+    esdt_swap: process.env.REACT_APP_ELRD_ESDT_SWAP,
   },
   web3_validators: ['0x0F7F9b1675174e5F62CE85D640A5c064BcdFf76c'],
   web3_minters: {
@@ -91,7 +91,7 @@ export const ChainConfig = {
     Tron: process.env.REACT_APP_TRON_ERC721,
     Celo: process.env.REACT_APP_CELO_ERC721,
     Harmony: process.env.REACT_APP_HARMONY_ERC721,
-  }
+  },
 }
 
 export const dbUrl = process.env.REACT_APP_DB

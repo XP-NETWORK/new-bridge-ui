@@ -1,4 +1,7 @@
-import { NetworkBatchExchangeRateService, networkBatchExchangeRateService } from 'crypto-exchange-rate/dist/model/network/BatchExchangeRateService'
+import {
+  NetworkBatchExchangeRateService,
+  networkBatchExchangeRateService,
+} from 'crypto-exchange-rate/dist/model/network/BatchExchangeRateService'
 import { nftMetaService, NFTMetaService } from 'nft-db-client'
 import { dbUrl, exchangeUrl } from '../config'
 export { nftMetaDtoMapper } from 'nft-db-client'
@@ -8,5 +11,5 @@ export function configNFTMetaService(): NFTMetaService {
 }
 
 export function configBatchExchangeService(): NetworkBatchExchangeRateService {
-  return networkBatchExchangeRateService(exchangeUrl!);
+  return networkBatchExchangeRateService(exchangeUrl!)
 }

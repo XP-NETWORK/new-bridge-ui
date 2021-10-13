@@ -54,9 +54,9 @@ const TransferNFT = ({
       getNfts(fromChain, PredefinedAccounts[fromChain][name].account)
     }
   }, [fromChain, fromAcct, getNfts])
-  const windowUrl = window.location.search;
-  const params = new URLSearchParams(windowUrl);
-  const [isCn,setIsCn] = useState(params.get("cn"))
+  const windowUrl = window.location.search
+  const params = new URLSearchParams(windowUrl)
+  const [isCn, setIsCn] = useState(params.get('cn'))
 
   const setLoader = (isMultiChain) => {
     closePopup()
@@ -215,10 +215,10 @@ const TransferNFT = ({
                 {modalMessage ? (
                   <>
                     <img className="check-mark " src={Check} alt="" />{' '}
-                    {isCn ?  '发送成功': 'Successfully Sent'}
+                    {isCn ? '发送成功' : 'Successfully Sent'}
                   </>
                 ) : loader ? (
-                  `${isCn ? 'NFT转移中': 'Transferring NFTs'}`
+                  `${isCn ? 'NFT转移中' : 'Transferring NFTs'}`
                 ) : (
                   `${isCn ? '发送NFT' : 'Send NFTs'}`
                 )}
@@ -242,7 +242,8 @@ const TransferNFT = ({
           <div className="transaction-message">
             {modalMessage ? (
               <a target="_blank" href={modalMessage} rel="noreferrer">
-               {isCn ? '查看交易' : 'View transaction'}  <img src={Next} alt="" />
+                {isCn ? '查看交易' : 'View transaction'}{' '}
+                <img src={Next} alt="" />
               </a>
             ) : (
               ''

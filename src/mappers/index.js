@@ -12,12 +12,12 @@ import Algorand from '../assets/images/Algarand.svg'
 import Fantom from '../assets/images/Fantom 1.svg'
 import Tron from '../assets/images/tron 1.svg'
 import Diem from '../assets/images/diem.svg'
-import Harmony from "../assets/images/Harmony.svg"
+import Harmony from '../assets/images/Harmony.svg'
 import Celo from '../assets/images/CELO.svg'
 // Blockchain related
 import { chains, coins } from '../config'
 
-export const mapChainToAvatar = chain => {
+export const mapChainToAvatar = (chain) => {
   switch (chain) {
     case chains[0]: {
       return xpNetIco
@@ -70,7 +70,7 @@ export const mapChainToAvatar = chain => {
   }
 }
 
-export const mapCoinToAvatar = coin => {
+export const mapCoinToAvatar = (coin) => {
   switch (coin) {
     case coins[0]: {
       return xpNetIco

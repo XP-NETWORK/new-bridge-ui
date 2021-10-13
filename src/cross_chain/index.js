@@ -147,9 +147,7 @@ export function baseWeb3Helper(chain, provider_construct, signer_construct) {
 
   async function requireWeb3() {
     if (!web3) {
-      web3Provider = provider_construct(
-        CHAIN_INFO[chain].rpcUrl
-      )
+      web3Provider = provider_construct(CHAIN_INFO[chain].rpcUrl)
       await web3Provider.ready
 
       web3 = await web3HelperFactory(
@@ -190,14 +188,24 @@ export function baseWeb3Helper(chain, provider_construct, signer_construct) {
  *
  * @param {string} chain identifier of the web3 chain
  */
-export const Web3Helper = (chain) => baseWeb3Helper(chain, ethers.providers.getDefaultProvider, (pk, p) => new Wallet(pk, p));
+export const Web3Helper = (chain) =>
+  baseWeb3Helper(
+    chain,
+    ethers.providers.getDefaultProvider,
+    (pk, p) => new Wallet(pk, p)
+  )
 
 /**
- * 
+ *
  * Celo wrapper over Web3Helper from testsuite-ts
  */
 
-export const CeloHelper = () => baseWeb3Helper("Celo", (uri) => new CeloProvider(uri), (pk, p) => new CeloWallet(pk, p));
+export const CeloHelper = () =>
+  baseWeb3Helper(
+    'Celo',
+    (uri) => new CeloProvider(uri),
+    (pk, p) => new CeloWallet(pk, p)
+  )
 
 /**
  * Wrapper over TronHelper from testsuite-ts
@@ -240,7 +248,7 @@ export function TronHelper() {
      * @param {string} pk private key
      * @returns private key
      */
-    signerFromPk: pk => Promise.resolve(pk),
+    signerFromPk: (pk) => Promise.resolve(pk),
   }
 }
 
