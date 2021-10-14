@@ -8,7 +8,6 @@ import {
 } from 'testsuite-ts'
 import { ChainConfig } from '../config'
 import { CHAIN_BY_NONCE, CHAIN_INFO } from './consts'
-import { abi } from '../assets/Minter.json'
 import { ethers, Wallet } from 'ethers'
 import { Keyring } from '@polkadot/keyring'
 import { UserSigner } from '@elrondnetwork/erdjs/out'
@@ -154,7 +153,6 @@ export function baseWeb3Helper(chain, provider_construct, signer_construct) {
       web3 = await web3HelperFactory(
         web3Provider,
         minter_addr,
-        new ethers.utils.Interface(abi),
         ChainConfig.web3_erc1155[chain]
       )
     }
@@ -226,8 +224,7 @@ export function TronHelper() {
         tronWebp,
         ChainConfig.tron_event_rest,
         ChainConfig.web3_erc1155['Tron'],
-        ChainConfig.web3_minters['Tron'],
-        abi
+        ChainConfig.web3_minters['Tron']
       )
     }
   }
