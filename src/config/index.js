@@ -54,6 +54,8 @@ export const ChainConfig = {
     esdt_nft: process.env.REACT_APP_ELRD_ESDT_NFT,
     esdt_swap: process.env.REACT_APP_ELRD_ESDT_SWAP,
   },
+  elrond_validators: ['erd1qqqqqqqqqqqqqpgqx8dhqmvpnm4f0ylhazn7elwrx7gvmwnnk4asyp83t6'],
+  tron_validators: ['TDESCaeTLQwvXv1GDz9Q1AKDMAmDk4AF6x'],
   web3_validators: ['0x0F7F9b1675174e5F62CE85D640A5c064BcdFf76c'],
   web3_minters: {
     HECO: process.env.REACT_APP_HECO_MINTER,

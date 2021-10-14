@@ -205,7 +205,7 @@ export const sendNFTNative = (
     const target_inner = await target.inner()
 
     const estimate = await target_inner.estimateValidateTransferNft(
-      ChainConfig.web3_validators,
+      target.validators,
       to,
       nft.hash
     )
@@ -217,11 +217,11 @@ export const sendNFTNative = (
       CHAIN_INFO[chain].currency
     )
 
-    console.log(`exrate`, exrate.toString())
-
     const conv = estimate
+      .dividedBy(CHAIN_INFO[target_chain].decimals)
       .times(exrate * ChainConfig.validator_fee)
-      .integerValue(BigNumber.ROUND_CEIL)
+      .times(CHAIN_INFO[chain].decimals)
+      .integerValue(BigNumber.ROUND_CEIL);
 
     console.log('value is', conv.toString())
 
@@ -298,18 +298,21 @@ export const sendNFTForeign = (
     const target_inner = await target.inner()
 
     const estimate = await target_inner.estimateValidateUnfreezeNft(
-      ChainConfig.web3_validators,
+      target.validators,
       to,
       nft.raw_data
-    )
+    );
+    
+    const exrate = await remoteExchangeRate.getExchangeRate(
+      CHAIN_INFO[target_chain].currency,
+      CHAIN_INFO[chain].currency
+    );
+    
     const conv = estimate
-      .times(
-        await remoteExchangeRate.getExchangeRate(
-          CHAIN_INFO[target_chain].currency,
-          CHAIN_INFO[chain].currency
-        )
-      )
-      .integerValue(BigNumber.ROUND_CEIL)
+      .dividedBy(CHAIN_INFO[target_chain].decimals)
+      .times(exrate * ChainConfig.validator_fee)
+      .times(CHAIN_INFO[chain].decimals)
+      .integerValue(BigNumber.ROUND_CEIL);
 
     const sender = await helper.signerFromPk(sender_)
 

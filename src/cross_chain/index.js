@@ -110,6 +110,7 @@ export function ElrondHelper() {
 
   return {
     ident: 'Elrond',
+    validators: ChainConfig.elrond_validators,
     /**
      *
      * @returns Inner ElrondHelper from testsuite-ts
@@ -161,6 +162,7 @@ export function baseWeb3Helper(chain, provider_construct, signer_construct) {
 
   return {
     ident: chain,
+    validators: ChainConfig.web3_validators,
     /**
      * @returns Inner Web3Helper from testsuite-ts
      */
@@ -232,6 +234,7 @@ export function TronHelper() {
 
   return {
     ident: 'Tron',
+    validators: ChainConfig.tron_validators,
     /**
      *
      * @returns Inner TronHelper from testsuite-ts
@@ -248,7 +251,7 @@ export function TronHelper() {
      * @param {string} pk private key
      * @returns private key
      */
-    signerFromPk: (pk) => Promise.resolve(pk),
+    signerFromPk: pk => Promise.resolve(pk)
   }
 }
 
