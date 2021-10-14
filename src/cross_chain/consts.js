@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { SupportedCurrency } from 'crypto-exchange-rate/dist/model/domain';
+import { SupportedCurrency } from 'crypto-exchange-rate';
 import { coins } from '../config';
 
 export const CHAIN_INFO = {
