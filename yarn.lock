@@ -13380,7 +13380,7 @@ test-exclude@^6.0.0:
 
 "testsuite-ts@git+https://github.com/xp-network/bridge-ui-logics#bleeding-edge":
   version "2.0.0"
-  resolved "git+https://github.com/xp-network/bridge-ui-logics#8cdc938e5629e047ad293afc4f8c9a609e91f790"
+  resolved "git+https://github.com/xp-network/bridge-ui-logics#8e9559fbada0b12644cfbcc36cee140ee8cb31f7"
   dependencies:
     "@elrondnetwork/erdjs" "^8.0.1-alpha.5"
     "@polkadot/api" "^5.2.1"
