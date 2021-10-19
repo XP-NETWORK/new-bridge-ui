@@ -34,7 +34,7 @@ export const CHAIN_INFO = {
   },
   Polygon: {
     nonce: 7,
-    native: coins[6],
+    native: coins[5],
     chainId: 80001,
     rpcUrl: 'https://matic-testnet-archive-rpc.bwarelabs.com',
     decimals: 1e18,
