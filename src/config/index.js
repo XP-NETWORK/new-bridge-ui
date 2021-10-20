@@ -4,20 +4,13 @@ export const chains = [
   'HECO', // 2
   'Ropsten', // 3
   'Avalanche', // 4
-  // 'Polygon', // 5
-  // 'Fantom', // 6
-  // "Tron", // 7
-  // 'Cardano', // 8
-  // 'Solana', // 9
-  // 'Algorand', // 10
-  // "Diem", // 11
-
-  'Fantom', // 5
-  "Tron", // 6
-  'Cardano', // 7
-  'Solana', // 8
-  'Algorand', // 9
-  "Diem", // 10
+  'Polygon', // 5
+  'Fantom', // 6
+  "Tron", // 7
+  'Cardano', // 8
+  'Solana', // 9
+  'Algorand', // 10
+  "Diem", // 11
 ]
 
 export const coins = [
@@ -26,9 +19,9 @@ export const coins = [
   'HT', // 2
   'ETH', // 3
   'AVAX', // 4
-  //'MATIC', // 5
-  'FTM', // 5
-  'TRX', // 6
+  'MATIC', // 5
+  'FTM', // 6
+  'TRX', // 7
 ]
 
 export const exchangeRates = {
