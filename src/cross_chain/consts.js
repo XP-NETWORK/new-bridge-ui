@@ -36,7 +36,8 @@ export const CHAIN_INFO = {
     nonce: 7,
     native: coins[6],
     chainId: 80001,
-    rpcUrl: 'https://matic-testnet-archive-rpc.bwarelabs.com',
+    rpcUrl:
+      'https://polygon-mumbai.g.alchemy.com/v2/YIqg-xmclLPC0jD1PlPlG_sRwhx0F7-v',
     decimals: 1e18,
   },
   Fantom: {
@@ -48,7 +49,7 @@ export const CHAIN_INFO = {
   },
   Tron: {
     nonce: 0x9,
-    decimals: 1E6,
+    decimals: 1e6,
     native: coins[8],
     rpcUrl: 'https://api.shasta.trongrid.io/',
   },
